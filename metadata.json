@@ -1,0 +1,6 @@
+{
+  "name": "MASARI",
+  "description": "MASARI (مساري) - Luxury Travel, Tourism, Hajj & Umrah Platform Foundation",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
