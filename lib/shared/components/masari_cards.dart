@@ -3,7 +3,7 @@ import '../../core/theme/masari_colors.dart';
 import '../../core/theme/masari_shadows.dart';
 import '../../core/theme/masari_spacing.dart';
 
-/// Standard MASARI White Clean Card
+/// Standard MASARI Clean Card
 class MasariCard extends StatelessWidget {
   final Widget child;
   final EdgeInsetsGeometry? padding;
@@ -18,12 +18,16 @@ class MasariCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final cardBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
+    final borderColor = isDark ? const Color(0x26D4AF37) : MasariColors.titaniumDivider;
+
     return Container(
       decoration: BoxDecoration(
-        color: MasariColors.pureWhite,
+        color: cardBg,
         borderRadius: MasariSpacing.borderMd,
-        border: Border.all(color: MasariColors.titaniumDivider),
-        boxShadow: MasariShadows.card,
+        border: Border.all(color: borderColor),
+        boxShadow: isDark ? const [] : MasariShadows.card,
       ),
       child: Material(
         color: Colors.transparent,

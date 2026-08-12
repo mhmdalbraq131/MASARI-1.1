@@ -75,6 +75,7 @@ class MasariSecondaryButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final IconData? icon;
   final Color borderColor;
+  final Color? textColor;
 
   const MasariSecondaryButton({
     super.key,
@@ -82,15 +83,19 @@ class MasariSecondaryButton extends StatelessWidget {
     required this.onPressed,
     this.icon,
     this.borderColor = MasariColors.royalGold,
+    this.textColor,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final effectiveColor = textColor ?? (isDark ? MasariColors.royalGold : MasariColors.deepBlue);
+
     return SizedBox(
       height: 50,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          foregroundColor: MasariColors.deepBlue,
+          foregroundColor: effectiveColor,
           side: BorderSide(color: borderColor, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: MasariSpacing.borderMd,
@@ -103,12 +108,12 @@ class MasariSecondaryButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 18, color: MasariColors.deepBlue),
+              Icon(icon, size: 18, color: effectiveColor),
               const SizedBox(width: MasariSpacing.sm),
             ],
             Text(
               label,
-              style: MasariTypography.buttonText(color: MasariColors.deepBlue),
+              style: MasariTypography.buttonText(color: effectiveColor),
             ),
           ],
         ),

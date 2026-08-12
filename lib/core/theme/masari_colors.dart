@@ -36,7 +36,8 @@ class MasariColors {
   /// Titanium Gray - Subtitles, borders, dividers & captions
   static const Color titaniumGray = Color(0xFF64748B);
   static const Color titaniumLight = Color(0xFF94A3B8);
-  static const Color titaniumDivider = Color(0xFF1E293B);
+  static const Color titaniumDivider = Color(0xFFE2E8F0);
+  static const Color titaniumDividerDark = Color(0xFF1E293B);
 
   // --- Status & Feedback Colors ---
   static const Color success = Color(0xFF10B981);

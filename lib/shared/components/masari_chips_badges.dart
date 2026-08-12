@@ -78,15 +78,21 @@ class MasariChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
+    final unselectedBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
+    final unselectedBorder = isDark ? const Color(0x26D4AF37) : MasariColors.titaniumDivider;
+    final unselectedText = isDark ? MasariColors.pureWhite : MasariColors.darkGraphite;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? MasariColors.deepBlue : MasariColors.pureWhite,
+          color: isSelected ? MasariColors.deepBlue : unselectedBg,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? MasariColors.royalGold : MasariColors.titaniumDivider,
+            color: isSelected ? MasariColors.royalGold : unselectedBorder,
             width: isSelected ? 1.5 : 1.0,
           ),
         ),
@@ -100,7 +106,7 @@ class MasariChip extends StatelessWidget {
             Text(
               label,
               style: MasariTypography.bodySmall(
-                color: isSelected ? MasariColors.pureWhite : MasariColors.darkGraphite,
+                color: isSelected ? MasariColors.pureWhite : unselectedText,
               ),
             ),
           ],

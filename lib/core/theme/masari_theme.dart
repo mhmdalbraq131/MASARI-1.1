@@ -64,6 +64,29 @@ class MasariTheme {
           elevation: 2,
         ),
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: MasariColors.deepBlue,
+          side: const BorderSide(color: MasariColors.royalGold, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
+        ),
+      ),
+      dividerTheme: const DividerThemeData(
+        color: MasariColors.titaniumDivider,
+        thickness: 1,
+        space: 24,
+      ),
+      tabBarTheme: const TabBarThemeData(
+        labelColor: MasariColors.royalGold,
+        unselectedLabelColor: MasariColors.titaniumGray,
+        indicatorColor: MasariColors.royalGold,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: MasariColors.deepBlue,
+        selectedItemColor: MasariColors.royalGold,
+        unselectedItemColor: MasariColors.titaniumLight,
+      ),
     );
   }
 
@@ -124,6 +147,29 @@ class MasariTheme {
           shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
           elevation: 2,
         ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: MasariColors.royalGold,
+          side: const BorderSide(color: MasariColors.royalGold, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
+        ),
+      ),
+      dividerTheme: const DividerThemeData(
+        color: MasariColors.titaniumDividerDark,
+        thickness: 1,
+        space: 24,
+      ),
+      tabBarTheme: const TabBarThemeData(
+        labelColor: MasariColors.royalGold,
+        unselectedLabelColor: MasariColors.titaniumLight,
+        indicatorColor: MasariColors.royalGold,
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: MasariColors.deepBlue,
+        selectedItemColor: MasariColors.royalGold,
+        unselectedItemColor: MasariColors.titaniumLight,
       ),
     );
   }

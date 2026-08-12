@@ -19,6 +19,9 @@ class MasariSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final titleColor = isDark ? MasariColors.pureWhite : MasariColors.darkGraphite;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -39,7 +42,7 @@ class MasariSectionHeader extends StatelessWidget {
                 const SizedBox(width: 8),
                 Text(
                   title,
-                  style: MasariTypography.titleLarge(color: MasariColors.darkGraphite),
+                  style: MasariTypography.titleLarge(color: titleColor),
                 ),
               ],
             ),

@@ -24,12 +24,15 @@ class MasariTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final labelColor = isDark ? MasariColors.pureWhite : MasariColors.darkGraphite;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           label,
-          style: MasariTypography.titleSmall(color: MasariColors.darkGraphite),
+          style: MasariTypography.titleSmall(color: labelColor),
         ),
         const SizedBox(height: MasariSpacing.xs),
         TextField(
@@ -95,17 +98,25 @@ class MasariSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fillBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
+    final borderColor = isDark ? const Color(0x26D4AF37) : MasariColors.titaniumDivider;
+
     return TextField(
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: MasariTypography.bodyMedium(color: MasariColors.titaniumGray),
         prefixIcon: const Icon(Icons.search, color: MasariColors.royalGold),
-        fillColor: MasariColors.pureWhite,
+        fillColor: fillBg,
         filled: true,
         border: OutlineInputBorder(
           borderRadius: MasariSpacing.borderLg,
-          borderSide: const BorderSide(color: MasariColors.titaniumDivider),
+          borderSide: BorderSide(color: borderColor),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: MasariSpacing.borderLg,
+          borderSide: BorderSide(color: borderColor),
         ),
       ),
     );
