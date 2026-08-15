@@ -10,9 +10,11 @@ class MasariBottomSheet {
     required String title,
     required Widget content,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return showModalBottomSheet<T>(
       context: context,
-      backgroundColor: MasariColors.pureWhite,
+      backgroundColor: isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(MasariSpacing.radiusXl)),
       ),
@@ -27,7 +29,7 @@ class MasariBottomSheet {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: MasariColors.titaniumDivider,
+                  color: isDark ? MasariColors.titaniumDividerDark : MasariColors.titaniumDivider,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -43,7 +45,7 @@ class MasariBottomSheet {
   }
 }
 
-/// MASARI Luxury Custom Dialog
+/// MASARI Custom Dialog
 class MasariDialog extends StatelessWidget {
   final String title;
   final String message;
@@ -60,19 +62,21 @@ class MasariDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderLg),
       child: Container(
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
-          color: MasariColors.pureWhite,
+          color: isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite,
           borderRadius: MasariSpacing.borderLg,
-          border: Border.all(color: MasariColors.royalGold, width: 1),
+          border: Border.all(color: MasariColors.primaryCyan, width: 1),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.star, color: MasariColors.royalGold, size: 40),
+            const Icon(Icons.star, color: MasariColors.primaryCyan, size: 40),
             const SizedBox(height: 12),
             Text(title, style: MasariTypography.titleLarge()),
             const SizedBox(height: 8),
@@ -80,7 +84,7 @@ class MasariDialog extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: MasariColors.deepBlue,
+                backgroundColor: MasariColors.primaryBlue,
                 foregroundColor: MasariColors.pureWhite,
               ),
               onPressed: onPrimaryPressed,

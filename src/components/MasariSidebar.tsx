@@ -75,20 +75,20 @@ export const MasariSidebar: React.FC<MasariSidebarProps> = ({
 
   return (
     <aside
-      className={`hidden md:flex flex-col border-l border-[#D4AF37]/20 bg-[#050914] text-[#F8FAFC] transition-all duration-300 ${
+      className={`hidden md:flex flex-col border-l border-slate-200 dark:border-[#00D4FF]/20 bg-white dark:bg-[#050914] text-slate-900 dark:text-[#F8FAFC] transition-all duration-300 ${
         isCollapsed ? 'w-20' : 'w-64'
       } h-[calc(100vh-4rem)] sticky top-16 z-30`}
     >
       {/* Collapse Toggle Header */}
-      <div className="flex items-center justify-between p-4 border-b border-[#1E293B]">
+      <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-[#1E293B]">
         {!isCollapsed && (
-          <span className="text-xs font-bold text-[#D4AF37] tracking-wider uppercase">
+          <span className="text-xs font-bold text-[#008DDA] dark:text-[#00D4FF] tracking-wider uppercase">
             {isArabic ? 'خريطة المسارات' : 'Platform Architecture'}
           </span>
         )}
         <button
           onClick={onToggleCollapse}
-          className="p-1.5 rounded-lg bg-[#0A1631] text-[#94A3B8] hover:text-[#D4AF37] hover:bg-[#0A1631]/80 transition-colors"
+          className="p-1.5 rounded-lg bg-slate-100 dark:bg-[#0A1631] text-slate-500 hover:text-[#008DDA] dark:text-[#94A3B8] dark:hover:text-[#00D4FF] hover:bg-slate-200 dark:hover:bg-[#0A1631]/80 transition-colors"
         >
           {isCollapsed ? (
             isArabic ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
@@ -105,7 +105,7 @@ export const MasariSidebar: React.FC<MasariSidebarProps> = ({
           return (
             <div key={cat.key} className="space-y-1">
               {!isCollapsed && (
-                <div className="px-3 py-1 text-[11px] font-semibold text-[#64748B] uppercase tracking-wider">
+                <div className="px-3 py-1 text-[11px] font-semibold text-slate-400 dark:text-[#64748B] uppercase tracking-wider">
                   {isArabic ? cat.nameAr : cat.nameEn}
                 </div>
               )}
@@ -119,12 +119,12 @@ export const MasariSidebar: React.FC<MasariSidebarProps> = ({
                     onClick={() => onNavigate(route.path)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium transition-all ${
                       isActive
-                        ? 'bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#050914] font-bold shadow-md shadow-[#D4AF37]/20'
-                        : 'text-[#94A3B8] hover:bg-[#0A1631] hover:text-[#F8FAFC]'
+                        ? 'bg-gradient-to-r from-[#008DDA] to-[#0B192C] text-white font-bold shadow-md shadow-[#008DDA]/25 dark:from-[#00D4FF] dark:to-[#008DDA] dark:text-[#050914]'
+                        : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-[#94A3B8] dark:hover:bg-[#0A1631] dark:hover:text-[#F8FAFC]'
                     } ${isProtected ? 'opacity-60' : ''}`}
                     title={isArabic ? route.titleAr : route.titleEn}
                   >
-                    <span className={isActive ? 'text-[#050914]' : 'text-[#D4AF37]'}>
+                    <span className={isActive ? 'text-white dark:text-[#050914]' : 'text-[#008DDA] dark:text-[#00D4FF]'}>
                       {getIcon(route.icon)}
                     </span>
                     {!isCollapsed && (
@@ -134,8 +134,8 @@ export const MasariSidebar: React.FC<MasariSidebarProps> = ({
                           <span
                             className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
                               isActive
-                                ? 'bg-[#050914] text-[#D4AF37]'
-                                : 'bg-[#D4AF37]/20 text-[#D4AF37]'
+                                ? 'bg-white/20 text-white dark:bg-[#050914] dark:text-[#00D4FF]'
+                                : 'bg-[#00D4FF]/15 text-[#008DDA] dark:bg-[#00D4FF]/20 dark:text-[#00D4FF]'
                             }`}
                           >
                             {route.badge}
@@ -153,8 +153,8 @@ export const MasariSidebar: React.FC<MasariSidebarProps> = ({
 
       {/* Footer / Architecture Indicator */}
       {!isCollapsed && (
-        <div className="p-4 border-t border-[#1E293B] bg-[#0A1631]/50 text-center">
-          <div className="flex items-center justify-center gap-2 text-[10px] text-[#00D4FF] font-mono">
+        <div className="p-4 border-t border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0A1631]/50 text-center">
+          <div className="flex items-center justify-center gap-2 text-[10px] text-[#008DDA] dark:text-[#00D4FF] font-mono">
             <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse"></span>
             <span>Firebase & Riverpod Active</span>
           </div>

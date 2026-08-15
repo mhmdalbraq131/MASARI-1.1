@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/masari_colors.dart';
 import '../../core/theme/masari_typography.dart';
 
-/// Loading State Spinner with Gold Accent
+/// Loading State Spinner with Cyan Accent
 class MasariLoadingState extends StatelessWidget {
   final String? message;
 
@@ -15,7 +15,7 @@ class MasariLoadingState extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(MasariColors.royalGold),
+            valueColor: AlwaysStoppedAnimation<Color>(MasariColors.primaryCyan),
           ),
           if (message != null) ...[
             const SizedBox(height: 16),
@@ -42,11 +42,12 @@ class MasariSkeletonLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: MasariColors.titaniumDivider,
+        color: isDark ? MasariColors.titaniumDividerDark : MasariColors.titaniumDivider,
         borderRadius: BorderRadius.circular(borderRadius),
       ),
     );
@@ -68,6 +69,7 @@ class MasariEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(32.0),
@@ -77,11 +79,11 @@ class MasariEmptyState extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: MasariColors.marbleWhite,
+                color: isDark ? MasariColors.graphiteSurface : MasariColors.marbleWhite,
                 shape: BoxShape.circle,
-                border: Border.all(color: MasariColors.royalGold, width: 1.5),
+                border: Border.all(color: MasariColors.primaryCyan, width: 1.5),
               ),
-              child: Icon(icon, size: 48, color: MasariColors.royalGold),
+              child: Icon(icon, size: 48, color: MasariColors.primaryCyan),
             ),
             const SizedBox(height: 20),
             Text(title, style: MasariTypography.titleLarge(), textAlign: TextAlign.center),
@@ -120,8 +122,8 @@ class MasariErrorState extends StatelessWidget {
               const SizedBox(height: 20),
               OutlinedButton.icon(
                 onPressed: onRetry,
-                icon: const Icon(Icons.refresh, color: MasariColors.deepBlue),
-                label: Text('إعادة المحاولة', style: MasariTypography.buttonText(color: MasariColors.deepBlue)),
+                icon: const Icon(Icons.refresh, color: MasariColors.primaryBlue),
+                label: Text('إعادة المحاولة', style: MasariTypography.buttonText(color: MasariColors.primaryBlue)),
               ),
             ],
           ],

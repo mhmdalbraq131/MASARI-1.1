@@ -6,7 +6,7 @@ import '../../core/theme/masari_colors.dart';
 import '../../core/theme/masari_typography.dart';
 import '../../features/foundation/presentation/providers/app_providers.dart';
 
-/// Luxury Navigation Sidebar for Desktop / Windows / Web Application Shell
+/// Navigation Sidebar for Desktop / Windows / Web Application Shell
 class MasariSidebar extends ConsumerWidget {
   final String currentPath;
   final bool isCollapsed;
@@ -25,7 +25,7 @@ class MasariSidebar extends ConsumerWidget {
 
     return Container(
       width: isCollapsed ? 70 : 260,
-      color: MasariColors.deepBlue,
+      color: MasariColors.primaryBlueDark,
       child: Column(
         children: [
           Expanded(
@@ -36,7 +36,7 @@ class MasariSidebar extends ConsumerWidget {
                 _buildNavItem(context, path: '/home', label: isArabic ? 'الرئيسية' : 'Home', icon: Icons.home_outlined),
                 _buildNavItem(context, path: '/ai', label: isArabic ? 'مساعد مساري الذكي' : 'AI Travel Assistant', icon: Icons.auto_awesome, badge: 'AI'),
 
-                const Divider(color: MasariColors.deepBlueLight, height: 24),
+                const Divider(color: MasariColors.primaryBlueContainer, height: 24),
                 _buildSectionTitle(isArabic ? 'خدمات السفر' : 'Travel Services', isArabic),
                 _buildNavItem(context, path: '/flights', label: isArabic ? 'الطيران' : 'Flights', icon: Icons.flight_outlined),
                 _buildNavItem(context, path: '/hotels', label: isArabic ? 'الفنادق' : 'Hotels', icon: Icons.hotel_outlined),
@@ -45,29 +45,29 @@ class MasariSidebar extends ConsumerWidget {
                 _buildNavItem(context, path: '/transfers', label: isArabic ? 'النقل الخاص' : 'Private Transfers', icon: Icons.local_taxi_outlined),
                 _buildNavItem(context, path: '/tourism', label: isArabic ? 'الباقات السياحية' : 'Tourism Packages', icon: Icons.explore_outlined),
 
-                const Divider(color: MasariColors.deepBlueLight, height: 24),
+                const Divider(color: MasariColors.primaryBlueContainer, height: 24),
                 _buildSectionTitle(isArabic ? 'الحج والعمرة والـتأشيرات' : 'Hajj, Umrah & Visas', isArabic),
-                _buildNavItem(context, path: '/hajj', label: isArabic ? 'الحج' : 'Hajj', icon: Icons.mosque, isGold: true),
-                _buildNavItem(context, path: '/umrah', label: isArabic ? 'العمرة' : 'Umrah', icon: Icons.night_shelter, isGold: true),
+                _buildNavItem(context, path: '/hajj', label: isArabic ? 'الحج' : 'Hajj', icon: Icons.mosque, isSpecial: true),
+                _buildNavItem(context, path: '/umrah', label: isArabic ? 'العمرة' : 'Umrah', icon: Icons.night_shelter, isSpecial: true),
                 _buildNavItem(context, path: '/visa', label: isArabic ? 'تأشيرات السفر' : 'Visa Services', icon: Icons.badge_outlined),
 
-                const Divider(color: MasariColors.deepBlueLight, height: 24),
+                const Divider(color: MasariColors.primaryBlueContainer, height: 24),
                 _buildSectionTitle(isArabic ? 'إدارة المسافر والحساب' : 'Account & Travel Center', isArabic),
                 _buildNavItem(context, path: '/wallet', label: isArabic ? 'محفظة مساري' : 'Wallet', icon: Icons.account_balance_wallet_outlined),
                 _buildNavItem(context, path: '/bookings', label: isArabic ? 'حجوزاتي' : 'My Bookings', icon: Icons.confirmation_number_outlined),
                 _buildNavItem(context, path: '/travelers', label: isArabic ? 'إدارة المسافرين' : 'Travelers', icon: Icons.people_outline),
                 _buildNavItem(context, path: '/passports', label: isArabic ? 'مركز الجوازات' : 'Passport Center', icon: Icons.contact_page_outlined),
 
-                const Divider(color: MasariColors.deepBlueLight, height: 24),
+                const Divider(color: MasariColors.primaryBlueContainer, height: 24),
                 _buildSectionTitle(isArabic ? 'النظام والإعدادات' : 'System & Settings', isArabic),
                 _buildNavItem(context, path: '/notifications', label: isArabic ? 'الإشعارات' : 'Notifications', icon: Icons.notifications_none),
                 _buildNavItem(context, path: '/profile', label: isArabic ? 'الملف الشخصي' : 'Profile', icon: Icons.person_outline),
                 _buildNavItem(context, path: '/settings', label: isArabic ? 'الإعدادات' : 'Settings', icon: Icons.settings_outlined),
 
                 if (currentRole == UserRole.admin) ...[
-                  const Divider(color: MasariColors.deepBlueLight, height: 24),
+                  const Divider(color: MasariColors.primaryBlueContainer, height: 24),
                   _buildSectionTitle(isArabic ? 'لوحة التحكم' : 'Admin Panel', isArabic),
-                  _buildNavItem(context, path: '/admin', label: isArabic ? 'بوابة الإدارة' : 'Admin Portal', icon: Icons.admin_panel_settings, isGold: true),
+                  _buildNavItem(context, path: '/admin', label: isArabic ? 'بوابة الإدارة' : 'Admin Portal', icon: Icons.admin_panel_settings, isSpecial: true),
                 ],
               ],
             ),
@@ -76,14 +76,14 @@ class MasariSidebar extends ConsumerWidget {
           // Sidebar Footer Status
           Container(
             padding: const EdgeInsets.all(16),
-            color: MasariColors.deepBlueLight.withOpacity(0.3),
+            color: MasariColors.primaryBlueContainer.withOpacity(0.5),
             child: isCollapsed
                 ? const Center(
-                    child: Icon(Icons.shield_outlined, color: MasariColors.royalGold, size: 20),
+                    child: Icon(Icons.shield_outlined, color: MasariColors.primaryCyan, size: 20),
                   )
                 : Row(
                     children: [
-                      const Icon(Icons.shield_outlined, color: MasariColors.royalGold, size: 18),
+                      const Icon(Icons.shield_outlined, color: MasariColors.primaryCyan, size: 18),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -106,7 +106,7 @@ class MasariSidebar extends ConsumerWidget {
       child: Text(
         title,
         style: TextStyle(
-          color: MasariColors.royalGold.withOpacity(0.8),
+          color: MasariColors.primaryCyan.withOpacity(0.85),
           fontSize: 11,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.5,
@@ -120,7 +120,7 @@ class MasariSidebar extends ConsumerWidget {
     required String path,
     required String label,
     required IconData icon,
-    bool isGold = false,
+    bool isSpecial = false,
     String? badge,
   }) {
     final isSelected = currentPath == path;
@@ -128,7 +128,7 @@ class MasariSidebar extends ConsumerWidget {
     final navWidget = Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Material(
-        color: isSelected ? MasariColors.deepBlueLight : Colors.transparent,
+        color: isSelected ? MasariColors.primaryBlueLight.withOpacity(0.3) : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
           onTap: () => context.go(path),
@@ -141,9 +141,9 @@ class MasariSidebar extends ConsumerWidget {
                       icon,
                       size: 22,
                       color: isSelected
-                          ? MasariColors.royalGold
-                          : isGold
-                              ? MasariColors.royalGold
+                          ? MasariColors.primaryCyan
+                          : isSpecial
+                              ? MasariColors.primaryCyan
                               : MasariColors.titaniumLight,
                     ),
                   )
@@ -153,9 +153,9 @@ class MasariSidebar extends ConsumerWidget {
                         icon,
                         size: 20,
                         color: isSelected
-                            ? MasariColors.royalGold
-                            : isGold
-                                ? MasariColors.royalGold
+                            ? MasariColors.primaryCyan
+                            : isSpecial
+                                ? MasariColors.primaryCyan
                                 : MasariColors.titaniumLight,
                       ),
                       const SizedBox(width: 12),
@@ -165,8 +165,8 @@ class MasariSidebar extends ConsumerWidget {
                           style: TextStyle(
                             color: isSelected
                                 ? MasariColors.pureWhite
-                                : isGold
-                                    ? MasariColors.royalGold
+                                : isSpecial
+                                    ? MasariColors.primaryCyan
                                     : MasariColors.titaniumLight,
                             fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                             fontSize: 13,
@@ -177,12 +177,12 @@ class MasariSidebar extends ConsumerWidget {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                           decoration: BoxDecoration(
-                            color: MasariColors.royalGold,
+                            color: MasariColors.primaryOrange,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
                             badge,
-                            style: const TextStyle(color: MasariColors.deepBlue, fontSize: 10, fontWeight: FontWeight.bold),
+                            style: const TextStyle(color: MasariColors.pureWhite, fontSize: 10, fontWeight: FontWeight.bold),
                           ),
                         ),
                     ],

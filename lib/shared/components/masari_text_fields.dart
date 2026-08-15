@@ -85,7 +85,7 @@ class _MasariPasswordFieldState extends State<MasariPasswordField> {
   }
 }
 
-/// Luxury Travel Search Field
+/// Travel Search Field
 class MasariSearchField extends StatelessWidget {
   final String hint;
   final ValueChanged<String>? onChanged;
@@ -100,14 +100,14 @@ class MasariSearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final fillBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
-    final borderColor = isDark ? const Color(0x26D4AF37) : MasariColors.titaniumDivider;
+    final borderColor = isDark ? MasariColors.primaryCyan.withOpacity(0.2) : MasariColors.titaniumDivider;
 
     return TextField(
       onChanged: onChanged,
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: MasariTypography.bodyMedium(color: MasariColors.titaniumGray),
-        prefixIcon: const Icon(Icons.search, color: MasariColors.royalGold),
+        prefixIcon: const Icon(Icons.search, color: MasariColors.primaryCyan),
         fillColor: fillBg,
         filled: true,
         border: OutlineInputBorder(
@@ -117,6 +117,10 @@ class MasariSearchField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: MasariSpacing.borderLg,
           borderSide: BorderSide(color: borderColor),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: MasariSpacing.borderLg,
+          borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 1.5),
         ),
       ),
     );

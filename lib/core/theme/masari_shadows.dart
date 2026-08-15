@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'masari_colors.dart';
 
 /// MASARI Centralized Design System Elevation & BoxShadow Tokens.
 class MasariShadows {
@@ -26,11 +27,21 @@ class MasariShadows {
     ),
   ];
 
-  static final List<BoxShadow> luxuryGold = [
+  /// Brand Cyan Accent Glow
+  static final List<BoxShadow> luxuryCyan = [
     BoxShadow(
-      color: const Color(0xFFD4AF37).withOpacity(0.25),
-      blurRadius: 20,
-      offset: const Offset(0, 6),
+      color: MasariColors.primaryCyan.withOpacity(0.2),
+      blurRadius: 18,
+      offset: const Offset(0, 4),
+    ),
+  ];
+
+  /// Brand Orange Glow
+  static final List<BoxShadow> luxuryOrange = [
+    BoxShadow(
+      color: MasariColors.primaryOrange.withOpacity(0.25),
+      blurRadius: 18,
+      offset: const Offset(0, 4),
     ),
   ];
 }

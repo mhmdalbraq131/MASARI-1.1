@@ -1,46 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'masari_colors.dart';
 import 'masari_spacing.dart';
 
-/// Centralized MASARI ThemeData Configuration for Light & Dark luxury theme modes.
+/// MASARI High-End Theme Configuration.
+/// Standardized on the Tri-Color Palette: Blue, Cyan, and Orange.
 class MasariTheme {
-  static ThemeData lightTheme({bool isArabic = true}) {
-    final colorScheme = const ColorScheme.light(
-      primary: MasariColors.deepBlue,
-      onPrimary: MasariColors.pureWhite,
-      primaryContainer: MasariColors.deepBlueContainer,
-      secondary: MasariColors.royalGold,
-      onSecondary: MasariColors.deepBlue,
-      secondaryContainer: MasariColors.royalGoldLight,
-      tertiary: MasariColors.skyCyan,
-      surface: MasariColors.pureWhite,
-      onSurface: MasariColors.darkGraphite,
-      error: MasariColors.error,
-      onError: MasariColors.pureWhite,
-    );
-
+  // Light Theme Configuration
+  static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
-      colorScheme: colorScheme,
+      brightness: Brightness.light,
+      primaryColor: MasariColors.primaryBlue,
       scaffoldBackgroundColor: MasariColors.marbleWhite,
-      fontFamily: isArabic ? 'Cairo' : 'Inter',
+      colorScheme: const ColorScheme(
+        brightness: Brightness.light,
+        primary: MasariColors.primaryBlue,
+        onPrimary: MasariColors.pureWhite,
+        primaryContainer: MasariColors.primaryBlueContainer,
+        onPrimaryContainer: MasariColors.pureWhite,
+        secondary: MasariColors.primaryCyan,
+        onSecondary: MasariColors.primaryBlueDark,
+        secondaryContainer: MasariColors.primaryCyanContainer,
+        onSecondaryContainer: MasariColors.primaryCyan,
+        tertiary: MasariColors.primaryOrange,
+        onTertiary: MasariColors.pureWhite,
+        tertiaryContainer: MasariColors.primaryOrangeContainer,
+        onTertiaryContainer: MasariColors.primaryOrange,
+        error: MasariColors.error,
+        onError: MasariColors.pureWhite,
+        surface: MasariColors.pureWhite,
+        onSurface: MasariColors.primaryBlueDark,
+        surfaceContainerHighest: MasariColors.titaniumDivider,
+        outline: MasariColors.titaniumDivider,
+        outlineVariant: MasariColors.primaryCyanDark,
+      ),
+      fontFamily: GoogleFonts.cairo().fontFamily,
       appBarTheme: const AppBarTheme(
-        backgroundColor: MasariColors.deepBlue,
+        backgroundColor: MasariColors.primaryBlue,
         foregroundColor: MasariColors.pureWhite,
         elevation: 0,
         centerTitle: false,
+        iconTheme: IconThemeData(color: MasariColors.primaryCyan),
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: MasariColors.pureWhite,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: MasariSpacing.borderMd,
+          borderRadius: MasariSpacing.borderLg,
           side: const BorderSide(color: MasariColors.titaniumDivider, width: 1),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: MasariColors.primaryBlue,
+          foregroundColor: MasariColors.pureWhite,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
+          textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: MasariColors.primaryBlue,
+          side: const BorderSide(color: MasariColors.primaryBlue, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
+          textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: MasariColors.primaryCyanDark,
+          textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: MasariColors.pureWhite,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         border: OutlineInputBorder(
           borderRadius: MasariSpacing.borderMd,
           borderSide: const BorderSide(color: MasariColors.titaniumDivider),
@@ -51,125 +90,126 @@ class MasariTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: MasariSpacing.borderMd,
-          borderSide: const BorderSide(color: MasariColors.royalGold, width: 1.5),
+          borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 1.5),
         ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      ),
-      elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: MasariColors.deepBlue,
-          foregroundColor: MasariColors.pureWhite,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
-          elevation: 2,
+        errorBorder: OutlineInputBorder(
+          borderRadius: MasariSpacing.borderMd,
+          borderSide: const BorderSide(color: MasariColors.error),
         ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: MasariColors.deepBlue,
-          side: const BorderSide(color: MasariColors.royalGold, width: 1.5),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
-        ),
+        hintStyle: const TextStyle(color: MasariColors.titaniumLight, fontSize: 14),
       ),
       dividerTheme: const DividerThemeData(
         color: MasariColors.titaniumDivider,
         thickness: 1,
-        space: 24,
       ),
-      tabBarTheme: const TabBarThemeData(
-        labelColor: MasariColors.royalGold,
+      tabBarTheme: const TabBarTheme(
+        labelColor: MasariColors.primaryCyan,
         unselectedLabelColor: MasariColors.titaniumGray,
-        indicatorColor: MasariColors.royalGold,
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: MasariColors.deepBlue,
-        selectedItemColor: MasariColors.royalGold,
-        unselectedItemColor: MasariColors.titaniumLight,
+        indicatorColor: MasariColors.primaryCyan,
       ),
     );
   }
 
-  static ThemeData darkTheme({bool isArabic = true}) {
-    final colorScheme = const ColorScheme.dark(
-      primary: MasariColors.royalGold,
-      onPrimary: MasariColors.deepBlue,
-      primaryContainer: MasariColors.deepBlueLight,
-      secondary: MasariColors.skyCyan,
-      onSecondary: MasariColors.deepBlue,
-      surface: MasariColors.graphiteSurface,
-      onSurface: MasariColors.pureWhite,
-      error: MasariColors.error,
-      onError: MasariColors.pureWhite,
-    );
-
+  // Dark Theme Configuration
+  static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
-      colorScheme: colorScheme,
-      scaffoldBackgroundColor: MasariColors.darkGraphite,
-      fontFamily: isArabic ? 'Cairo' : 'Inter',
+      brightness: Brightness.dark,
+      primaryColor: MasariColors.primaryCyan,
+      scaffoldBackgroundColor: MasariColors.primaryBlueDark,
+      colorScheme: const ColorScheme(
+        brightness: Brightness.dark,
+        primary: MasariColors.primaryCyan,
+        onPrimary: MasariColors.primaryBlueDark,
+        primaryContainer: MasariColors.primaryBlueContainer,
+        onPrimaryContainer: MasariColors.primaryCyan,
+        secondary: MasariColors.primaryOrange,
+        onSecondary: MasariColors.pureWhite,
+        secondaryContainer: MasariColors.primaryOrangeContainer,
+        onSecondaryContainer: MasariColors.primaryOrangeLight,
+        tertiary: MasariColors.primaryBlueLight,
+        onTertiary: MasariColors.pureWhite,
+        tertiaryContainer: MasariColors.primaryBlueContainer,
+        onTertiaryContainer: MasariColors.primaryCyanLight,
+        error: MasariColors.error,
+        onError: MasariColors.pureWhite,
+        surface: MasariColors.graphiteSurface,
+        onSurface: MasariColors.pureWhite,
+        surfaceContainerHighest: MasariColors.primaryBlueContainer,
+        outline: MasariColors.titaniumDividerDark,
+        outlineVariant: MasariColors.primaryCyanDark,
+      ),
+      fontFamily: GoogleFonts.cairo().fontFamily,
       appBarTheme: const AppBarTheme(
-        backgroundColor: MasariColors.darkGraphite,
+        backgroundColor: MasariColors.primaryBlueDark,
         foregroundColor: MasariColors.pureWhite,
         elevation: 0,
         centerTitle: false,
+        iconTheme: IconThemeData(color: MasariColors.primaryCyan),
       ),
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: MasariColors.graphiteSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: MasariSpacing.borderMd,
-          side: const BorderSide(color: Color(0x26D4AF37), width: 1),
+          borderRadius: MasariSpacing.borderLg,
+          side: BorderSide(color: MasariColors.primaryCyan.withOpacity(0.2), width: 1),
         ),
-      ),
-      inputDecorationTheme: InputDecorationTheme(
-        filled: true,
-        fillColor: MasariColors.deepBlueLight,
-        border: OutlineInputBorder(
-          borderRadius: MasariSpacing.borderMd,
-          borderSide: const BorderSide(color: Color(0x1AFFFFFF)),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: MasariSpacing.borderMd,
-          borderSide: const BorderSide(color: Color(0x1AFFFFFF)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: MasariSpacing.borderMd,
-          borderSide: const BorderSide(color: MasariColors.royalGold, width: 1.5),
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: MasariColors.royalGold,
-          foregroundColor: MasariColors.deepBlue,
+          backgroundColor: MasariColors.primaryCyan,
+          foregroundColor: MasariColors.primaryBlueDark,
+          elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
-          elevation: 2,
+          textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: MasariColors.royalGold,
-          side: const BorderSide(color: MasariColors.royalGold, width: 1.5),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          foregroundColor: MasariColors.primaryCyan,
+          side: const BorderSide(color: MasariColors.primaryCyan, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: MasariSpacing.borderMd),
+          textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
         ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: MasariColors.primaryCyanLight,
+          textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: MasariColors.graphiteSurface,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        border: OutlineInputBorder(
+          borderRadius: MasariSpacing.borderMd,
+          borderSide: const BorderSide(color: MasariColors.titaniumDividerDark),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: MasariSpacing.borderMd,
+          borderSide: const BorderSide(color: MasariColors.titaniumDividerDark),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: MasariSpacing.borderMd,
+          borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 1.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: MasariSpacing.borderMd,
+          borderSide: const BorderSide(color: MasariColors.error),
+        ),
+        hintStyle: const TextStyle(color: MasariColors.titaniumLight, fontSize: 14),
       ),
       dividerTheme: const DividerThemeData(
         color: MasariColors.titaniumDividerDark,
         thickness: 1,
-        space: 24,
       ),
-      tabBarTheme: const TabBarThemeData(
-        labelColor: MasariColors.royalGold,
+      tabBarTheme: const TabBarTheme(
+        labelColor: MasariColors.primaryCyan,
         unselectedLabelColor: MasariColors.titaniumLight,
-        indicatorColor: MasariColors.royalGold,
-      ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: MasariColors.deepBlue,
-        selectedItemColor: MasariColors.royalGold,
-        unselectedItemColor: MasariColors.titaniumLight,
+        indicatorColor: MasariColors.primaryCyan,
       ),
     );
   }

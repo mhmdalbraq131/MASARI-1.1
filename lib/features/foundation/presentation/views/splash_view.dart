@@ -26,7 +26,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MasariColors.deepBlue,
+      backgroundColor: MasariColors.primaryBlueDark,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,11 +34,11 @@ class _SplashViewState extends State<SplashView> {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: MasariColors.royalGold,
+                color: MasariColors.primaryCyan,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: MasariColors.royalGold.withOpacity(0.4),
+                    color: MasariColors.primaryCyan.withOpacity(0.4),
                     blurRadius: 30,
                     spreadRadius: 5,
                   )
@@ -47,14 +47,14 @@ class _SplashViewState extends State<SplashView> {
               child: const Icon(
                 Icons.flight_takeoff,
                 size: 64,
-                color: MasariColors.deepBlue,
+                color: MasariColors.primaryBlueDark,
               ),
             ),
             const SizedBox(height: 24),
             Text(
               AppConstants.appNameArabic,
               style: MasariTypography.headlineLarge(
-                color: MasariColors.royalGold,
+                color: MasariColors.primaryCyan,
                 isArabic: true,
               ),
             ),
@@ -68,7 +68,7 @@ class _SplashViewState extends State<SplashView> {
             ),
             const SizedBox(height: 48),
             const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(MasariColors.royalGold),
+              valueColor: AlwaysStoppedAnimation<Color>(MasariColors.primaryOrange),
             ),
           ],
         ),

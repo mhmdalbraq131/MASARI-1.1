@@ -19,11 +19,11 @@ class MasariAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: radius,
-      backgroundColor: MasariColors.royalGold,
+      backgroundColor: MasariColors.primaryCyan,
       child: Text(
         initials,
         style: TextStyle(
-          color: MasariColors.deepBlue,
+          color: MasariColors.primaryBlueDark,
           fontWeight: FontWeight.bold,
           fontSize: radius * 0.9,
         ),
@@ -41,8 +41,8 @@ class MasariBadge extends StatelessWidget {
   const MasariBadge({
     super.key,
     required this.label,
-    this.backgroundColor = MasariColors.royalGold,
-    this.textColor = MasariColors.deepBlue,
+    this.backgroundColor = MasariColors.primaryCyan,
+    this.textColor = MasariColors.primaryBlueDark,
   });
 
   @override
@@ -81,7 +81,7 @@ class MasariChip extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     
     final unselectedBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
-    final unselectedBorder = isDark ? const Color(0x26D4AF37) : MasariColors.titaniumDivider;
+    final unselectedBorder = isDark ? MasariColors.primaryCyan.withOpacity(0.2) : MasariColors.titaniumDivider;
     final unselectedText = isDark ? MasariColors.pureWhite : MasariColors.darkGraphite;
 
     return GestureDetector(
@@ -89,10 +89,10 @@ class MasariChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? MasariColors.deepBlue : unselectedBg,
+          color: isSelected ? MasariColors.primaryBlue : unselectedBg,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected ? MasariColors.royalGold : unselectedBorder,
+            color: isSelected ? MasariColors.primaryCyan : unselectedBorder,
             width: isSelected ? 1.5 : 1.0,
           ),
         ),
@@ -100,7 +100,7 @@ class MasariChip extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (icon != null) ...[
-              Icon(icon, size: 16, color: isSelected ? MasariColors.royalGold : MasariColors.titaniumGray),
+              Icon(icon, size: 16, color: isSelected ? MasariColors.primaryCyan : MasariColors.titaniumGray),
               const SizedBox(width: 6),
             ],
             Text(
@@ -136,7 +136,7 @@ class MasariNavigationItem extends StatelessWidget {
     return ListTile(
       leading: Icon(
         icon,
-        color: isSelected ? MasariColors.royalGold : MasariColors.titaniumLight,
+        color: isSelected ? MasariColors.primaryCyan : MasariColors.titaniumLight,
       ),
       title: Text(
         label,
@@ -146,7 +146,7 @@ class MasariNavigationItem extends StatelessWidget {
         ),
       ),
       selected: isSelected,
-      selectedTileColor: MasariColors.deepBlueLight.withOpacity(0.5),
+      selectedTileColor: MasariColors.primaryBlueLight.withOpacity(0.3),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       onTap: onTap,
     );

@@ -21,7 +21,7 @@ class OnboardingView extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.star, color: MasariColors.royalGold, size: 48),
+              const Icon(Icons.explore, color: MasariColors.primaryCyan, size: 48),
               const SizedBox(height: 16),
               Text(
                 'مرحباً بك في منصة ${AppConstants.appNameArabic}',
@@ -30,7 +30,7 @@ class OnboardingView extends ConsumerWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                'البوابة الملكية الموحدة للسفر الفاخر، رحلات الطيران، الفنادق، وباقات الحج والعمرة.',
+                'البوابة الموحدة للسفر الفاخر، رحلات الطيران، الفنادق، وباقات الحج والعمرة.',
                 style: MasariTypography.bodyLarge(color: MasariColors.titaniumGray),
                 textAlign: TextAlign.center,
               ),
@@ -39,16 +39,16 @@ class OnboardingView extends ConsumerWidget {
                 badgeText: 'الأساس التقني',
                 child: Column(
                   children: [
-                    const Icon(Icons.verified, color: MasariColors.royalGold, size: 36),
+                    const Icon(Icons.verified, color: MasariColors.primaryCyan, size: 36),
                     const SizedBox(height: 12),
                     Text(
-                      'هيكل المنصة الموحدجاهز للعمل على كافة المنصات',
+                      'هيكل المنصة الموحد جاهز للعمل على كافة المنصات',
                       style: MasariTypography.titleMedium(color: MasariColors.pureWhite),
                     ),
                     const SizedBox(height: 6),
                     Text(
                       'Android • iOS • Windows • Web',
-                      style: MasariTypography.caption(color: MasariColors.royalGold, isArabic: false),
+                      style: MasariTypography.caption(color: MasariColors.primaryCyanLight, isArabic: false),
                     ),
                   ],
                 ),
@@ -56,7 +56,7 @@ class OnboardingView extends ConsumerWidget {
               const SizedBox(height: 40),
               MasariPrimaryButton(
                 label: 'الدخول إلى المنصة (Home)',
-                isGoldStyle: true,
+                isOrangeCta: true,
                 onPressed: () => context.go('/home'),
               ),
               const SizedBox(height: 12),

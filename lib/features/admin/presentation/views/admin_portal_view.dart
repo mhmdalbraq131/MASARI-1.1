@@ -49,9 +49,9 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.block, color: MasariColors.coralOrange, size: 56),
+                  const Icon(Icons.block, color: MasariColors.primaryOrange, size: 56),
                   const SizedBox(height: 16),
-                  Text('غير مصرح بالدخول', style: MasariTypography.headlineSmall(color: MasariColors.coralOrange)),
+                  Text('غير مصرح بالدخول', style: MasariTypography.headlineSmall(color: MasariColors.primaryOrange)),
                   const SizedBox(height: 8),
                   Text(
                     'عذراً، هذه المنطقة مخصصة لمدراء النظام المعتمدين فقط.',
@@ -72,7 +72,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
     }
 
     return Scaffold(
-      backgroundColor: MasariColors.deepBlueDark,
+      backgroundColor: MasariColors.primaryBlueDark,
       body: SafeArea(
         child: Column(
           children: [
@@ -80,18 +80,18 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               decoration: const BoxDecoration(
-                color: MasariColors.deepBlue,
-                border: Border(bottom: BorderSide(color: MasariColors.royalGold, width: 1.5)),
+                color: MasariColors.primaryBlue,
+                border: Border(bottom: BorderSide(color: MasariColors.primaryCyan, width: 1.5)),
               ),
               child: Row(
                 children: [
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: MasariColors.royalGold,
+                      color: MasariColors.primaryCyan,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Icon(Icons.admin_panel_settings, color: MasariColors.deepBlue, size: 24),
+                    child: const Icon(Icons.admin_panel_settings, color: MasariColors.primaryBlueDark, size: 24),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -105,8 +105,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                             const SizedBox(width: 12),
                             const MasariBadge(
                               label: 'OPERATIONAL CONTROL',
-                              backgroundColor: MasariColors.royalGold,
-                              textColor: MasariColors.deepBlue,
+                              backgroundColor: MasariColors.primaryCyan,
+                              textColor: MasariColors.primaryBlueDark,
                             ),
                           ],
                         ),
@@ -124,7 +124,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
 
             // Admin Operational Navigation Tabs
             Container(
-              color: MasariColors.deepBlueLight,
+              color: MasariColors.primaryBlueLight.withOpacity(0.4),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -133,7 +133,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                     _buildAdminTab(0, 'لوحة التحكم والعمليات', Icons.dashboard_outlined),
                     _buildAdminTab(1, 'إدارة الخدمات والأسعار', Icons.inventory_2_outlined),
                     _buildAdminTab(2, 'إدارة المستخدمين', Icons.people_alt_outlined),
-                    _buildAdminTab(3, 'سجل التدقيق الأمني (Audit Log)', Icons.security_outlined, isGold: true),
+                    _buildAdminTab(3, 'سجل التدقيق الأمني (Audit Log)', Icons.security_outlined, isCyan: true),
                     _buildAdminTab(4, 'التقارير والمالية', Icons.assessment_outlined),
                     _buildAdminTab(5, 'إعدادات النظام', Icons.settings_applications_outlined),
                   ],
@@ -164,7 +164,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
     );
   }
 
-  Widget _buildAdminTab(int index, String label, IconData icon, {bool isGold = false}) {
+  Widget _buildAdminTab(int index, String label, IconData icon, {bool isCyan = false}) {
     final isSelected = _selectedTabIndex == index;
     return InkWell(
       onTap: () => setState(() => _selectedTabIndex = index),
@@ -173,11 +173,11 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: isSelected ? MasariColors.royalGold : Colors.transparent,
+              color: isSelected ? MasariColors.primaryCyan : Colors.transparent,
               width: 3,
             ),
           ),
-          color: isSelected ? MasariColors.deepBlue.withOpacity(0.5) : Colors.transparent,
+          color: isSelected ? MasariColors.primaryBlue.withOpacity(0.5) : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -185,9 +185,9 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               icon,
               size: 18,
               color: isSelected
-                  ? MasariColors.royalGold
-                  : isGold
-                      ? MasariColors.royalGold
+                  ? MasariColors.primaryCyan
+                  : isCyan
+                      ? MasariColors.primaryCyanLight
                       : MasariColors.titaniumLight,
             ),
             const SizedBox(width: 8),
@@ -215,7 +215,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MasariSectionHeader(title: 'ملخص المؤشرات التشغيلية والمالية'),
+          const MasariSectionHeader(title: 'ملخص المؤشرات التشغيلية والمالية'),
           const SizedBox(height: 16),
           LayoutBuilder(
             builder: (context, constraints) {
@@ -228,10 +228,10 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                 mainAxisSpacing: 16,
                 childAspectRatio: 2.2,
                 children: [
-                  _buildStatCard('إجمالي الإيرادات', '1,450,200 SAR', Icons.monetization_on_outlined, MasariColors.royalGold),
-                  _buildStatCard('الخدمات النشطة', '${services.length} خدمات', Icons.inventory_2_outlined, MasariColors.skyCyan),
+                  _buildStatCard('إجمالي الإيرادات', '1,450,200 SAR', Icons.monetization_on_outlined, MasariColors.primaryCyan),
+                  _buildStatCard('الخدمات النشطة', '${services.length} خدمات', Icons.inventory_2_outlined, MasariColors.primaryBlueLight),
                   _buildStatCard('المستخدمين والمدراء', '${users.length} حسابات', Icons.group_outlined, MasariColors.success),
-                  _buildStatCard('سجلات التدقيق الأمني', '${auditLogs.length} سجلات', Icons.verified_user_outlined, MasariColors.coralOrange),
+                  _buildStatCard('سجلات التدقيق الأمني', '${auditLogs.length} سجلات', Icons.verified_user_outlined, MasariColors.primaryOrange),
                 ],
               );
             },
@@ -248,16 +248,16 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('إجراءات تشغيلية سريعة', style: MasariTypography.titleMedium(color: MasariColors.royalGold)),
+                      Text('إجراءات تشغيلية سريعة', style: MasariTypography.titleMedium(color: MasariColors.primaryCyan)),
                       const SizedBox(height: 16),
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton.icon(
                           onPressed: () => setState(() => _selectedTabIndex = 1),
-                          icon: const Icon(Icons.edit_note, color: MasariColors.royalGold),
+                          icon: const Icon(Icons.edit_note, color: MasariColors.primaryCyan),
                           label: const Text('تعديل أسعار العمرة والخدمات'),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: MasariColors.royalGold),
+                            side: const BorderSide(color: MasariColors.primaryCyan),
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
                         ),
@@ -267,10 +267,10 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                         width: double.infinity,
                         child: OutlinedButton.icon(
                           onPressed: () => setState(() => _selectedTabIndex = 2),
-                          icon: const Icon(Icons.person_add_outlined, color: MasariColors.skyCyan),
+                          icon: const Icon(Icons.person_add_outlined, color: MasariColors.primaryCyanLight),
                           label: const Text('إضافة مدير نظام أو عميل جديد'),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: MasariColors.skyCyan),
+                            side: const BorderSide(color: MasariColors.primaryCyanLight),
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
                         ),
@@ -280,10 +280,10 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                         width: double.infinity,
                         child: OutlinedButton.icon(
                           onPressed: () => setState(() => _selectedTabIndex = 3),
-                          icon: const Icon(Icons.history_outlined, color: MasariColors.coralOrange),
+                          icon: const Icon(Icons.history_outlined, color: MasariColors.primaryOrange),
                           label: const Text('مراجعة سجل التدقيق الأمني'),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: MasariColors.coralOrange),
+                            side: const BorderSide(color: MasariColors.primaryOrange),
                             padding: const EdgeInsets.symmetric(vertical: 12),
                           ),
                         ),
@@ -307,7 +307,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: auditLogs.length > 3 ? 3 : auditLogs.length,
-                        separatorBuilder: (_, __) => const Divider(color: MasariColors.deepBlueLight),
+                        separatorBuilder: (_, __) => const Divider(color: MasariColors.primaryBlueLight),
                         itemBuilder: (context, index) {
                           final log = auditLogs[index];
                           return ListTile(
@@ -315,10 +315,10 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                             leading: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: MasariColors.royalGold.withOpacity(0.15),
+                                color: MasariColors.primaryCyan.withOpacity(0.15),
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(Icons.edit_attributes, color: MasariColors.royalGold, size: 20),
+                              child: const Icon(Icons.edit_attributes, color: MasariColors.primaryCyan, size: 20),
                             ),
                             title: Text(log.summary, style: MasariTypography.bodySmall(color: MasariColors.pureWhite)),
                             subtitle: Text(
@@ -366,14 +366,14 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
               decoration: BoxDecoration(
-                color: MasariColors.deepBlueLight,
+                color: MasariColors.primaryBlueContainer,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: MasariColors.royalGold),
+                border: Border.all(color: MasariColors.primaryCyan),
               ),
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<String>(
                   value: _serviceCategoryFilter,
-                  dropdownColor: MasariColors.deepBlue,
+                  dropdownColor: MasariColors.primaryBlueDark,
                   style: const TextStyle(color: MasariColors.pureWhite, fontSize: 13),
                   items: ['الكل', 'عمرة', 'حج', 'طيران', 'فنادق', 'حافلات', 'سيارات']
                       .map((cat) => DropdownMenuItem(value: cat, child: Text(cat)))
@@ -408,8 +408,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                           errorBuilder: (_, __, ___) => Container(
                             width: 80,
                             height: 80,
-                            color: MasariColors.deepBlueLight,
-                            child: const Icon(Icons.image, color: MasariColors.royalGold),
+                            color: MasariColors.primaryBlueLight.withOpacity(0.3),
+                            child: const Icon(Icons.image, color: MasariColors.primaryCyan),
                           ),
                         ),
                       ),
@@ -424,16 +424,16 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                                 const SizedBox(width: 8),
                                 MasariBadge(
                                   label: service.category,
-                                  backgroundColor: MasariColors.royalGold.withOpacity(0.2),
-                                  textColor: MasariColors.royalGold,
+                                  backgroundColor: MasariColors.primaryCyan.withOpacity(0.2),
+                                  textColor: MasariColors.primaryCyan,
                                 ),
                                 const SizedBox(width: 8),
                                 MasariBadge(
                                   label: service.status,
                                   backgroundColor: service.status == 'نشط'
                                       ? MasariColors.success.withOpacity(0.2)
-                                      : MasariColors.coralOrange.withOpacity(0.2),
-                                  textColor: service.status == 'نشط' ? MasariColors.success : MasariColors.coralOrange,
+                                      : MasariColors.primaryOrange.withOpacity(0.2),
+                                  textColor: service.status == 'نشط' ? MasariColors.success : MasariColors.primaryOrange,
                                 ),
                               ],
                             ),
@@ -445,7 +445,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                             const SizedBox(height: 6),
                             Text(
                               'السعر الحالي: ${service.price.toInt()} ${service.currency}',
-                              style: MasariTypography.titleSmall(color: MasariColors.royalGold),
+                              style: MasariTypography.titleSmall(color: MasariColors.primaryCyan),
                             ),
                           ],
                         ),
@@ -459,8 +459,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                             icon: const Icon(Icons.price_change, size: 16),
                             label: const Text('تعديل السعر'),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: MasariColors.royalGold,
-                              foregroundColor: MasariColors.deepBlue,
+                              backgroundColor: MasariColors.primaryCyan,
+                              foregroundColor: MasariColors.primaryBlueDark,
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                             ),
                           ),
@@ -475,9 +475,9 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                                   );
                             },
                             style: OutlinedButton.styleFrom(
-                              foregroundColor: service.status == 'نشط' ? MasariColors.coralOrange : MasariColors.success,
+                              foregroundColor: service.status == 'نشط' ? MasariColors.primaryOrange : MasariColors.success,
                               side: BorderSide(
-                                color: service.status == 'نشط' ? MasariColors.coralOrange : MasariColors.success,
+                                color: service.status == 'نشط' ? MasariColors.primaryOrange : MasariColors.success,
                               ),
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             ),
@@ -497,14 +497,14 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
   }
 
   // Edit Price Dialog Component
-  void _showEditPriceDialog(BuildContext context, PlatformService service, var adminSession) {
+  void _showEditPriceDialog(BuildContext context, PlatformService service, dynamic adminSession) {
     final controller = TextEditingController(text: service.price.toInt().toString());
 
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: MasariColors.deepBlue,
-        title: Text('تعديل سعر (${service.name})', style: MasariTypography.titleMedium(color: MasariColors.royalGold)),
+        backgroundColor: MasariColors.primaryBlueDark,
+        title: Text('تعديل سعر (${service.name})', style: MasariTypography.titleMedium(color: MasariColors.primaryCyan)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -520,13 +520,13 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: MasariColors.deepBlueLight,
+                color: MasariColors.primaryBlueContainer,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: MasariColors.royalGold.withOpacity(0.5)),
+                border: Border.all(color: MasariColors.primaryCyan.withOpacity(0.5)),
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.security, color: MasariColors.royalGold, size: 16),
+                  const Icon(Icons.security, color: MasariColors.primaryCyan, size: 16),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -561,8 +561,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: MasariColors.royalGold,
-              foregroundColor: MasariColors.deepBlue,
+              backgroundColor: MasariColors.primaryCyan,
+              foregroundColor: MasariColors.primaryBlueDark,
             ),
             child: const Text('تأكيد وحفظ السعر'),
           ),
@@ -595,8 +595,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               icon: const Icon(Icons.person_add, size: 18),
               label: const Text('إضافة مستخدم / مدير جديد'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: MasariColors.royalGold,
-                foregroundColor: MasariColors.deepBlue,
+                backgroundColor: MasariColors.primaryOrange,
+                foregroundColor: MasariColors.pureWhite,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               ),
             ),
@@ -615,8 +615,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundColor: user.role == UserRole.admin ? MasariColors.royalGold : MasariColors.deepBlueLight,
-                        foregroundColor: user.role == UserRole.admin ? MasariColors.deepBlue : MasariColors.pureWhite,
+                        backgroundColor: user.role == UserRole.admin ? MasariColors.primaryCyan : MasariColors.primaryBlueLight,
+                        foregroundColor: user.role == UserRole.admin ? MasariColors.primaryBlueDark : MasariColors.pureWhite,
                         child: Text(user.name.isNotEmpty ? user.name[0] : 'U'),
                       ),
                       const SizedBox(width: 16),
@@ -631,9 +631,9 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                                 MasariBadge(
                                   label: user.role == UserRole.admin ? 'مدير نظام (Admin)' : 'عميل مسافر (User)',
                                   backgroundColor: user.role == UserRole.admin
-                                      ? MasariColors.royalGold.withOpacity(0.2)
-                                      : MasariColors.skyCyan.withOpacity(0.2),
-                                  textColor: user.role == UserRole.admin ? MasariColors.royalGold : MasariColors.skyCyan,
+                                      ? MasariColors.primaryCyan.withOpacity(0.2)
+                                      : MasariColors.primaryBlueLight.withOpacity(0.2),
+                                  textColor: user.role == UserRole.admin ? MasariColors.primaryCyan : MasariColors.primaryCyanLight,
                                 ),
                               ],
                             ),
@@ -646,8 +646,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                         label: user.status,
                         backgroundColor: user.status == 'نشط'
                             ? MasariColors.success.withOpacity(0.2)
-                            : MasariColors.coralOrange.withOpacity(0.2),
-                        textColor: user.status == 'نشط' ? MasariColors.success : MasariColors.coralOrange,
+                            : MasariColors.primaryOrange.withOpacity(0.2),
+                        textColor: user.status == 'نشط' ? MasariColors.success : MasariColors.primaryOrange,
                       ),
                     ],
                   ),
@@ -661,7 +661,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
   }
 
   // Create User Dialog Component
-  void _showAddUserDialog(BuildContext context, var adminSession) {
+  void _showAddUserDialog(BuildContext context, dynamic adminSession) {
     final nameCtrl = TextEditingController();
     final emailCtrl = TextEditingController();
     UserRole selectedRole = UserRole.user;
@@ -670,8 +670,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
       context: context,
       builder: (ctx) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          backgroundColor: MasariColors.deepBlue,
-          title: Text('إضافة مستخدم / مدير نظام جديد', style: MasariTypography.titleMedium(color: MasariColors.royalGold)),
+          backgroundColor: MasariColors.primaryBlueDark,
+          title: Text('إضافة مستخدم / مدير نظام جديد', style: MasariTypography.titleMedium(color: MasariColors.primaryCyan)),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -687,7 +687,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   Radio<UserRole>(
                     value: UserRole.user,
                     groupValue: selectedRole,
-                    activeColor: MasariColors.royalGold,
+                    activeColor: MasariColors.primaryCyan,
                     onChanged: (val) => setDialogState(() => selectedRole = val!),
                   ),
                   const Text('عميل مسافر (User)'),
@@ -695,7 +695,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   Radio<UserRole>(
                     value: UserRole.admin,
                     groupValue: selectedRole,
-                    activeColor: MasariColors.royalGold,
+                    activeColor: MasariColors.primaryCyan,
                     onChanged: (val) => setDialogState(() => selectedRole = val!),
                   ),
                   const Text('مدير نظام (Admin)'),
@@ -723,7 +723,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   );
                 }
               },
-              style: ElevatedButton.styleFrom(backgroundColor: MasariColors.royalGold, foregroundColor: MasariColors.deepBlue),
+              style: ElevatedButton.styleFrom(backgroundColor: MasariColors.primaryCyan, foregroundColor: MasariColors.primaryBlueDark),
               child: const Text('حفظ وإضافة الحساب'),
             ),
           ],
@@ -732,7 +732,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
     );
   }
 
-  // 4. Audit Log Vault Tab (CRITICAL REQUIREMENT)
+  // 4. Audit Log Vault Tab
   Widget _buildAuditLogSection() {
     final auditLogs = ref.watch(auditLogProvider);
 
@@ -757,7 +757,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               children: [
                 Row(
                   children: [
-                    const Icon(Icons.shield, color: MasariColors.royalGold, size: 24),
+                    const Icon(Icons.shield, color: MasariColors.primaryCyan, size: 24),
                     const SizedBox(width: 8),
                     Text('سجل التدقيق والنشاط الأمني (Immutable Audit Vault)', style: MasariTypography.titleLarge()),
                   ],
@@ -768,8 +768,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
             ),
             const MasariBadge(
               label: 'IMMUTABLE RECORD',
-              backgroundColor: MasariColors.deepBlueLight,
-              textColor: MasariColors.royalGold,
+              backgroundColor: MasariColors.primaryBlueContainer,
+              textColor: MasariColors.primaryCyan,
             ),
           ],
         ),
@@ -783,7 +783,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: 'البحث في سجل التدقيق...',
-                    prefixIcon: const Icon(Icons.search, color: MasariColors.royalGold),
+                    prefixIcon: const Icon(Icons.search, color: MasariColors.primaryCyan),
                     isDense: true,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
@@ -796,14 +796,14 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
                 decoration: BoxDecoration(
-                  color: MasariColors.deepBlueLight,
+                  color: MasariColors.primaryBlueContainer,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: MasariColors.royalGold),
+                  border: Border.all(color: MasariColors.primaryCyan),
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: _auditActionFilter,
-                    dropdownColor: MasariColors.deepBlue,
+                    dropdownColor: MasariColors.primaryBlueDark,
                     style: const TextStyle(color: MasariColors.pureWhite, fontSize: 13),
                     items: ['الكل', 'تعديل سعر', 'إنشاء مستخدم', 'تعديل حالة']
                         .map((act) => DropdownMenuItem(value: act, child: Text('الإجراء: $act')))
@@ -835,10 +835,10 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                       child: Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: MasariColors.deepBlue,
+                          color: MasariColors.primaryBlue,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: log.action == 'تعديل سعر' ? MasariColors.royalGold : MasariColors.deepBlueLight,
+                            color: log.action == 'تعديل سعر' ? MasariColors.primaryCyan : MasariColors.primaryBlueLight,
                             width: 1,
                           ),
                         ),
@@ -850,9 +850,9 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                                 MasariBadge(
                                   label: log.action,
                                   backgroundColor: log.action == 'تعديل سعر'
-                                      ? MasariColors.royalGold.withOpacity(0.2)
-                                      : MasariColors.skyCyan.withOpacity(0.2),
-                                  textColor: log.action == 'تعديل سعر' ? MasariColors.royalGold : MasariColors.skyCyan,
+                                      ? MasariColors.primaryCyan.withOpacity(0.2)
+                                      : MasariColors.primaryBlueLight.withOpacity(0.2),
+                                  textColor: log.action == 'تعديل سعر' ? MasariColors.primaryCyan : MasariColors.primaryCyanLight,
                                 ),
                                 const SizedBox(width: 12),
                                 Text('الكيان: ${log.entity}', style: MasariTypography.titleSmall(color: MasariColors.pureWhite)),
@@ -878,16 +878,16 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                             Container(
                               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                               decoration: BoxDecoration(
-                                color: MasariColors.deepBlueDark,
+                                color: MasariColors.primaryBlueDark,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(
                                 children: [
                                   Text('المشرف المسؤول: ', style: MasariTypography.caption(color: MasariColors.titaniumGray)),
-                                  Text(log.adminName, style: MasariTypography.caption(color: MasariColors.royalGold)),
+                                  Text(log.adminName, style: MasariTypography.caption(color: MasariColors.primaryCyan)),
                                   const Spacer(),
-                                  Text('القيمة السابقة: ', style: MasariTypography.caption(color: MasariColors.coralOrange)),
-                                  Text(log.previousValue, style: MasariTypography.caption(color: MasariColors.coralOrange)),
+                                  Text('القيمة السابقة: ', style: MasariTypography.caption(color: MasariColors.primaryOrange)),
+                                  Text(log.previousValue, style: MasariTypography.caption(color: MasariColors.primaryOrange)),
                                   const SizedBox(width: 16),
                                   Text('القيمة الجديدة: ', style: MasariTypography.caption(color: MasariColors.success)),
                                   Text(log.newValue, style: MasariTypography.caption(color: MasariColors.success)),
@@ -911,21 +911,21 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('التقارير المالي التشغيلية والتحليلات', style: MasariTypography.titleLarge()),
+          Text('التقارير المالية التشغيلية والتحليلات', style: MasariTypography.titleLarge()),
           const SizedBox(height: 16),
           MasariCard(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('توزيع المبيعات والإيرادات حسب نوع الخدمة', style: MasariTypography.titleMedium(color: MasariColors.royalGold)),
+                Text('توزيع المبيعات والإيرادات حسب نوع الخدمة', style: MasariTypography.titleMedium(color: MasariColors.primaryCyan)),
                 const SizedBox(height: 16),
-                _buildReportRow('باقات العمرة والحج الفاخرة', '650,000 SAR', '45%', MasariColors.royalGold),
+                _buildReportRow('باقات العمرة والحج الفاخرة', '650,000 SAR', '45%', MasariColors.primaryCyan),
                 const SizedBox(height: 8),
-                _buildReportRow('رحلات الطيران الدولي والداخلي', '380,000 SAR', '26%', MasariColors.skyCyan),
+                _buildReportRow('رحلات الطيران الدولي والداخلي', '380,000 SAR', '26%', MasariColors.primaryBlueLight),
                 const SizedBox(height: 8),
                 _buildReportRow('الحجوزات الفندقية البرجية', '270,000 SAR', '19%', MasariColors.success),
                 const SizedBox(height: 8),
-                _buildReportRow('النقل الخاص والسيارات الفارهة', '150,200 SAR', '10%', MasariColors.coralOrange),
+                _buildReportRow('النقل الخاص والسيارات الفارهة', '150,200 SAR', '10%', MasariColors.primaryOrange),
               ],
             ),
           ),
@@ -940,7 +940,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
         Container(width: 12, height: 12, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 8),
         Expanded(child: Text(name, style: MasariTypography.bodySmall(color: MasariColors.pureWhite))),
-        Text(amount, style: MasariTypography.titleSmall(color: MasariColors.royalGold)),
+        Text(amount, style: MasariTypography.titleSmall(color: MasariColors.primaryCyan)),
         const SizedBox(width: 16),
         Text(percentage, style: MasariTypography.caption(color: MasariColors.titaniumGray)),
       ],
@@ -963,15 +963,15 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   title: const Text('تفعيل التوثيق الثنائي (2FA) للمدراء'),
                   subtitle: const Text('إلزام جميع المشرفين بإدخال رمز OTP عند تسجيل الدخول للنظام.'),
                   value: true,
-                  activeColor: MasariColors.royalGold,
+                  activeColor: MasariColors.primaryCyan,
                   onChanged: (val) {},
                 ),
-                const Divider(color: MasariColors.deepBlueLight),
+                const Divider(color: MasariColors.primaryBlueLight),
                 SwitchListTile(
                   title: const Text('التسجيل التلقائي لسجلات التدقيق (Immutable Logging)'),
                   subtitle: const Text('تشفير وحفظ كل إجراء إداري بشكل مباشر يمنع تعديله أو مسحه.'),
                   value: true,
-                  activeColor: MasariColors.royalGold,
+                  activeColor: MasariColors.primaryCyan,
                   onChanged: (val) {},
                 ),
               ],

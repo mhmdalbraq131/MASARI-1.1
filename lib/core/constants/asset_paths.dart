@@ -1,7 +1,7 @@
 /// MASARI Platform Asset Paths
 class AssetPaths {
   static const String logo = 'assets/images/masari_logo.png';
-  static const String logoGold = 'assets/images/masari_logo_gold.png';
+  static const String logoCyan = 'assets/images/masari_logo_cyan.png';
   static const String kaabaIllustration = 'assets/images/kaaba_illustration.png';
   static const String luxuryFlightPattern = 'assets/images/luxury_pattern.png';
   

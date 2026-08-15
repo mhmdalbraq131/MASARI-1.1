@@ -8,6 +8,7 @@ class MasariSectionHeader extends StatelessWidget {
   final String? subtitle;
   final String? actionLabel;
   final VoidCallback? onActionPressed;
+  final Color? accentColor;
 
   const MasariSectionHeader({
     super.key,
@@ -15,12 +16,14 @@ class MasariSectionHeader extends StatelessWidget {
     this.subtitle,
     this.actionLabel,
     this.onActionPressed,
+    this.accentColor,
   });
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final titleColor = isDark ? MasariColors.pureWhite : MasariColors.darkGraphite;
+    final barColor = accentColor ?? MasariColors.primaryCyan;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,7 +38,7 @@ class MasariSectionHeader extends StatelessWidget {
                   width: 4,
                   height: 20,
                   decoration: BoxDecoration(
-                    color: MasariColors.royalGold,
+                    color: barColor,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -62,9 +65,9 @@ class MasariSectionHeader extends StatelessWidget {
               children: [
                 Text(
                   actionLabel!,
-                  style: MasariTypography.titleSmall(color: MasariColors.royalGoldDark),
+                  style: MasariTypography.titleSmall(color: MasariColors.primaryCyanDark),
                 ),
-                const Icon(Icons.arrow_forward_ios, size: 12, color: MasariColors.royalGoldDark),
+                const Icon(Icons.arrow_forward_ios, size: 12, color: MasariColors.primaryCyanDark),
               ],
             ),
           ),

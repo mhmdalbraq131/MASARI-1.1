@@ -24,9 +24,9 @@ class HomeView extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Luxury Welcome Banner
+          // Welcome Banner
           MasariLuxuryCard(
-            badgeText: 'منصة مساري الملكية',
+            badgeText: 'منصة مساري الموحدة',
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -35,9 +35,9 @@ class HomeView extends ConsumerWidget {
                   children: [
                     Text(
                       'أهلاً بك في ${AppConstants.appNameArabic}',
-                      style: MasariTypography.headlineMedium(color: MasariColors.royalGold),
+                      style: MasariTypography.headlineMedium(color: MasariColors.primaryCyan),
                     ),
-                    const Icon(Icons.star, color: MasariColors.royalGold, size: 28),
+                    const Icon(Icons.flight_takeoff, color: MasariColors.primaryCyan, size: 28),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -50,10 +50,10 @@ class HomeView extends ConsumerWidget {
                   spacing: 8,
                   runSpacing: 8,
                   children: const [
-                    MasariBadge(label: 'Riverpod', backgroundColor: MasariColors.royalGold, textColor: MasariColors.deepBlue),
-                    MasariBadge(label: 'GoRouter', backgroundColor: MasariColors.deepBlueLight, textColor: MasariColors.pureWhite),
-                    MasariBadge(label: 'Clean Architecture', backgroundColor: MasariColors.skyCyan, textColor: MasariColors.deepBlue),
-                    MasariBadge(label: 'Firebase Architecture', backgroundColor: MasariColors.coralOrange, textColor: MasariColors.pureWhite),
+                    MasariBadge(label: 'Riverpod', backgroundColor: MasariColors.primaryCyan, textColor: MasariColors.primaryBlueDark),
+                    MasariBadge(label: 'GoRouter', backgroundColor: MasariColors.primaryBlueLight, textColor: MasariColors.pureWhite),
+                    MasariBadge(label: 'Clean Architecture', backgroundColor: MasariColors.primaryCyanDark, textColor: MasariColors.pureWhite),
+                    MasariBadge(label: 'Tri-Color Brand System', backgroundColor: MasariColors.primaryOrange, textColor: MasariColors.pureWhite),
                   ],
                 ),
               ],
@@ -83,14 +83,14 @@ class HomeView extends ConsumerWidget {
             mainAxisSpacing: 16,
             childAspectRatio: 1.3,
             children: [
-              _buildServiceCard(context, path: '/flights', title: 'رحلات الطيران', subtitle: 'Flights Route', icon: Icons.flight_takeoff, color: MasariColors.skyCyan),
-              _buildServiceCard(context, path: '/hotels', title: 'الفنادق والإقامة', subtitle: 'Hotels Route', icon: Icons.hotel, color: MasariColors.royalGold),
-              _buildServiceCard(context, path: '/bus', title: 'حجوزات الحافلات', subtitle: 'Bus Route', icon: Icons.directions_bus, color: MasariColors.coralOrange),
-              _buildServiceCard(context, path: '/cars', title: 'تأجير السيارات', subtitle: 'Cars Route', icon: Icons.directions_car, color: MasariColors.deepBlueLight),
+              _buildServiceCard(context, path: '/flights', title: 'رحلات الطيران', subtitle: 'Flights Route', icon: Icons.flight_takeoff, color: MasariColors.primaryCyan),
+              _buildServiceCard(context, path: '/hotels', title: 'الفنادق والإقامة', subtitle: 'Hotels Route', icon: Icons.hotel, color: MasariColors.primaryBlueLight),
+              _buildServiceCard(context, path: '/bus', title: 'حجوزات الحافلات', subtitle: 'Bus Route', icon: Icons.directions_bus, color: MasariColors.primaryOrange),
+              _buildServiceCard(context, path: '/cars', title: 'تأجير السيارات', subtitle: 'Cars Route', icon: Icons.directions_car, color: MasariColors.primaryCyanDark),
               _buildServiceCard(context, path: '/transfers', title: 'النقل الخاص', subtitle: 'Transfers Route', icon: Icons.local_taxi, color: MasariColors.info),
-              _buildServiceCard(context, path: '/tourism', title: 'الباقات السياحية', subtitle: 'Tourism Route', icon: Icons.explore, color: MasariColors.success),
-              _buildServiceCard(context, path: '/hajj', title: 'باقات الحج', subtitle: 'Hajj Route', icon: Icons.mosque, color: MasariColors.royalGoldDark),
-              _buildServiceCard(context, path: '/umrah', title: 'خدمات العمرة', subtitle: 'Umrah Route', icon: Icons.night_shelter, color: MasariColors.deepBlue),
+              _buildServiceCard(context, path: '/tourism', title: 'الباقات السياحية', subtitle: 'Tourism Route', icon: Icons.explore, color: MasariColors.primaryOrangeDark),
+              _buildServiceCard(context, path: '/hajj', title: 'باقات الحج', subtitle: 'Hajj Route', icon: Icons.mosque, color: MasariColors.primaryCyan),
+              _buildServiceCard(context, path: '/umrah', title: 'خدمات العمرة', subtitle: 'Umrah Route', icon: Icons.night_shelter, color: MasariColors.primaryBlueLight),
             ],
           ),
 
@@ -99,7 +99,7 @@ class HomeView extends ConsumerWidget {
           // Management & Account Routes
           MasariSectionHeader(
             title: isArabic ? 'إدارة الحساب والمسافرين' : 'Account & Traveler Center',
-            subtitle: isArabic ? 'بنية المسارات المحمية والمحفظة الملكية' : 'Protected routes architecture',
+            subtitle: isArabic ? 'بنية المسارات المحمية والمحفظة الرقمية' : 'Protected routes architecture',
           ),
 
           const SizedBox(height: 16),
@@ -168,10 +168,10 @@ class HomeView extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: MasariColors.royalGold.withOpacity(0.15),
+              color: MasariColors.primaryCyan.withOpacity(0.15),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: MasariColors.royalGoldDark, size: 22),
+            child: const Icon(icon, color: MasariColors.primaryCyanDark, size: 22),
           ),
           const SizedBox(width: 12),
           Expanded(

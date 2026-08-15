@@ -46,7 +46,7 @@ class _BaseTravelServiceView extends StatelessWidget {
                     children: [
                       Text(title, style: MasariTypography.headlineSmall(color: MasariColors.pureWhite)),
                       const SizedBox(height: 4),
-                      Text('المسار المعتمد: $routePath', style: MasariTypography.caption(color: MasariColors.royalGold, isArabic: false)),
+                      Text('المسار المعتمد: $routePath', style: MasariTypography.caption(color: MasariColors.primaryCyan, isArabic: false)),
                       const SizedBox(height: 6),
                       Text(description, style: MasariTypography.bodySmall(color: MasariColors.marbleWhite)),
                     ],
@@ -56,7 +56,7 @@ class _BaseTravelServiceView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          MasariSectionHeader(
+          const MasariSectionHeader(
             title: 'الهيكل الهندسي وقواعد البيانات المجهزة',
             subtitle: 'جاهزية الربط البرمجي وواجهات المستخدم المستقلة',
           ),
@@ -66,19 +66,19 @@ class _BaseTravelServiceView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  leading: const Icon(Icons.architecture, color: MasariColors.royalGold),
+                  leading: const Icon(Icons.architecture, color: MasariColors.primaryCyan),
                   title: Text('Architecture Layer', style: MasariTypography.titleMedium()),
                   subtitle: const Text('data/ • domain/ • presentation/ (Clean Feature-First)'),
                 ),
                 const Divider(),
                 ListTile(
-                  leading: const Icon(Icons.cloud_sync, color: MasariColors.skyCyan),
+                  leading: const Icon(Icons.cloud_sync, color: MasariColors.primaryCyanLight),
                   title: Text('Repository & Data Sources', style: MasariTypography.titleMedium()),
                   subtitle: const Text('Firebase Firestore & REST API Ready Repository Contracts'),
                 ),
                 const Divider(),
                 ListTile(
-                  leading: const Icon(Icons.view_agenda, color: MasariColors.coralOrange),
+                  leading: const Icon(Icons.view_agenda, color: MasariColors.primaryOrange),
                   title: Text('State Management', style: MasariTypography.titleMedium()),
                   subtitle: const Text('Riverpod Providers & AsyncNotifier Architecture'),
                 ),
@@ -96,11 +96,11 @@ class FlightsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const _BaseTravelServiceView(
-      title: 'حجوزات الطيران الفاخرة (Flights)',
+      title: 'حجوزات الطيران (Flights)',
       routePath: '/flights',
       description: 'البنية المخصصة لمقارنة وحجز رحلات الطيران العالمية، الدرجة الأولى ودرجة الأعمال.',
       icon: Icons.flight_takeoff,
-      accentColor: MasariColors.skyCyan,
+      accentColor: MasariColors.primaryCyan,
     );
   }
 }
@@ -112,9 +112,9 @@ class HotelsView extends StatelessWidget {
     return const _BaseTravelServiceView(
       title: 'حجوزات الفنادق والمنتجعات (Hotels)',
       routePath: '/hotels',
-      description: 'البنية الهيكلية لفنادق الخمس نجوم، فنادق مكة والمدينة، والمنتجعات الملكية.',
+      description: 'البنية الهيكلية لفنادق الخمس نجوم، فنادق مكة والمدينة، والمنتجعات.',
       icon: Icons.hotel,
-      accentColor: MasariColors.royalGold,
+      accentColor: MasariColors.primaryBlueLight,
     );
   }
 }
@@ -126,9 +126,9 @@ class BusView extends StatelessWidget {
     return const _BaseTravelServiceView(
       title: 'حافلات النقل الفاخر (Bus Booking)',
       routePath: '/bus',
-      description: 'البنية التحتية لحجز الحافلات لكبار الشخصيات والتنقلات بين المدن والمشاعر المقدسة.',
+      description: 'البنية التحتية لحجز الحافلات والتنقلات بين المدن والمشاعر المقدسة.',
       icon: Icons.directions_bus,
-      accentColor: MasariColors.coralOrange,
+      accentColor: MasariColors.primaryOrange,
     );
   }
 }
@@ -140,9 +140,9 @@ class CarsView extends StatelessWidget {
     return const _BaseTravelServiceView(
       title: 'تأجير السيارات الفارهة (Car Rental)',
       routePath: '/cars',
-      description: 'منظومة تأجير السيارات مع وسائقين خاصين أو قيادة شخصية.',
+      description: 'منظومة تأجير السيارات مع سائقين خاصين أو قيادة شخصية.',
       icon: Icons.directions_car,
-      accentColor: MasariColors.deepBlueLight,
+      accentColor: MasariColors.primaryCyanDark,
     );
   }
 }
@@ -152,11 +152,11 @@ class TransfersView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const _BaseTravelServiceView(
-      title: 'النقل الخاص والتوصيل VIP (Private Transfers)',
+      title: 'النقل الخاص والتوصيل (Private Transfers)',
       routePath: '/transfers',
-      description: 'خدمات التوصيل من وإلى المطار، الفنادق، والمشاعر بأسطول فاخر.',
+      description: 'خدمات التوصيل من وإلى المطار، الفنادق، والمشاعر بأسطول حديث.',
       icon: Icons.local_taxi,
-      accentColor: MasariColors.info,
+      accentColor: MasariColors.primaryBlue,
     );
   }
 }
@@ -166,11 +166,11 @@ class TourismView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const _BaseTravelServiceView(
-      title: 'الباقات البرامج السياحية (Tourism Packages)',
+      title: 'الباقات والبرامج السياحية (Tourism Packages)',
       routePath: '/tourism',
       description: 'جولات سياحية متكاملة، رحلات كروز، واستكشاف الوجهات العالمية.',
       icon: Icons.explore,
-      accentColor: MasariColors.success,
+      accentColor: MasariColors.primaryOrangeDark,
     );
   }
 }

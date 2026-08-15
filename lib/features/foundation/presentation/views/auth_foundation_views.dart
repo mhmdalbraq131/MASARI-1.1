@@ -48,10 +48,10 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: MasariColors.royalGold.withOpacity(0.2),
+                          color: MasariColors.primaryCyan.withOpacity(0.15),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(Icons.lock_outline, color: MasariColors.royalGold, size: 28),
+                        child: const Icon(Icons.lock_outline, color: MasariColors.primaryCyan, size: 28),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -72,9 +72,9 @@ class _LoginViewState extends ConsumerState<LoginView> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: MasariColors.deepBlueLight,
+                        color: MasariColors.primaryBlueContainer,
                         borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: MasariColors.royalGold),
+                        border: Border.all(color: MasariColors.primaryCyan),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,8 +90,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
                             ],
                           ),
                           const SizedBox(height: 8),
-                          Text('الاسم: ${session.name}', style: MasariTypography.bodyMedium(color: MasariColors.royalGold)),
-                          Text('البريد: ${session.email}', style: MasariTypography.bodySmall(color: MasariColors.titaniumGray)),
+                          Text('الاسم: ${session.name}', style: MasariTypography.bodyMedium(color: MasariColors.primaryCyan)),
+                          Text('البريد: ${session.email}', style: MasariTypography.bodySmall(color: MasariColors.titaniumLight)),
                           Text('نوع الحساب: ${session.role == UserRole.admin ? "مدير نظام (Admin)" : "عميل مسافر (User)"}',
                               style: MasariTypography.bodySmall(color: MasariColors.pureWhite)),
                           const SizedBox(height: 16),
@@ -115,8 +115,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                   ref.read(userSessionProvider.notifier).logout();
                                 },
                                 style: OutlinedButton.styleFrom(
-                                  foregroundColor: MasariColors.coralOrange,
-                                  side: const BorderSide(color: MasariColors.coralOrange),
+                                  foregroundColor: MasariColors.primaryOrange,
+                                  side: const BorderSide(color: MasariColors.primaryOrange),
                                 ),
                                 child: const Text('تسجيل الخروج'),
                               ),
@@ -160,13 +160,13 @@ class _LoginViewState extends ConsumerState<LoginView> {
                               );
                           context.go('/admin');
                         },
-                        icon: const Icon(Icons.admin_panel_settings, color: MasariColors.royalGold, size: 18),
+                        icon: const Icon(Icons.admin_panel_settings, color: MasariColors.primaryCyan, size: 18),
                         label: const Text(
                           'تسجيل الدخول كمدير نظام (Admin Portal)',
-                          style: TextStyle(color: MasariColors.royalGold, fontWeight: FontWeight.bold),
+                          style: TextStyle(color: MasariColors.primaryCyan, fontWeight: FontWeight.bold),
                         ),
                         style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: MasariColors.royalGold, width: 1.5),
+                          side: const BorderSide(color: MasariColors.primaryCyan, width: 1.5),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         ),
@@ -179,7 +179,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                         onPressed: () => context.go('/register'),
                         child: Text(
                           'ليس لديك حساب؟ إنشاء حساب جديد (/register)',
-                          style: MasariTypography.titleSmall(color: MasariColors.royalGoldDark),
+                          style: MasariTypography.titleSmall(color: MasariColors.primaryCyanDark),
                         ),
                       ),
                     ),
@@ -213,7 +213,7 @@ class RegisterView extends ConsumerWidget {
                 children: [
                   Text('إنشاء حساب جديد في مساري', style: MasariTypography.headlineSmall()),
                   const SizedBox(height: 4),
-                  Text('انضم إلى منصة مساري الفاخرة لخدمات الحج والعمرة والسفر', style: MasariTypography.bodySmall(color: MasariColors.titaniumGray)),
+                  Text('انضم إلى منصة مساري لخدمات الحج والعمرة والسفر الفاخر', style: MasariTypography.bodySmall(color: MasariColors.titaniumGray)),
                   const SizedBox(height: 20),
                   const MasariTextField(label: 'الاسم الكامل', hintText: 'سارة الغامدي'),
                   const SizedBox(height: 16),
@@ -223,6 +223,7 @@ class RegisterView extends ConsumerWidget {
                   const SizedBox(height: 24),
                   MasariPrimaryButton(
                     label: 'إنشاء الحساب والمتابعة',
+                    isOrangeCta: true,
                     onPressed: () {
                       ref.read(userSessionProvider.notifier).loginAsUser(
                             name: 'سارة الغامدي',
@@ -235,7 +236,7 @@ class RegisterView extends ConsumerWidget {
                   Center(
                     child: TextButton(
                       onPressed: () => context.go('/login'),
-                      child: Text('لديك حساب بالفعل؟ تسجيل الدخول (/login)', style: MasariTypography.titleSmall(color: MasariColors.royalGoldDark)),
+                      child: Text('لديك حساب بالفعل؟ تسجيل الدخول (/login)', style: MasariTypography.titleSmall(color: MasariColors.primaryCyanDark)),
                     ),
                   ),
                 ],
@@ -263,7 +264,7 @@ class OtpView extends ConsumerWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.mark_email_read_outlined, size: 48, color: MasariColors.royalGold),
+                const Icon(Icons.mark_email_read_outlined, size: 48, color: MasariColors.primaryCyan),
                 const SizedBox(height: 16),
                 Text('رمز التحقق (OTP)', style: MasariTypography.headlineSmall()),
                 const SizedBox(height: 4),
@@ -283,6 +284,10 @@ class OtpView extends ConsumerWidget {
                         decoration: InputDecoration(
                           counterText: '',
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 2),
+                          ),
                         ),
                       ),
                     ),
@@ -291,7 +296,7 @@ class OtpView extends ConsumerWidget {
                 const SizedBox(height: 24),
                 MasariPrimaryButton(
                   label: 'تأكيد ودخول الرئيسية (/home)',
-                  isGoldStyle: true,
+                  isOrangeCta: true,
                   onPressed: () => context.go('/home'),
                 ),
               ],

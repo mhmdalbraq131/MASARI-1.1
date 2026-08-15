@@ -4,13 +4,12 @@ import '../../../../core/theme/masari_colors.dart';
 import '../../../../core/theme/masari_typography.dart';
 import '../../../../shared/components/masari_cards.dart';
 import '../../../../shared/components/masari_chips_badges.dart';
-import '../../../../shared/components/masari_section_header.dart';
 
 class WalletView extends StatelessWidget {
   const WalletView({super.key});
   @override
   Widget build(BuildContext context) {
-    return _buildAccountSection('محفظة مساري الرقمية (Wallet)', '/wallet', Icons.account_balance_wallet, 'إدارة الرصيد والبطاقات واستبدال نقاط المكافآت الملكية.');
+    return _buildAccountSection('محفظة مساري الرقمية (Wallet)', '/wallet', Icons.account_balance_wallet, 'إدارة الرصيد والبطاقات واستبدال نقاط المكافآت.');
   }
 }
 
@@ -58,7 +57,7 @@ class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
   @override
   Widget build(BuildContext context) {
-    return _buildAccountSection('الملف الشخصي (Profile)', '/profile', Icons.person, 'إدارة البيانات الشخصية، العضوية الملكية، وتفضيلات السفر.');
+    return _buildAccountSection('الملف الشخصي (Profile)', '/profile', Icons.person, 'إدارة البيانات الشخصية، العضوية، وتفضيلات السفر.');
   }
 }
 
@@ -90,10 +89,10 @@ Widget _buildAccountSection(String title, String path, IconData icon, String des
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: MasariColors.royalGold.withOpacity(0.15),
+                  color: MasariColors.primaryCyan.withOpacity(0.15),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, color: MasariColors.royalGoldDark, size: 36),
+                child: Icon(icon, color: MasariColors.primaryCyanDark, size: 36),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -102,7 +101,7 @@ Widget _buildAccountSection(String title, String path, IconData icon, String des
                   children: [
                     Text(title, style: MasariTypography.titleLarge()),
                     const SizedBox(height: 4),
-                    MasariBadge(label: 'Route: $path', backgroundColor: MasariColors.deepBlueLight, textColor: MasariColors.pureWhite),
+                    const MasariBadge(label: 'Active Route', backgroundColor: MasariColors.primaryBlueLight, textColor: MasariColors.pureWhite),
                     const SizedBox(height: 8),
                     Text(description, style: MasariTypography.bodyMedium(color: MasariColors.titaniumGray)),
                   ],

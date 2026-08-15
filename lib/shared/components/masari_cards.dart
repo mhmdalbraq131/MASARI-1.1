@@ -20,7 +20,7 @@ class MasariCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final cardBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
-    final borderColor = isDark ? const Color(0x26D4AF37) : MasariColors.titaniumDivider;
+    final borderColor = isDark ? MasariColors.primaryCyan.withOpacity(0.2) : MasariColors.titaniumDivider;
 
     return Container(
       decoration: BoxDecoration(
@@ -45,7 +45,7 @@ class MasariCard extends StatelessWidget {
   }
 }
 
-/// MASARI Luxury Card with Royal Gold Border & Deep Blue Accent
+/// MASARI High-End Brand Card with Cyan Border & Deep Blue Gradient
 class MasariLuxuryCard extends StatelessWidget {
   final Widget child;
   final String? badgeText;
@@ -64,8 +64,8 @@ class MasariLuxuryCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: MasariColors.luxuryCardGradient,
         borderRadius: MasariSpacing.borderLg,
-        border: Border.all(color: MasariColors.royalGold, width: 1.5),
-        boxShadow: MasariShadows.luxuryGold,
+        border: Border.all(color: MasariColors.primaryCyan, width: 1.5),
+        boxShadow: MasariShadows.luxuryCyan,
       ),
       child: Material(
         color: Colors.transparent,
@@ -85,7 +85,7 @@ class MasariLuxuryCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                       decoration: const BoxDecoration(
-                        color: MasariColors.royalGold,
+                        color: MasariColors.primaryCyan,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(MasariSpacing.radiusLg),
                           bottomRight: Radius.circular(MasariSpacing.radiusSm),
@@ -94,7 +94,7 @@ class MasariLuxuryCard extends StatelessWidget {
                       child: Text(
                         badgeText!,
                         style: const TextStyle(
-                          color: MasariColors.deepBlue,
+                          color: MasariColors.primaryBlueDark,
                           fontSize: 11,
                           fontWeight: FontWeight.bold,
                         ),

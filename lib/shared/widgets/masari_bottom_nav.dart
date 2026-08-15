@@ -29,8 +29,8 @@ class MasariBottomNav extends ConsumerWidget {
 
     return Container(
       decoration: const BoxDecoration(
-        color: MasariColors.deepBlue,
-        border: Border(top: BorderSide(color: MasariColors.royalGold, width: 1.5)),
+        color: MasariColors.primaryBlueDark,
+        border: Border(top: BorderSide(color: MasariColors.primaryCyan, width: 1.5)),
       ),
       child: BottomNavigationBar(
         currentIndex: _getSelectedIndex(),
@@ -54,35 +54,35 @@ class MasariBottomNav extends ConsumerWidget {
           }
         },
         type: BottomNavigationBarType.fixed,
-        backgroundColor: MasariColors.deepBlue,
-        selectedItemColor: MasariColors.royalGold,
+        backgroundColor: MasariColors.primaryBlueDark,
+        selectedItemColor: MasariColors.primaryCyan,
         unselectedItemColor: MasariColors.titaniumLight,
         selectedFontSize: 12,
         unselectedFontSize: 11,
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.home_outlined),
-            activeIcon: const Icon(Icons.home, color: MasariColors.royalGold),
+            activeIcon: const Icon(Icons.home, color: MasariColors.primaryCyan),
             label: isArabic ? 'الرئيسية' : 'Home',
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.explore_outlined),
-            activeIcon: const Icon(Icons.explore, color: MasariColors.royalGold),
+            activeIcon: const Icon(Icons.explore, color: MasariColors.primaryCyan),
             label: isArabic ? 'الخدمات' : 'Services',
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.mosque_outlined),
-            activeIcon: const Icon(Icons.mosque, color: MasariColors.royalGold),
+            activeIcon: const Icon(Icons.mosque, color: MasariColors.primaryCyan),
             label: isArabic ? 'الحج والعمرة' : 'Hajj/Umrah',
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.auto_awesome_outlined),
-            activeIcon: const Icon(Icons.auto_awesome, color: MasariColors.royalGold),
+            activeIcon: const Icon(Icons.auto_awesome, color: MasariColors.primaryOrange),
             label: isArabic ? 'مساعد AI' : 'AI Assistant',
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.person_outline),
-            activeIcon: const Icon(Icons.person, color: MasariColors.royalGold),
+            activeIcon: const Icon(Icons.person, color: MasariColors.primaryCyan),
             label: isArabic ? 'حسابي' : 'Profile',
           ),
         ],

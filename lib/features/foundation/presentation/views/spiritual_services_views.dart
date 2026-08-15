@@ -22,10 +22,10 @@ class HajjView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
-                    color: MasariColors.royalGold,
+                    color: MasariColors.primaryCyan,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.mosque, color: MasariColors.deepBlue, size: 36),
+                  child: const Icon(Icons.mosque, color: MasariColors.primaryBlueDark, size: 36),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -34,9 +34,9 @@ class HajjView extends StatelessWidget {
                     children: [
                       Text('باقات ومجموعات الحج (Hajj)', style: MasariTypography.headlineSmall(color: MasariColors.pureWhite)),
                       const SizedBox(height: 4),
-                      Text('المسار: /hajj', style: MasariTypography.caption(color: MasariColors.royalGold, isArabic: false)),
+                      Text('المسار: /hajj', style: MasariTypography.caption(color: MasariColors.primaryCyan, isArabic: false)),
                       const SizedBox(height: 6),
-                      Text('بنية تنظيم وتنفيذ رحلات الحج VIP، المخيمات، والتنقلات المقدسة.', style: MasariTypography.bodySmall(color: MasariColors.marbleWhite)),
+                      Text('بنية تنظيم وتنفيذ رحلات الحج والمخيمات والتنقلات المقدسة.', style: MasariTypography.bodySmall(color: MasariColors.marbleWhite)),
                     ],
                   ),
                 ),
@@ -44,7 +44,7 @@ class HajjView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          MasariSectionHeader(title: 'جاهزية الربط بوزارة الحج والمؤسسات'),
+          const MasariSectionHeader(title: 'جاهزية الربط بوزارة الحج والمؤسسات'),
           const SizedBox(height: 16),
           const MasariCard(
             child: Text('هيكل الموديول جاهز لتطبيق بروتوكولات الحج وإدارة المجموعات.'),
@@ -67,17 +67,17 @@ class UmrahView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           MasariLuxuryCard(
-            badgeText: 'خدمات العمرة الملكية',
+            badgeText: 'خدمات العمرة المتميزة',
             child: Row(
               children: [
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: MasariColors.deepBlueContainer,
+                    color: MasariColors.primaryBlueContainer,
                     shape: BoxShape.circle,
-                    border: Border.all(color: MasariColors.royalGold),
+                    border: Border.all(color: MasariColors.primaryCyan),
                   ),
-                  child: const Icon(Icons.night_shelter, color: MasariColors.royalGold, size: 36),
+                  child: const Icon(Icons.night_shelter, color: MasariColors.primaryCyan, size: 36),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -86,7 +86,7 @@ class UmrahView extends StatelessWidget {
                     children: [
                       Text('برامج العمرة المخصصة (Umrah)', style: MasariTypography.headlineSmall(color: MasariColors.pureWhite)),
                       const SizedBox(height: 4),
-                      Text('المسار: /umrah', style: MasariTypography.caption(color: MasariColors.royalGold, isArabic: false)),
+                      Text('المسار: /umrah', style: MasariTypography.caption(color: MasariColors.primaryCyan, isArabic: false)),
                       const SizedBox(height: 6),
                       Text('باقات العمرة الشاملة للتصاريح، الطيران، الفنادق المطلة، والإرشاد.', style: MasariTypography.bodySmall(color: MasariColors.marbleWhite)),
                     ],
@@ -119,10 +119,10 @@ class VisaView extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: const BoxDecoration(
-                    color: MasariColors.skyCyan,
+                    color: MasariColors.primaryCyan,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(Icons.badge, color: MasariColors.deepBlue, size: 36),
+                  child: const Icon(Icons.badge, color: MasariColors.primaryBlueDark, size: 36),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -131,7 +131,7 @@ class VisaView extends StatelessWidget {
                     children: [
                       Text('تأشيرات السفر والسياحة والعمرة (Visa)', style: MasariTypography.headlineSmall(color: MasariColors.pureWhite)),
                       const SizedBox(height: 4),
-                      Text('المسار: /visa', style: MasariTypography.caption(color: MasariColors.royalGold, isArabic: false)),
+                      Text('المسار: /visa', style: MasariTypography.caption(color: MasariColors.primaryCyan, isArabic: false)),
                       const SizedBox(height: 6),
                       Text('معالجة طلبات التأشيرات الإلكترونية، التأشيرات السياحية، والدعم القنصلي.', style: MasariTypography.bodySmall(color: MasariColors.marbleWhite)),
                     ],
