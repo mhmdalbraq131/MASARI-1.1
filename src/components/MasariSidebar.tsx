@@ -83,7 +83,7 @@ export const MasariSidebar: React.FC<MasariSidebarProps> = ({
       <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-[#1E293B]">
         {!isCollapsed && (
           <span className="text-xs font-bold text-[#008DDA] dark:text-[#00D4FF] tracking-wider uppercase">
-            {isArabic ? 'خريطة المسارات' : 'Platform Architecture'}
+            {isArabic ? 'دليل الخدمات' : 'Service Directory'}
           </span>
         )}
         <button
@@ -151,12 +151,12 @@ export const MasariSidebar: React.FC<MasariSidebarProps> = ({
         })}
       </div>
 
-      {/* Footer / Architecture Indicator */}
+      {/* Footer / Trust Guarantee Indicator */}
       {!isCollapsed && (
         <div className="p-4 border-t border-slate-200 dark:border-[#1E293B] bg-slate-50 dark:bg-[#0A1631]/50 text-center">
-          <div className="flex items-center justify-center gap-2 text-[10px] text-[#008DDA] dark:text-[#00D4FF] font-mono">
+          <div className="flex items-center justify-center gap-2 text-[10px] text-[#008DDA] dark:text-[#00D4FF] font-bold">
             <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse"></span>
-            <span>Firebase & Riverpod Active</span>
+            <span>{isArabic ? 'خدمة معتمدة ودفع آمن 100%' : 'Certified & 100% Secure'}</span>
           </div>
         </div>
       )}

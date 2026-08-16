@@ -31,19 +31,19 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
   };
 
   return (
-    <div className="p-4 md:p-8 space-y-8 max-w-7xl mx-auto w-full transition-colors">
+    <div className="p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 max-w-7xl mx-auto w-full transition-colors overflow-hidden">
       {/* Header Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0B192C] via-[#1E3E62] to-[#0B192C] text-white p-6 md:p-10 shadow-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0B192C] via-[#1E3E62] to-[#0B192C] text-white p-5 sm:p-8 md:p-10 shadow-xl">
         <div className="absolute top-0 right-0 -mr-16 -mt-16 w-72 h-72 bg-[#00D4FF]/15 rounded-full blur-3xl pointer-events-none"></div>
         <div className="relative z-10 space-y-3 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00D4FF]/20 border border-[#00D4FF]/40 text-xs font-bold text-[#00D4FF]">
-            <FileCheck className="h-4 w-4" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00D4FF]/20 border border-[#00D4FF]/40 text-xs font-bold text-[#00D4FF]">
+            <FileCheck className="h-4 w-4 shrink-0" />
             <span>{isArabic ? 'بوابة التأشيرات وتصاريح الدخول الفورية' : 'Instant e-Visa & Travel Authorization'}</span>
           </div>
-          <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight text-white">
+          <h1 className="text-xl sm:text-2xl md:text-4xl font-extrabold tracking-tight text-white">
             {isArabic ? 'إصدار التأشيرات السياحية وتأشيرات العمرة' : 'Saudi Tourist, Umrah & Transit Visas'}
           </h1>
-          <p className="text-sm md:text-base text-slate-200 leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-slate-200 leading-relaxed max-w-2xl">
             {isArabic
               ? 'إجراءات مبسطة وتأشيرات إلكترونية سريعة معتمدة من وزارة الخارجية والمنصات الرسمية شاملة التأمين الطبي وتصاريح نسك.'
               : 'Streamlined online visa application with certified official verification, comprehensive medical insurance, and Nusuk permit integration.'}
@@ -53,10 +53,10 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
 
       {/* Submission Alert */}
       {submitted && selectedVisa && (
-        <div className="p-4 rounded-2xl bg-[#10B981]/15 border border-[#10B981]/40 text-[#10B981] flex items-center justify-between shadow-lg">
+        <div className="p-4 rounded-2xl bg-[#10B981]/15 border border-[#10B981]/40 text-[#10B981] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
           <div className="flex items-center gap-3">
             <ShieldCheck className="h-6 w-6 shrink-0" />
-            <div className="text-sm font-bold">
+            <div className="text-xs sm:text-sm font-bold">
               {isArabic
                 ? `تم استلام طلب إصدار: "${selectedVisa.titleAr}". سيتم إشعارك بصدور التأشيرة خلال ${selectedVisa.processingTimeAr}.`
                 : `Application received for "${selectedVisa.titleEn}". You will receive updates within ${selectedVisa.processingTimeEn}.`}
@@ -64,7 +64,7 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
           </div>
           <button
             onClick={() => onNavigate('/bookings')}
-            className="px-3 py-1.5 rounded-xl bg-[#10B981] text-white font-bold text-xs"
+            className="px-3 py-1.5 rounded-xl bg-[#10B981] text-white font-bold text-xs whitespace-nowrap"
           >
             {isArabic ? 'متابعة الطلب' : 'Track Status'}
           </button>
@@ -72,16 +72,16 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
       )}
 
       {/* Visa Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
         {VISA_TYPES.map((visa) => (
           <div
             key={visa.id}
-            className="flex flex-col rounded-3xl bg-white dark:bg-[#0A1631] border border-slate-200 dark:border-[#1E293B] p-6 shadow-sm hover:shadow-xl dark:shadow-none hover:border-[#00D4FF]/50 transition-all justify-between space-y-6"
+            className="flex flex-col rounded-3xl bg-white dark:bg-[#0A1631] border border-slate-200 dark:border-[#1E293B] p-4 sm:p-6 shadow-sm hover:shadow-xl dark:shadow-none hover:border-[#00D4FF]/50 transition-all justify-between space-y-5 sm:space-y-6 w-full min-w-0"
           >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="p-3 rounded-2xl bg-[#00D4FF]/10 text-[#008DDA] dark:text-[#00D4FF]">
-                  <FileCheck className="h-6 w-6" />
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex items-center justify-between gap-2">
+                <div className="p-2.5 sm:p-3 rounded-2xl bg-[#00D4FF]/10 text-[#008DDA] dark:text-[#00D4FF] shrink-0">
+                  <FileCheck className="h-5 sm:h-6 w-5 sm:w-6" />
                 </div>
                 <span className="px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-[11px] font-bold text-slate-700 dark:text-slate-300">
                   {isArabic ? visa.validityAr : visa.validityEn}
@@ -89,7 +89,7 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
               </div>
 
               <div>
-                <h3 className="text-lg font-extrabold text-[#0B192C] dark:text-white">
+                <h3 className="text-base sm:text-lg font-extrabold text-[#0B192C] dark:text-white leading-snug">
                   {isArabic ? visa.titleAr : visa.titleEn}
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
@@ -100,7 +100,7 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
               <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/40 text-xs text-slate-600 dark:text-slate-400">
                 <Clock className="h-4 w-4 text-[#008DDA] dark:text-[#00D4FF] shrink-0" />
                 <span>
-                  {isArabic ? `وقت المعالجة: ${visa.processingTimeAr}` : `Processing Time: ${visa.processingTimeEn}`}
+                  {isArabic ? `وقت المعالجة: ${visa.processingTimeAr}` : `Processing: ${visa.processingTimeEn}`}
                 </span>
               </div>
 
@@ -117,13 +117,13 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col xs:flex-row sm:flex-row items-stretch xs:items-center sm:items-center justify-between gap-3">
               <div>
                 <div className="text-[10px] text-slate-500 font-medium">
                   {isArabic ? 'رسوم التأشيرة والتأمين' : 'Fee & Insurance'}
                 </div>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-xl font-black text-[#0B192C] dark:text-[#00D4FF]">
+                  <span className="text-xl sm:text-2xl font-black text-[#0B192C] dark:text-[#00D4FF]">
                     {visa.fee}
                   </span>
                   <span className="text-xs font-bold text-slate-500">
@@ -134,7 +134,7 @@ export const VisaView: React.FC<VisaViewProps> = ({ language, onNavigate }) => {
 
               <button
                 onClick={() => handleApply(visa)}
-                className="px-5 py-2.5 rounded-xl bg-[#FF6500] hover:bg-[#EA580C] text-white font-extrabold text-xs shadow-md transition-all active:scale-95"
+                className="w-full xs:w-auto sm:w-auto h-10 px-5 rounded-xl bg-[#FF6500] hover:bg-[#EA580C] text-white font-extrabold text-xs shadow-md transition-all active:scale-95 text-center"
               >
                 {isArabic ? 'تقديم الطلب' : 'Apply Now'}
               </button>
