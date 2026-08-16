@@ -2,6 +2,7 @@
 /// Centralized application metadata and brand constants.
 class AppConstants {
   static const String appName = 'MASARI';
+  static const String appNameEnglish = 'MASARI';
   static const String appNameArabic = 'مساري';
   static const String taglineEn = 'Luxury Travel, Tourism, Hajj & Umrah Platform';
   static const String taglineAr = 'منصة السفر الفاخر، السياحة، الحج والعمرة';

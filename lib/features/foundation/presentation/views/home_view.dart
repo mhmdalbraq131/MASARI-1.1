@@ -171,7 +171,7 @@ class HomeView extends ConsumerWidget {
               color: MasariColors.primaryCyan.withOpacity(0.15),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Icon(icon, color: MasariColors.primaryCyanDark, size: 22),
+            child: Icon(icon, color: MasariColors.primaryCyanDark, size: 22),
           ),
           const SizedBox(width: 12),
           Expanded(

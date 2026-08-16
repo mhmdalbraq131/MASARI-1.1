@@ -7,7 +7,7 @@ import 'masari_spacing.dart';
 /// Standardized on the Tri-Color Palette: Blue, Cyan, and Orange.
 class MasariTheme {
   // Light Theme Configuration
-  static ThemeData get lightTheme {
+  static ThemeData lightTheme({bool isArabic = true}) {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
@@ -35,7 +35,7 @@ class MasariTheme {
         outline: MasariColors.titaniumDivider,
         outlineVariant: MasariColors.primaryCyanDark,
       ),
-      fontFamily: GoogleFonts.cairo().fontFamily,
+      fontFamily: isArabic ? GoogleFonts.cairo().fontFamily : GoogleFonts.inter().fontFamily,
       appBarTheme: const AppBarTheme(
         backgroundColor: MasariColors.primaryBlue,
         foregroundColor: MasariColors.pureWhite,
@@ -43,7 +43,7 @@ class MasariTheme {
         centerTitle: false,
         iconTheme: IconThemeData(color: MasariColors.primaryCyan),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: MasariColors.pureWhite,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -102,7 +102,7 @@ class MasariTheme {
         color: MasariColors.titaniumDivider,
         thickness: 1,
       ),
-      tabBarTheme: const TabBarTheme(
+      tabBarTheme: const TabBarThemeData(
         labelColor: MasariColors.primaryCyan,
         unselectedLabelColor: MasariColors.titaniumGray,
         indicatorColor: MasariColors.primaryCyan,
@@ -111,7 +111,7 @@ class MasariTheme {
   }
 
   // Dark Theme Configuration
-  static ThemeData get darkTheme {
+  static ThemeData darkTheme({bool isArabic = true}) {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
@@ -139,7 +139,7 @@ class MasariTheme {
         outline: MasariColors.titaniumDividerDark,
         outlineVariant: MasariColors.primaryCyanDark,
       ),
-      fontFamily: GoogleFonts.cairo().fontFamily,
+      fontFamily: isArabic ? GoogleFonts.cairo().fontFamily : GoogleFonts.inter().fontFamily,
       appBarTheme: const AppBarTheme(
         backgroundColor: MasariColors.primaryBlueDark,
         foregroundColor: MasariColors.pureWhite,
@@ -147,7 +147,7 @@ class MasariTheme {
         centerTitle: false,
         iconTheme: IconThemeData(color: MasariColors.primaryCyan),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: MasariColors.graphiteSurface,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -206,7 +206,7 @@ class MasariTheme {
         color: MasariColors.titaniumDividerDark,
         thickness: 1,
       ),
-      tabBarTheme: const TabBarTheme(
+      tabBarTheme: const TabBarThemeData(
         labelColor: MasariColors.primaryCyan,
         unselectedLabelColor: MasariColors.titaniumLight,
         indicatorColor: MasariColors.primaryCyan,
