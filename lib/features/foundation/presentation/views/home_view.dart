@@ -18,9 +18,12 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentLocale = ref.watch(localeProvider);
     final isArabic = currentLocale.languageCode == 'ar';
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth <= 600;
+    final isTablet = screenWidth > 600 && screenWidth <= 900;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(24.0),
+      padding: EdgeInsets.all(isMobile ? 16.0 : 24.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,13 +33,21 @@ class HomeView extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 8),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'أهلاً بك في ${AppConstants.appNameArabic}',
-                      style: MasariTypography.headlineMedium(color: MasariColors.primaryCyan),
+                    Expanded(
+                      child: Text(
+                        'أهلاً بك في ${AppConstants.appNameArabic}',
+                        style: isMobile
+                            ? MasariTypography.headlineSmall(color: MasariColors.primaryCyan)
+                            : MasariTypography.headlineMedium(color: MasariColors.primaryCyan),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
+                    const SizedBox(width: 8),
                     const Icon(Icons.flight_takeoff, color: MasariColors.primaryCyan, size: 28),
                   ],
                 ),
@@ -60,12 +71,12 @@ class HomeView extends ConsumerWidget {
             ),
           ),
 
-          const SizedBox(height: 28),
+          const SizedBox(height: 24),
 
           // Search Field
           const MasariSearchField(),
 
-          const SizedBox(height: 28),
+          const SizedBox(height: 24),
 
           // Primary Travel Services Grid
           MasariSectionHeader(
@@ -76,12 +87,12 @@ class HomeView extends ConsumerWidget {
           const SizedBox(height: 16),
 
           GridView.count(
-            crossAxisCount: MediaQuery.of(context).size.width > 900 ? 4 : (MediaQuery.of(context).size.width > 600 ? 3 : 2),
+            crossAxisCount: screenWidth > 900 ? 4 : (isTablet ? 3 : 2),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 1.3,
+            crossAxisSpacing: isMobile ? 12 : 16,
+            mainAxisSpacing: isMobile ? 12 : 16,
+            childAspectRatio: isMobile ? 1.02 : (isTablet ? 1.25 : 1.35),
             children: [
               _buildServiceCard(context, path: '/flights', title: 'رحلات الطيران', subtitle: 'Flights Route', icon: Icons.flight_takeoff, color: MasariColors.primaryCyan),
               _buildServiceCard(context, path: '/hotels', title: 'الفنادق والإقامة', subtitle: 'Hotels Route', icon: Icons.hotel, color: MasariColors.primaryBlueLight),
@@ -94,7 +105,7 @@ class HomeView extends ConsumerWidget {
             ],
           ),
 
-          const SizedBox(height: 32),
+          const SizedBox(height: 28),
 
           // Management & Account Routes
           MasariSectionHeader(
@@ -105,12 +116,12 @@ class HomeView extends ConsumerWidget {
           const SizedBox(height: 16),
 
           GridView.count(
-            crossAxisCount: MediaQuery.of(context).size.width > 900 ? 3 : 2,
+            crossAxisCount: screenWidth > 900 ? 3 : (isTablet ? 2 : 1),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 2.2,
+            crossAxisSpacing: isMobile ? 12 : 16,
+            mainAxisSpacing: isMobile ? 12 : 16,
+            childAspectRatio: isMobile ? 3.6 : (isTablet ? 2.4 : 2.7),
             children: [
               _buildQuickRouteCard(context, path: '/wallet', title: 'محفظة مساري', subtitle: 'Wallet Route', icon: Icons.account_balance_wallet),
               _buildQuickRouteCard(context, path: '/bookings', title: 'سجل الحجوزات', subtitle: 'Bookings Route', icon: Icons.confirmation_number),
@@ -135,20 +146,38 @@ class HomeView extends ConsumerWidget {
   }) {
     return MasariCard(
       onTap: () => context.go(path),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: color.withOpacity(0.12),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: color, size: 28),
+            child: Icon(icon, color: color, size: 24),
           ),
-          const SizedBox(height: 10),
-          Text(title, style: MasariTypography.titleSmall(), textAlign: TextAlign.center),
-          Text(subtitle, style: MasariTypography.caption(color: MasariColors.titaniumGray, isArabic: false)),
+          const SizedBox(height: 8),
+          Flexible(
+            child: Text(
+              title,
+              style: MasariTypography.titleSmall(),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Flexible(
+            child: Text(
+              subtitle,
+              style: MasariTypography.caption(color: MasariColors.titaniumGray, isArabic: false),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );
@@ -163,27 +192,41 @@ class HomeView extends ConsumerWidget {
   }) {
     return MasariCard(
       onTap: () => context.go(path),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: MasariColors.primaryCyan.withOpacity(0.15),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, color: MasariColors.primaryCyanDark, size: 22),
+            child: Icon(icon, color: MasariColors.primaryCyanDark, size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(title, style: MasariTypography.titleSmall()),
-                Text(subtitle, style: MasariTypography.caption(color: MasariColors.titaniumGray, isArabic: false)),
+                Text(
+                  title,
+                  style: MasariTypography.titleSmall(),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  subtitle,
+                  style: MasariTypography.caption(color: MasariColors.titaniumGray, isArabic: false),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ],
             ),
           ),
+          const Icon(Icons.arrow_forward_ios, size: 14, color: MasariColors.titaniumGray),
         ],
       ),
     );

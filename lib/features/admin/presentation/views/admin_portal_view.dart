@@ -98,11 +98,15 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
+                        Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          spacing: 8,
+                          runSpacing: 4,
                           children: [
-                            Text('بوابة الإدارة المركزية (MASARI Admin Portal)',
-                                style: MasariTypography.titleLarge(color: MasariColors.pureWhite, isArabic: isArabic)),
-                            const SizedBox(width: 12),
+                            Text(
+                              'بوابة الإدارة المركزية (Admin Portal)',
+                              style: MasariTypography.titleLarge(color: MasariColors.pureWhite, isArabic: isArabic),
+                            ),
                             const MasariBadge(
                               label: 'OPERATIONAL CONTROL',
                               backgroundColor: MasariColors.primaryCyan,
@@ -112,8 +116,10 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                         ),
                         const SizedBox(height: 2),
                         Text(
-                          'المسار المحمي: /admin | المشرف الحالي: ${userSession.name} (${userSession.email})',
+                          'المسار المحمي: /admin | المشرف: ${userSession.name}',
                           style: MasariTypography.caption(color: MasariColors.titaniumLight, isArabic: false),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),

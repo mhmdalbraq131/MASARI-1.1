@@ -58,9 +58,13 @@ class MasariPrimaryButton extends StatelessWidget {
                     Icon(icon, size: 18, color: fg),
                     const SizedBox(width: MasariSpacing.sm),
                   ],
-                  Text(
-                    label,
-                    style: MasariTypography.buttonText(color: fg),
+                  Flexible(
+                    child: Text(
+                      label,
+                      style: MasariTypography.buttonText(color: fg),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
@@ -112,9 +116,13 @@ class MasariSecondaryButton extends StatelessWidget {
               Icon(icon, size: 18, color: effectiveTextColor),
               const SizedBox(width: MasariSpacing.sm),
             ],
-            Text(
-              label,
-              style: MasariTypography.buttonText(color: effectiveTextColor),
+            Flexible(
+              child: Text(
+                label,
+                style: MasariTypography.buttonText(color: effectiveTextColor),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ],
         ),

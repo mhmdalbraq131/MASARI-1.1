@@ -95,21 +95,20 @@ class _LoginViewState extends ConsumerState<LoginView> {
                           Text('نوع الحساب: ${session.role == UserRole.admin ? "مدير نظام (Admin)" : "عميل مسافر (User)"}',
                               style: MasariTypography.bodySmall(color: MasariColors.pureWhite)),
                           const SizedBox(height: 16),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Expanded(
-                                child: MasariPrimaryButton(
-                                  label: session.role == UserRole.admin ? 'الانتقال لبوابة الإدارة (/admin)' : 'الانتقال للرئيسية (/home)',
-                                  onPressed: () {
-                                    if (session.role == UserRole.admin) {
-                                      context.go('/admin');
-                                    } else {
-                                      context.go('/home');
-                                    }
-                                  },
-                                ),
+                              MasariPrimaryButton(
+                                label: session.role == UserRole.admin ? 'الانتقال لبوابة الإدارة (/admin)' : 'الانتقال للرئيسية (/home)',
+                                onPressed: () {
+                                  if (session.role == UserRole.admin) {
+                                    context.go('/admin');
+                                  } else {
+                                    context.go('/home');
+                                  }
+                                },
                               ),
-                              const SizedBox(width: 12),
+                              const SizedBox(height: 8),
                               OutlinedButton(
                                 onPressed: () {
                                   ref.read(userSessionProvider.notifier).logout();
@@ -117,6 +116,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                                 style: OutlinedButton.styleFrom(
                                   foregroundColor: MasariColors.primaryOrange,
                                   side: const BorderSide(color: MasariColors.primaryOrange),
+                                  padding: const EdgeInsets.symmetric(vertical: 12),
                                 ),
                                 child: const Text('تسجيل الخروج'),
                               ),

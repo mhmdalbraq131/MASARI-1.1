@@ -29,39 +29,49 @@ class MasariSectionHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 4,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    color: barColor,
-                    borderRadius: BorderRadius.circular(2),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 4,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      color: barColor,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                   ),
-                ),
-                const SizedBox(width: 8),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: MasariTypography.titleLarge(color: titleColor),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+              if (subtitle != null) ...[
+                const SizedBox(height: 4),
                 Text(
-                  title,
-                  style: MasariTypography.titleLarge(color: titleColor),
+                  subtitle!,
+                  style: MasariTypography.bodySmall(color: MasariColors.titaniumGray),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
-            ),
-            if (subtitle != null) ...[
-              const SizedBox(height: 4),
-              Text(
-                subtitle!,
-                style: MasariTypography.bodySmall(color: MasariColors.titaniumGray),
-              ),
             ],
-          ],
+          ),
         ),
-        if (actionLabel != null && onActionPressed != null)
+        if (actionLabel != null && onActionPressed != null) ...[
+          const SizedBox(width: 8),
           TextButton(
             onPressed: onActionPressed,
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   actionLabel!,
@@ -71,6 +81,7 @@ class MasariSectionHeader extends StatelessWidget {
               ],
             ),
           ),
+        ],
       ],
     );
   }
