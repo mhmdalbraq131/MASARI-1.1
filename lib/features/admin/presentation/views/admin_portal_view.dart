@@ -686,24 +686,30 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               const SizedBox(height: 16),
               Text('نوع الحساب والصلاحية:', style: MasariTypography.bodySmall(color: MasariColors.pureWhite)),
               const SizedBox(height: 8),
-              Row(
-                children: [
-                  Radio<UserRole>(
+              SegmentedButton<UserRole>(
+                segments: const [
+                  ButtonSegment<UserRole>(
                     value: UserRole.user,
-                    groupValue: selectedRole,
-                    activeColor: MasariColors.primaryCyan,
-                    onChanged: (val) => setDialogState(() => selectedRole = val!),
+                    label: Text('عميل مسافر (User)'),
+                    icon: Icon(Icons.person_outline, size: 16),
                   ),
-                  const Text('عميل مسافر (User)'),
-                  const SizedBox(width: 16),
-                  Radio<UserRole>(
+                  ButtonSegment<UserRole>(
                     value: UserRole.admin,
-                    groupValue: selectedRole,
-                    activeColor: MasariColors.primaryCyan,
-                    onChanged: (val) => setDialogState(() => selectedRole = val!),
+                    label: Text('مدير نظام (Admin)'),
+                    icon: Icon(Icons.admin_panel_settings_outlined, size: 16),
                   ),
-                  const Text('مدير نظام (Admin)'),
                 ],
+                selected: {selectedRole},
+                onSelectionChanged: (newSelection) {
+                  setDialogState(() {
+                    selectedRole = newSelection.first;
+                  });
+                },
+                style: SegmentedButton.styleFrom(
+                  selectedBackgroundColor: MasariColors.primaryCyan.withValues(alpha: 0.2),
+                  selectedForegroundColor: MasariColors.primaryCyan,
+                  foregroundColor: MasariColors.titaniumLight,
+                ),
               ),
             ],
           ),
