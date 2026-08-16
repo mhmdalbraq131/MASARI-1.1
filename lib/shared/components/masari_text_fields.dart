@@ -100,7 +100,7 @@ class MasariSearchField extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final fillBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
-    final borderColor = isDark ? MasariColors.primaryCyan.withOpacity(0.2) : MasariColors.titaniumDivider;
+    final borderColor = isDark ? MasariColors.primaryCyan.withValues(alpha: 0.2) : MasariColors.titaniumDivider;
 
     return TextField(
       onChanged: onChanged,

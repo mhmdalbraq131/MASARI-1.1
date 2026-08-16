@@ -48,7 +48,7 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: MasariColors.primaryCyan.withOpacity(0.15),
+                          color: MasariColors.primaryCyan.withValues(alpha: 0.15),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(Icons.lock_outline, color: MasariColors.primaryCyan, size: 28),

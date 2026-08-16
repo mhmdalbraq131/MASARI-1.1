@@ -114,7 +114,7 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: MasariColors.primaryCyan.withOpacity(0.3), width: 0.5),
+                      borderSide: BorderSide(color: MasariColors.primaryCyan.withValues(alpha: 0.3), width: 0.5),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -143,7 +143,7 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                 style: OutlinedButton.styleFrom(
                   side: const BorderSide(color: MasariColors.primaryCyan),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  backgroundColor: MasariColors.primaryCyan.withOpacity(0.1),
+                  backgroundColor: MasariColors.primaryCyan.withValues(alpha: 0.1),
                 ),
               ),
             ),

@@ -76,7 +76,7 @@ class MasariSidebar extends ConsumerWidget {
           // Sidebar Footer Status
           Container(
             padding: const EdgeInsets.all(16),
-            color: MasariColors.primaryBlueContainer.withOpacity(0.5),
+            color: MasariColors.primaryBlueContainer.withValues(alpha: 0.5),
             child: isCollapsed
                 ? const Center(
                     child: Icon(Icons.shield_outlined, color: MasariColors.primaryCyan, size: 20),
@@ -106,7 +106,7 @@ class MasariSidebar extends ConsumerWidget {
       child: Text(
         title,
         style: TextStyle(
-          color: MasariColors.primaryCyan.withOpacity(0.85),
+          color: MasariColors.primaryCyan.withValues(alpha: 0.85),
           fontSize: 11,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.5,
@@ -128,7 +128,7 @@ class MasariSidebar extends ConsumerWidget {
     final navWidget = Padding(
       padding: const EdgeInsets.symmetric(vertical: 2),
       child: Material(
-        color: isSelected ? MasariColors.primaryBlueLight.withOpacity(0.3) : Colors.transparent,
+        color: isSelected ? MasariColors.primaryBlueLight.withValues(alpha: 0.3) : Colors.transparent,
         borderRadius: BorderRadius.circular(8),
         child: InkWell(
           onTap: () => context.go(path),

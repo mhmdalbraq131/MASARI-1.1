@@ -154,7 +154,7 @@ class HomeView extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: color, size: 24),
@@ -198,7 +198,7 @@ class HomeView extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: MasariColors.primaryCyan.withOpacity(0.15),
+              color: MasariColors.primaryCyan.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(icon, color: MasariColors.primaryCyanDark, size: 20),

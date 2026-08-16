@@ -81,7 +81,7 @@ class MasariChip extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     
     final unselectedBg = isDark ? MasariColors.graphiteSurface : MasariColors.pureWhite;
-    final unselectedBorder = isDark ? MasariColors.primaryCyan.withOpacity(0.2) : MasariColors.titaniumDivider;
+    final unselectedBorder = isDark ? MasariColors.primaryCyan.withValues(alpha: 0.2) : MasariColors.titaniumDivider;
     final unselectedText = isDark ? MasariColors.pureWhite : MasariColors.darkGraphite;
 
     return GestureDetector(
@@ -146,7 +146,7 @@ class MasariNavigationItem extends StatelessWidget {
         ),
       ),
       selected: isSelected,
-      selectedTileColor: MasariColors.primaryBlueLight.withOpacity(0.3),
+      selectedTileColor: MasariColors.primaryBlueLight.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       onTap: onTap,
     );

@@ -89,7 +89,7 @@ Widget _buildAccountSection(String title, String path, IconData icon, String des
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: MasariColors.primaryCyan.withOpacity(0.15),
+                  color: MasariColors.primaryCyan.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(icon, color: MasariColors.primaryCyanDark, size: 36),

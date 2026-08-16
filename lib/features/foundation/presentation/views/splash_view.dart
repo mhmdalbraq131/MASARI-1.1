@@ -38,7 +38,7 @@ class _SplashViewState extends State<SplashView> {
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: MasariColors.primaryCyan.withOpacity(0.4),
+                    color: MasariColors.primaryCyan.withValues(alpha: 0.4),
                     blurRadius: 30,
                     spreadRadius: 5,
                   )

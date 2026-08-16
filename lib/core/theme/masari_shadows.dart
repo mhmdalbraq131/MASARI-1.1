@@ -5,7 +5,7 @@ import 'masari_colors.dart';
 class MasariShadows {
   static final List<BoxShadow> subtle = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.04),
+      color: Colors.black.withValues(alpha: 0.04),
       blurRadius: 8,
       offset: const Offset(0, 2),
     ),
@@ -13,7 +13,7 @@ class MasariShadows {
 
   static final List<BoxShadow> medium = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.08),
+      color: Colors.black.withValues(alpha: 0.08),
       blurRadius: 16,
       offset: const Offset(0, 4),
     ),
@@ -21,7 +21,7 @@ class MasariShadows {
 
   static final List<BoxShadow> card = [
     BoxShadow(
-      color: Colors.black.withOpacity(0.06),
+      color: Colors.black.withValues(alpha: 0.06),
       blurRadius: 12,
       offset: const Offset(0, 3),
     ),
@@ -30,7 +30,7 @@ class MasariShadows {
   /// Brand Cyan Accent Glow
   static final List<BoxShadow> luxuryCyan = [
     BoxShadow(
-      color: MasariColors.primaryCyan.withOpacity(0.2),
+      color: MasariColors.primaryCyan.withValues(alpha: 0.2),
       blurRadius: 18,
       offset: const Offset(0, 4),
     ),
@@ -39,7 +39,7 @@ class MasariShadows {
   /// Brand Orange Glow
   static final List<BoxShadow> luxuryOrange = [
     BoxShadow(
-      color: MasariColors.primaryOrange.withOpacity(0.25),
+      color: MasariColors.primaryOrange.withValues(alpha: 0.25),
       blurRadius: 18,
       offset: const Offset(0, 4),
     ),

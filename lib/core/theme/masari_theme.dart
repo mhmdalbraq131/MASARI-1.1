@@ -152,7 +152,7 @@ class MasariTheme {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: MasariSpacing.borderLg,
-          side: BorderSide(color: MasariColors.primaryCyan.withOpacity(0.2), width: 1),
+          side: BorderSide(color: MasariColors.primaryCyan.withValues(alpha: 0.2), width: 1),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(

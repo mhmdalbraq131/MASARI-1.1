@@ -9,8 +9,6 @@ import '../../../../shared/components/masari_cards.dart';
 import '../../../../shared/components/masari_chips_badges.dart';
 import '../../../../shared/components/masari_section_header.dart';
 import '../../../../shared/components/masari_text_fields.dart';
-import '../../../foundation/domain/entities/audit_record.dart';
-import '../../../foundation/domain/entities/managed_user.dart';
 import '../../../foundation/domain/entities/platform_service.dart';
 import '../../../foundation/presentation/providers/app_providers.dart';
 
@@ -26,7 +24,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
   int _selectedTabIndex = 0;
 
   // Filter states for Audit Log
-  String _auditAdminFilter = 'الكل';
+  final String _auditAdminFilter = 'الكل';
   String _auditActionFilter = 'الكل';
   String _auditSearchQuery = '';
 
@@ -130,7 +128,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
 
             // Admin Operational Navigation Tabs
             Container(
-              color: MasariColors.primaryBlueLight.withOpacity(0.4),
+              color: MasariColors.primaryBlueLight.withValues(alpha: 0.4),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -183,7 +181,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               width: 3,
             ),
           ),
-          color: isSelected ? MasariColors.primaryBlue.withOpacity(0.5) : Colors.transparent,
+          color: isSelected ? MasariColors.primaryBlue.withValues(alpha: 0.5) : Colors.transparent,
         ),
         child: Row(
           children: [
@@ -321,7 +319,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                             leading: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: MasariColors.primaryCyan.withOpacity(0.15),
+                                color: MasariColors.primaryCyan.withValues(alpha: 0.15),
                                 shape: BoxShape.circle,
                               ),
                               child: const Icon(Icons.edit_attributes, color: MasariColors.primaryCyan, size: 20),
@@ -414,7 +412,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                           errorBuilder: (_, __, ___) => Container(
                             width: 80,
                             height: 80,
-                            color: MasariColors.primaryBlueLight.withOpacity(0.3),
+                            color: MasariColors.primaryBlueLight.withValues(alpha: 0.3),
                             child: const Icon(Icons.image, color: MasariColors.primaryCyan),
                           ),
                         ),
@@ -430,15 +428,15 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                                 const SizedBox(width: 8),
                                 MasariBadge(
                                   label: service.category,
-                                  backgroundColor: MasariColors.primaryCyan.withOpacity(0.2),
+                                  backgroundColor: MasariColors.primaryCyan.withValues(alpha: 0.2),
                                   textColor: MasariColors.primaryCyan,
                                 ),
                                 const SizedBox(width: 8),
                                 MasariBadge(
                                   label: service.status,
                                   backgroundColor: service.status == 'نشط'
-                                      ? MasariColors.success.withOpacity(0.2)
-                                      : MasariColors.primaryOrange.withOpacity(0.2),
+                                      ? MasariColors.success.withValues(alpha: 0.2)
+                                      : MasariColors.primaryOrange.withValues(alpha: 0.2),
                                   textColor: service.status == 'نشط' ? MasariColors.success : MasariColors.primaryOrange,
                                 ),
                               ],
@@ -528,7 +526,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
               decoration: BoxDecoration(
                 color: MasariColors.primaryBlueContainer,
                 borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: MasariColors.primaryCyan.withOpacity(0.5)),
+                border: Border.all(color: MasariColors.primaryCyan.withValues(alpha: 0.5)),
               ),
               child: Row(
                 children: [
@@ -637,8 +635,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                                 MasariBadge(
                                   label: user.role == UserRole.admin ? 'مدير نظام (Admin)' : 'عميل مسافر (User)',
                                   backgroundColor: user.role == UserRole.admin
-                                      ? MasariColors.primaryCyan.withOpacity(0.2)
-                                      : MasariColors.primaryBlueLight.withOpacity(0.2),
+                                      ? MasariColors.primaryCyan.withValues(alpha: 0.2)
+                                      : MasariColors.primaryBlueLight.withValues(alpha: 0.2),
                                   textColor: user.role == UserRole.admin ? MasariColors.primaryCyan : MasariColors.primaryCyanLight,
                                 ),
                               ],
@@ -651,8 +649,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                       MasariBadge(
                         label: user.status,
                         backgroundColor: user.status == 'نشط'
-                            ? MasariColors.success.withOpacity(0.2)
-                            : MasariColors.primaryOrange.withOpacity(0.2),
+                            ? MasariColors.success.withValues(alpha: 0.2)
+                            : MasariColors.primaryOrange.withValues(alpha: 0.2),
                         textColor: user.status == 'نشط' ? MasariColors.success : MasariColors.primaryOrange,
                       ),
                     ],
@@ -856,8 +854,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                                 MasariBadge(
                                   label: log.action,
                                   backgroundColor: log.action == 'تعديل سعر'
-                                      ? MasariColors.primaryCyan.withOpacity(0.2)
-                                      : MasariColors.primaryBlueLight.withOpacity(0.2),
+                                      ? MasariColors.primaryCyan.withValues(alpha: 0.2)
+                                      : MasariColors.primaryBlueLight.withValues(alpha: 0.2),
                                   textColor: log.action == 'تعديل سعر' ? MasariColors.primaryCyan : MasariColors.primaryCyanLight,
                                 ),
                                 const SizedBox(width: 12),
@@ -969,7 +967,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   title: const Text('تفعيل التوثيق الثنائي (2FA) للمدراء'),
                   subtitle: const Text('إلزام جميع المشرفين بإدخال رمز OTP عند تسجيل الدخول للنظام.'),
                   value: true,
-                  activeColor: MasariColors.primaryCyan,
+                  activeThumbColor: MasariColors.primaryCyan,
+                  activeTrackColor: MasariColors.primaryCyan.withValues(alpha: 0.5),
                   onChanged: (val) {},
                 ),
                 const Divider(color: MasariColors.primaryBlueLight),
@@ -977,7 +976,8 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
                   title: const Text('التسجيل التلقائي لسجلات التدقيق (Immutable Logging)'),
                   subtitle: const Text('تشفير وحفظ كل إجراء إداري بشكل مباشر يمنع تعديله أو مسحه.'),
                   value: true,
-                  activeColor: MasariColors.primaryCyan,
+                  activeThumbColor: MasariColors.primaryCyan,
+                  activeTrackColor: MasariColors.primaryCyan.withValues(alpha: 0.5),
                   onChanged: (val) {},
                 ),
               ],
@@ -994,7 +994,7 @@ class _AdminPortalViewState extends ConsumerState<AdminPortalView> {
         children: [
           Container(
             padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(color: color.withOpacity(0.15), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(color: color.withValues(alpha: 0.15), borderRadius: BorderRadius.circular(10)),
             child: Icon(icon, color: color, size: 28),
           ),
           const SizedBox(width: 12),
