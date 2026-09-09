@@ -19,6 +19,5 @@ final platformServicesPersistenceSyncProvider = Provider<void>((ref) {
     (_, next) {
       PlatformServicePersistence.save(next);
     },
-    fireImmediately: true,
   );
 });
