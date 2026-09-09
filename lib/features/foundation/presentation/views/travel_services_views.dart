@@ -4,10 +4,12 @@ import '../../../../core/theme/masari_colors.dart';
 import '../../../../core/theme/masari_typography.dart';
 import '../../domain/entities/platform_service.dart';
 import '../providers/app_providers.dart';
+import '../providers/platform_services_persistence_provider.dart';
 import '../../../../shared/components/masari_cards.dart';
 import '../../../../shared/components/masari_section_header.dart';
 
-/// Customer-facing catalog view backed by the same service state used by the admin portal.
+/// Customer-facing catalog view backed by the same operational state used by
+/// the admin portal, including persisted administrator changes.
 class _TravelServiceCatalogView extends ConsumerWidget {
   final String title;
   final String routePath;
@@ -27,7 +29,7 @@ class _TravelServiceCatalogView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final services = ref.watch(platformServicesProvider)
+    final services = ref.watch(operationalPlatformServicesProvider)
         .where((service) => service.category == category && service.status == 'نشط')
         .toList();
 
