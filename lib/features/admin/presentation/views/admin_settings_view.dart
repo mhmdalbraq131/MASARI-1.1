@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/persistence/admin_settings.dart';
 import '../../../../core/persistence/app_persistence.dart';
-import '../../../../shared/theme/masari_colors.dart';
-import '../../../../shared/theme/masari_typography.dart';
-import '../../../../shared/widgets/masari_card.dart';
+import '../../../../core/theme/masari_colors.dart';
+import '../../../../core/theme/masari_typography.dart';
+import '../../../../shared/components/masari_cards.dart';
 
 /// Persistent administrator security settings.
 class AdminSettingsView extends StatefulWidget {
@@ -74,6 +74,7 @@ class _AdminSettingsViewState extends State<AdminSettingsView> {
                         title: const Text('التوثيق الثنائي (2FA)'),
                         subtitle: const Text('إلزام المشرفين بخطوة تحقق إضافية عند تسجيل الدخول.'),
                         value: settings.twoFactorEnabled,
+                        activeColor: MasariColors.primaryCyan,
                         onChanged: _setTwoFactor,
                       ),
                       const Divider(),
@@ -81,6 +82,7 @@ class _AdminSettingsViewState extends State<AdminSettingsView> {
                         title: const Text('سجل التدقيق الإداري'),
                         subtitle: const Text('تسجيل الإجراءات الإدارية تلقائيًا للمراجعة والمساءلة.'),
                         value: settings.auditLoggingEnabled,
+                        activeColor: MasariColors.primaryCyan,
                         onChanged: _setAuditLogging,
                       ),
                     ],
