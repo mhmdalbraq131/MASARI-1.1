@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/constants/app_constants.dart';
 import '../core/theme/masari_theme.dart';
 import '../features/foundation/presentation/providers/app_providers.dart';
+import '../features/foundation/presentation/providers/platform_services_persistence_provider.dart';
 import 'app_router.dart';
 
 /// MASARI Platform Master Root App Widget
@@ -12,6 +13,10 @@ class MasariApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Keep administrator service changes persisted whenever the operational
+    // catalog changes during the current session.
+    ref.watch(platformServicesPersistenceSyncProvider);
+
     final currentLocale = ref.watch(localeProvider);
     final currentThemeMode = ref.watch(themeModeProvider);
     final currentRole = ref.watch(userRoleProvider);
