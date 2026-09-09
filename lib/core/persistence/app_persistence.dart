@@ -1,9 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Persistent application preferences for MASARI.
-///
-/// Keeps lightweight user-facing state (language, theme and onboarding)
-/// across application restarts without coupling the UI to SharedPreferences.
+/// Keeps lightweight user-facing and operational settings across restarts.
 class AppPersistence {
   AppPersistence._(this._preferences);
 
@@ -18,18 +16,16 @@ class AppPersistence {
   }
 
   String get localeCode => _preferences.getString(_localeKey) ?? 'ar';
-
-  Future<bool> setLocaleCode(String value) =>
-      _preferences.setString(_localeKey, value);
+  Future<bool> setLocaleCode(String value) => _preferences.setString(_localeKey, value);
 
   String get themeMode => _preferences.getString(_themeModeKey) ?? 'dark';
+  Future<bool> setThemeMode(String value) => _preferences.setString(_themeModeKey, value);
 
-  Future<bool> setThemeMode(String value) =>
-      _preferences.setString(_themeModeKey, value);
+  bool get onboardingCompleted => _preferences.getBool(_onboardingCompletedKey) ?? false;
+  Future<bool> setOnboardingCompleted(bool value) => _preferences.setBool(_onboardingCompletedKey, value);
 
-  bool get onboardingCompleted =>
-      _preferences.getBool(_onboardingCompletedKey) ?? false;
+  bool getBool(String key, {required bool defaultValue}) =>
+      _preferences.getBool(key) ?? defaultValue;
 
-  Future<bool> setOnboardingCompleted(bool value) =>
-      _preferences.setBool(_onboardingCompletedKey, value);
+  Future<bool> setBool(String key, bool value) => _preferences.setBool(key, value);
 }
