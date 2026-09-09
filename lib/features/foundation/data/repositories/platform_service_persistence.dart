@@ -55,12 +55,11 @@ class PlatformServicePersistence {
     _preferences ??= await SharedPreferences.getInstance();
 
     for (final service in services) {
-      final persisted = apply(service);
       _overrides[service.id] = {
-        'name': persisted.name,
-        'description': persisted.description,
-        'price': persisted.price,
-        'status': persisted.status,
+        'name': service.name,
+        'description': service.description,
+        'price': service.price,
+        'status': service.status,
       };
     }
 
