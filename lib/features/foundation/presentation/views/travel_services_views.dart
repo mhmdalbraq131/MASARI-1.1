@@ -7,7 +7,6 @@ import '../../../../shared/components/masari_cards.dart';
 import '../../../../shared/components/masari_section_header.dart';
 import '../../../bookings/presentation/booking_provider.dart';
 import '../../domain/entities/platform_service.dart';
-import '../providers/app_providers.dart';
 import '../providers/operational_catalog_provider.dart';
 
 class _TravelServiceCatalogView extends ConsumerWidget {
@@ -15,7 +14,6 @@ class _TravelServiceCatalogView extends ConsumerWidget {
   final IconData icon;
   final Color accentColor;
   const _TravelServiceCatalogView({required this.title, required this.routePath, required this.description, required this.icon, required this.accentColor, required this.category});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final services = ref.watch(operationalCatalogProvider).where((s) => s.category == category && s.status == 'نشط').toList();
@@ -33,12 +31,10 @@ class _ServiceCard extends ConsumerWidget {
   final PlatformService service;
   final Color accentColor;
   const _ServiceCard({required this.service, required this.accentColor});
-
   Future<void> _book(BuildContext context, WidgetRef ref) async {
     await ref.read(bookingProvider.notifier).createBooking(serviceId: service.id, serviceName: service.name, category: service.category, price: service.price, currency: service.currency);
     if (context.mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('تم إنشاء طلب الحجز. يمكنك متابعة حالته من حجوزاتي.')));
   }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) => MasariCard(child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
     ClipRRect(borderRadius: BorderRadius.circular(10), child: service.imageUrl.isEmpty ? Container(width: 130, height: 95, color: MasariColors.primaryBlueContainer, child: Icon(Icons.image, color: accentColor)) : Image.network(service.imageUrl, width: 130, height: 95, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(width: 130, height: 95, color: MasariColors.primaryBlueContainer, child: Icon(Icons.broken_image, color: accentColor)))),
@@ -60,10 +56,8 @@ class HotelsView extends ConsumerWidget {
       else ...hotels.map((hotel) {
         final rooms = catalog.where((r) => r.category == 'غرف' && r.status == 'نشط' && r.metadata['hotelId'] == hotel.id).toList();
         return Padding(padding: const EdgeInsets.only(bottom: 18), child: MasariCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          _ServiceCard(service: hotel, accentColor: MasariColors.primaryCyan),
-          const SizedBox(height: 16),
-          MasariSectionHeader(title: 'الغرف المتاحة (${rooms.length})', subtitle: 'الغرف التي يديرها مدير الفندق تظهر هنا تلقائيًا.'),
-          const SizedBox(height: 10),
+          _ServiceCard(service: hotel, accentColor: MasariColors.primaryCyan), const SizedBox(height: 16),
+          MasariSectionHeader(title: 'الغرف المتاحة (${rooms.length})', subtitle: 'الغرف التي يديرها مدير الفندق تظهر هنا تلقائيًا.'), const SizedBox(height: 10),
           if (rooms.isEmpty) const Text('لا توجد غرف منشورة لهذا الفندق بعد.') else ...rooms.map((room) => Padding(padding: const EdgeInsets.only(bottom: 8), child: _ServiceCard(service: room, accentColor: MasariColors.primaryOrange))),
         ])));
       }),
