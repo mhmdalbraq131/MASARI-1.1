@@ -1,86 +1,56 @@
 import 'package:flutter/material.dart';
 
-/// MASARI Centralized Design System Color Tokens.
-/// The Single Source of Truth for the MASARI Brand Visual Identity.
-/// Core Tri-Color Palette:
-/// 1. Blue (Primary Brand Foundation & Navigation)
-/// 2. Cyan / Turquoise (Dynamic High-End Accent & Active States)
-/// 3. Orange (Warm High-Energy Accent & Call-To-Action)
+/// MASARI centralized design-system color tokens.
+///
+/// The three source brand colors are taken from the approved MASARI identity:
+/// Blue #116EB4, Turquoise #53BDCA and Orange #EE8A3E.
+/// All other colors are supporting tones derived for accessibility and UI use.
 class MasariColors {
   // =========================================================================
-  // 1. PRIMARY BLUE & DERIVED VARIANTS
+  // APPROVED MASARI BRAND COLORS — DO NOT SUBSTITUTE GENERIC PALETTE VALUES
   // =========================================================================
-  /// MASARI Deep Blue - Main brand color for app bars, headers, primary buttons
-  static const Color primaryBlue = Color(0xFF0A2540);
-
-  /// Ultra-deep blue dark canvas for dark mode scaffold and dark shells
-  static const Color primaryBlueDark = Color(0xFF061528);
-
-  /// Vibrant/interactive blue for links, selection states, secondary badges
-  static const Color primaryBlueLight = Color(0xFF1E5B94);
-
-  /// Container & surface fill for dark-mode cards and embedded panels
-  static const Color primaryBlueContainer = Color(0xFF0D2545);
+  static const Color brandBlue = Color(0xFF116EB4);
+  static const Color brandTurquoise = Color(0xFF53BDCA);
+  static const Color brandOrange = Color(0xFFEE8A3E);
 
   // =========================================================================
-  // 2. PRIMARY CYAN / TURQUOISE & DERIVED VARIANTS
+  // BLUE — PRIMARY BRAND / NAVIGATION
   // =========================================================================
-  /// Vibrant MASARI Cyan / Turquoise - Key accent, badges, active icons, tabs
-  static const Color primaryCyan = Color(0xFF00C5E0);
-
-  /// Deep turquoise for borders, high-contrast text, and dark-theme outlines
-  static const Color primaryCyanDark = Color(0xFF0891B2);
-
-  /// Soft cyan for glowing accents, light badges, and subtle highlights
-  static const Color primaryCyanLight = Color(0xFF38BDF8);
-
-  /// Background container for cyan badges and interactive chip fills
-  static const Color primaryCyanContainer = Color(0xFF083344);
+  static const Color primaryBlue = brandBlue;
+  static const Color primaryBlueDark = Color(0xFF0A3556);
+  static const Color primaryBlueLight = Color(0xFF3A86C1);
+  static const Color primaryBlueContainer = Color(0xFF123E60);
 
   // =========================================================================
-  // 3. PRIMARY ORANGE & DERIVED VARIANTS
+  // TURQUOISE — ACTIVE / DYNAMIC ACCENT
   // =========================================================================
-  /// Warm MASARI Coral Orange - Highlights, primary CTAs, alerts, and promo badges
-  static const Color primaryOrange = Color(0xFFFF6B35);
-
-  /// Deep burnt orange for borders, pressed states, and high-contrast warnings
-  static const Color primaryOrangeDark = Color(0xFFEA580C);
-
-  /// Soft coral orange for highlights and subtle badge backgrounds
-  static const Color primaryOrangeLight = Color(0xFFFB923C);
-
-  /// Background container for orange badges and warning containers
-  static const Color primaryOrangeContainer = Color(0xFF431407);
+  static const Color primaryCyan = brandTurquoise;
+  static const Color primaryCyanDark = Color(0xFF2B97A8);
+  static const Color primaryCyanLight = Color(0xFF8AD4DD);
+  static const Color primaryCyanContainer = Color(0xFF174C56);
 
   // =========================================================================
-  // 4. NEUTRALS & BACKGROUNDS (TECHNICAL READABILITY)
+  // ORANGE — ACTION / HIGHLIGHT
   // =========================================================================
-  /// Dark canvas background
-  static const Color darkGraphite = Color(0xFF061528);
+  static const Color primaryOrange = brandOrange;
+  static const Color primaryOrangeDark = Color(0xFFC9682F);
+  static const Color primaryOrangeLight = Color(0xFFF3AE7A);
+  static const Color primaryOrangeContainer = Color(0xFF5A2D18);
 
-  /// Dark surface card background
-  static const Color graphiteSurface = Color(0xFF0B213B);
-
-  /// Light theme background & pristine surfaces
+  // =========================================================================
+  // NEUTRALS & BACKGROUNDS
+  // =========================================================================
+  static const Color darkGraphite = Color(0xFF071A2A);
+  static const Color graphiteSurface = Color(0xFF0D263B);
   static const Color marbleWhite = Color(0xFFF8FAFC);
-
-  /// Pure crisp white
   static const Color pureWhite = Color(0xFFFFFFFF);
-
-  /// Slate / Titanium Gray for subtitles, captions & muted elements
   static const Color titaniumGray = Color(0xFF64748B);
-
-  /// Light titanium for secondary captions & placeholder text
   static const Color titaniumLight = Color(0xFF94A3B8);
-
-  /// Divider in light mode
   static const Color titaniumDivider = Color(0xFFE2E8F0);
-
-  /// Divider in dark mode
-  static const Color titaniumDividerDark = Color(0xFF1E3A5F);
+  static const Color titaniumDividerDark = Color(0xFF29465F);
 
   // =========================================================================
-  // 5. STATUS & FEEDBACK COLORS
+  // STATUS & FEEDBACK COLORS
   // =========================================================================
   static const Color success = Color(0xFF10B981);
   static const Color successContainer = Color(0xFF064E3B);
@@ -91,46 +61,41 @@ class MasariColors {
   static const Color info = Color(0xFF0284C7);
 
   // =========================================================================
-  // 6. BRAND GRADIENTS
+  // BRAND GRADIENTS
   // =========================================================================
-  /// Signature Blue to Cyan gradient
   static const LinearGradient brandGradient = LinearGradient(
-    colors: [Color(0xFF0A2540), Color(0xFF00C5E0)],
+    colors: [brandBlue, brandTurquoise],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
-  /// High-energy Cyan to Orange gradient
   static const LinearGradient cyanOrangeGradient = LinearGradient(
-    colors: [Color(0xFF00C5E0), Color(0xFFFF6B35)],
+    colors: [brandTurquoise, brandOrange],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
-  /// Deep Blue Luxury Card Gradient
   static const LinearGradient luxuryCardGradient = LinearGradient(
-    colors: [Color(0xFF0B213B), Color(0xFF061528)],
+    colors: [graphiteSurface, darkGraphite],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
   static const LinearGradient deepBlueGradient = LinearGradient(
-    colors: [Color(0xFF061528), Color(0xFF0D2545)],
+    colors: [darkGraphite, primaryBlueContainer],
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
 
   // =========================================================================
-  // 7. COMPATIBILITY ALIASES (Transitioned to the 3-Color Brand System)
+  // LEGACY COMPATIBILITY ALIASES
   // =========================================================================
   static const Color deepBlue = primaryBlue;
   static const Color deepBlueDark = primaryBlueDark;
   static const Color deepBlueLight = primaryBlueLight;
   static const Color deepBlueContainer = primaryBlueContainer;
-
   static const Color skyCyan = primaryCyan;
   static const Color skyCyanLight = primaryCyanLight;
-
   static const Color coralOrange = primaryOrange;
   static const Color coralOrangeAccent = primaryOrangeDark;
 }
