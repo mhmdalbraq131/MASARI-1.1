@@ -24,7 +24,7 @@ class MasariFloatingAiButton extends StatelessWidget {
         icon: const Icon(Icons.auto_awesome, size: 21),
         label: Text(
           isArabic ? 'مساري AI' : 'MASARI AI',
-          style: MasariTypography.labelLarge(
+          style: MasariTypography.buttonText(
             color: Colors.white,
             isArabic: isArabic,
           ),
