@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../../core/theme/masari_colors.dart';
 import '../../../../core/theme/masari_typography.dart';
-import '../../domain/entities/platform_service.dart';
-import '../providers/platform_services_persistence_provider.dart';
 import '../../../../shared/components/masari_cards.dart';
 import '../../../../shared/components/masari_section_header.dart';
+import '../../domain/entities/platform_service.dart';
+import '../providers/operational_catalog_provider.dart';
 
-/// Customer-facing catalog view backed by the same operational state used by
-/// the admin portal, including persisted administrator changes.
+/// Customer catalog. It watches the exact same operational catalog edited by
+/// administrators, so create/update/delete operations are reflected here.
 class _TravelServiceCatalogView extends ConsumerWidget {
   final String title;
   final String routePath;
@@ -17,74 +18,21 @@ class _TravelServiceCatalogView extends ConsumerWidget {
   final Color accentColor;
   final String category;
 
-  const _TravelServiceCatalogView({
-    required this.title,
-    required this.routePath,
-    required this.description,
-    required this.icon,
-    required this.accentColor,
-    required this.category,
-  });
+  const _TravelServiceCatalogView({required this.title, required this.routePath, required this.description, required this.icon, required this.accentColor, required this.category});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final services = ref.watch(operationalPlatformServicesProvider)
-        .where((service) => service.category == category && service.status == 'نشط')
-        .toList();
-
+    final services = ref.watch(operationalCatalogProvider).where((s) => s.category == category && s.status == 'نشط').toList();
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          MasariLuxuryCard(
-            badgeText: 'قطاع مساري التخصصي',
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: accentColor.withValues(alpha: 0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(icon, color: accentColor, size: 36),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(title, style: MasariTypography.headlineSmall(color: MasariColors.pureWhite)),
-                      const SizedBox(height: 4),
-                      Text('المسار المعتمد: $routePath', style: MasariTypography.caption(color: MasariColors.primaryCyan, isArabic: false)),
-                      const SizedBox(height: 6),
-                      Text(description, style: MasariTypography.bodySmall(color: MasariColors.marbleWhite)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 24),
-          MasariSectionHeader(
-            title: 'الخدمات المتاحة',
-            subtitle: 'الأسعار والحالة معروضة من كتالوج مساري التشغيلي',
-          ),
-          const SizedBox(height: 16),
-          if (services.isEmpty)
-            const MasariCard(
-              child: Padding(
-                padding: EdgeInsets.all(20),
-                child: Center(child: Text('لا توجد خدمات متاحة حاليًا ضمن هذا القطاع.')),
-              ),
-            )
-          else
-            ...services.map((service) => Padding(
-              padding: const EdgeInsets.only(bottom: 14),
-              child: _ServiceCard(service: service, accentColor: accentColor),
-            )),
-        ],
-      ),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        MasariLuxuryCard(badgeText: 'قطاع مساري التخصصي', child: Row(children: [Container(padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: accentColor.withValues(alpha: .2), shape: BoxShape.circle), child: Icon(icon, color: accentColor, size: 36)), const SizedBox(width: 16), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(title, style: MasariTypography.headlineSmall(color: Colors.white)), Text('المسار المعتمد: $routePath', style: MasariTypography.caption(color: MasariColors.primaryCyan)), const SizedBox(height: 6), Text(description, style: MasariTypography.bodySmall(color: MasariColors.marbleWhite))]))])),
+        const SizedBox(height: 24),
+        MasariSectionHeader(title: 'الخدمات المتاحة', subtitle: 'هذه البيانات مصدرها الكتالوج التشغيلي الموحد.'),
+        const SizedBox(height: 16),
+        if (services.isEmpty) const MasariCard(child: Padding(padding: EdgeInsets.all(22), child: Center(child: Text('لا توجد خدمات متاحة حاليًا ضمن هذا القطاع.'))))
+        else ...services.map((service) => Padding(padding: const EdgeInsets.only(bottom: 14), child: _ServiceCard(service: service, accentColor: accentColor))),
+      ]),
     );
   }
 }
@@ -92,106 +40,46 @@ class _TravelServiceCatalogView extends ConsumerWidget {
 class _ServiceCard extends StatelessWidget {
   final PlatformService service;
   final Color accentColor;
-
   const _ServiceCard({required this.service, required this.accentColor});
 
   @override
-  Widget build(BuildContext context) {
-    return MasariCard(
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-        leading: CircleAvatar(
-          backgroundColor: accentColor.withValues(alpha: 0.15),
-          child: Icon(Icons.workspace_premium, color: accentColor),
-        ),
-        title: Text(service.name, style: MasariTypography.titleMedium()),
-        subtitle: Padding(
-          padding: const EdgeInsets.only(top: 6),
-          child: Text(service.description),
-        ),
-        trailing: Text(
-          '${service.price.toStringAsFixed(0)} ${service.currency}',
-          style: MasariTypography.titleMedium(color: accentColor),
-        ),
-      ),
-    );
+  Widget build(BuildContext context) => MasariCard(child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    ClipRRect(borderRadius: BorderRadius.circular(10), child: service.imageUrl.isEmpty ? Container(width: 130, height: 95, color: MasariColors.primaryBlueContainer, child: Icon(Icons.image, color: accentColor)) : Image.network(service.imageUrl, width: 130, height: 95, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(width: 130, height: 95, color: MasariColors.primaryBlueContainer, child: Icon(Icons.broken_image, color: accentColor)))),
+    const SizedBox(width: 14),
+    Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(service.name, style: MasariTypography.titleMedium()), const SizedBox(height: 6), Text(service.description), const SizedBox(height: 7), Text('${service.price.toStringAsFixed(0)} ${service.currency}', style: MasariTypography.titleMedium(color: accentColor)), if (service.metadata.isNotEmpty) ...[const SizedBox(height: 7), Text(service.metadata.entries.map((e) => '${e.key}: ${e.value}').join(' • '), style: MasariTypography.caption(color: MasariColors.titaniumGray))]])),
+  ]));
+}
+
+class HotelsView extends ConsumerWidget {
+  const HotelsView({super.key});
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final catalog = ref.watch(operationalCatalogProvider);
+    final hotels = catalog.where((s) => s.category == 'فنادق' && s.status == 'نشط').toList();
+    return SingleChildScrollView(padding: const EdgeInsets.all(24), child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      MasariLuxuryCard(badgeText: 'HOTELS', child: Row(children: [const Icon(Icons.hotel, color: MasariColors.primaryCyan, size: 42), const SizedBox(width: 14), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('الفنادق والمنتجعات', style: MasariTypography.headlineSmall(color: Colors.white)), const SizedBox(height: 5), const Text('الفندق والغرف والأسعار والصور المعروضة من الكتالوج الإداري الموحد.')] ))])),
+      const SizedBox(height: 22),
+      if (hotels.isEmpty) const MasariCard(child: Padding(padding: EdgeInsets.all(22), child: Text('لا توجد فنادق متاحة حاليًا.')))
+      else ...hotels.map((hotel) {
+        final rooms = catalog.where((r) => r.category == 'غرف' && r.status == 'نشط' && r.metadata['hotelId'] == hotel.id).toList();
+        return Padding(padding: const EdgeInsets.only(bottom: 18), child: MasariCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            ClipRRect(borderRadius: BorderRadius.circular(10), child: hotel.imageUrl.isEmpty ? Container(width: 150, height: 100, color: MasariColors.primaryBlueContainer, child: const Icon(Icons.hotel, color: MasariColors.primaryCyan)) : Image.network(hotel.imageUrl, width: 150, height: 100, fit: BoxFit.cover, errorBuilder: (_, __, ___) => Container(width: 150, height: 100, color: MasariColors.primaryBlueContainer, child: const Icon(Icons.broken_image)))),
+            const SizedBox(width: 15), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(hotel.name, style: MasariTypography.titleLarge()), const SizedBox(height: 5), Text(hotel.description), const SizedBox(height: 7), Text('يبدأ من ${hotel.price.toStringAsFixed(0)} ${hotel.currency}', style: MasariTypography.titleMedium(color: MasariColors.primaryCyan))]))
+          ]),
+          const SizedBox(height: 16),
+          MasariSectionHeader(title: 'الغرف المتاحة (${rooms.length})', subtitle: 'الغرف التي أضافها مدير الفندق تظهر هنا تلقائيًا.'),
+          const SizedBox(height: 10),
+          if (rooms.isEmpty) const Text('لا توجد غرف منشورة لهذا الفندق بعد.')
+          else ...rooms.map((room) => Padding(padding: const EdgeInsets.only(bottom: 8), child: _ServiceCard(service: room, accentColor: MasariColors.primaryOrange))),
+        ])));
+      }),
+    ]));
   }
 }
 
-class FlightsView extends StatelessWidget {
-  const FlightsView({super.key});
-  @override
-  Widget build(BuildContext context) => const _TravelServiceCatalogView(
-    title: 'حجوزات الطيران (Flights)',
-    routePath: '/flights',
-    description: 'مقارنة خيارات الطيران ودرجات السفر ضمن منظومة مساري.',
-    icon: Icons.flight_takeoff,
-    accentColor: MasariColors.primaryCyan,
-    category: 'طيران',
-  );
-}
-
-class HotelsView extends StatelessWidget {
-  const HotelsView({super.key});
-  @override
-  Widget build(BuildContext context) => const _TravelServiceCatalogView(
-    title: 'حجوزات الفنادق والمنتجعات (Hotels)',
-    routePath: '/hotels',
-    description: 'خيارات إقامة فاخرة في مكة والمدينة والوجهات السياحية.',
-    icon: Icons.hotel,
-    accentColor: MasariColors.primaryBlueLight,
-    category: 'فنادق',
-  );
-}
-
-class BusView extends StatelessWidget {
-  const BusView({super.key});
-  @override
-  Widget build(BuildContext context) => const _TravelServiceCatalogView(
-    title: 'حافلات النقل الفاخر (Bus Booking)',
-    routePath: '/bus',
-    description: 'حجز النقل بين المدن والمشاعر المقدسة بأسطول فاخر.',
-    icon: Icons.directions_bus,
-    accentColor: MasariColors.primaryOrange,
-    category: 'حافلات',
-  );
-}
-
-class CarsView extends StatelessWidget {
-  const CarsView({super.key});
-  @override
-  Widget build(BuildContext context) => const _TravelServiceCatalogView(
-    title: 'تأجير السيارات الفارهة (Car Rental)',
-    routePath: '/cars',
-    description: 'سيارات فاخرة مع خيار السائق الخاص أو القيادة الشخصية.',
-    icon: Icons.directions_car,
-    accentColor: MasariColors.primaryCyanDark,
-    category: 'سيارات',
-  );
-}
-
-class TransfersView extends StatelessWidget {
-  const TransfersView({super.key});
-  @override
-  Widget build(BuildContext context) => const _TravelServiceCatalogView(
-    title: 'النقل الخاص والتوصيل (Private Transfers)',
-    routePath: '/transfers',
-    description: 'خدمات الاستقبال والتوصيل من وإلى المطارات والفنادق والمشاعر.',
-    icon: Icons.local_taxi,
-    accentColor: MasariColors.primaryBlue,
-    category: 'سيارات',
-  );
-}
-
-class TourismView extends StatelessWidget {
-  const TourismView({super.key});
-  @override
-  Widget build(BuildContext context) => const _TravelServiceCatalogView(
-    title: 'الباقات والبرامج السياحية (Tourism Packages)',
-    routePath: '/tourism',
-    description: 'برامج سياحية متكاملة ورحلات لاستكشاف الوجهات العالمية.',
-    icon: Icons.explore,
-    accentColor: MasariColors.primaryOrangeDark,
-    category: 'سياحة',
-  );
-}
+class FlightsView extends StatelessWidget { const FlightsView({super.key}); @override Widget build(BuildContext context) => const _TravelServiceCatalogView(title: 'حجوزات الطيران (Flights)', routePath: '/flights', description: 'خيارات الطيران ودرجات السفر ضمن منظومة مساري.', icon: Icons.flight_takeoff, accentColor: MasariColors.primaryCyan, category: 'طيران'); }
+class BusView extends StatelessWidget { const BusView({super.key}); @override Widget build(BuildContext context) => const _TravelServiceCatalogView(title: 'حافلات النقل الفاخر (Bus Booking)', routePath: '/bus', description: 'حجز النقل بين المدن والمشاعر المقدسة.', icon: Icons.directions_bus, accentColor: MasariColors.primaryOrange, category: 'حافلات'); }
+class CarsView extends StatelessWidget { const CarsView({super.key}); @override Widget build(BuildContext context) => const _TravelServiceCatalogView(title: 'تأجير السيارات الفارهة (Car Rental)', routePath: '/cars', description: 'سيارات فاخرة مع السائق أو القيادة الشخصية.', icon: Icons.directions_car, accentColor: MasariColors.primaryCyanDark, category: 'سيارات'); }
+class TransfersView extends StatelessWidget { const TransfersView({super.key}); @override Widget build(BuildContext context) => const _TravelServiceCatalogView(title: 'النقل الخاص والتوصيل', routePath: '/transfers', description: 'الاستقبال والتوصيل من وإلى المطارات والفنادق.', icon: Icons.local_taxi, accentColor: MasariColors.primaryBlue, category: 'سيارات'); }
+class TourismView extends StatelessWidget { const TourismView({super.key}); @override Widget build(BuildContext context) => const _TravelServiceCatalogView(title: 'الباقات والبرامج السياحية', routePath: '/tourism', description: 'برامج سياحية متكاملة ورحلات لاستكشاف الوجهات.', icon: Icons.explore, accentColor: MasariColors.primaryOrangeDark, category: 'سياحة'); }
