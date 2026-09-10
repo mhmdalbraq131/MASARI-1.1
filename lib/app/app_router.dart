@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../core/security/protected_route_guard.dart';
 import '../features/admin/presentation/views/admin_operations_view.dart';
 import '../features/admin/presentation/views/admin_settings_view.dart';
-import '../features/foundation/presentation/views/account_management_views.dart';
+import '../features/foundation/presentation/views/account_workspace_views.dart';
 import '../features/foundation/presentation/views/auth_foundation_views.dart';
 import '../features/foundation/presentation/views/home_view.dart';
 import '../features/foundation/presentation/views/onboarding_view.dart';
@@ -42,14 +42,14 @@ class AppRouter {
             GoRoute(path: '/visa', builder: (context, state) => const VisaView()),
             GoRoute(path: '/hajj', builder: (context, state) => const HajjView()),
             GoRoute(path: '/umrah', builder: (context, state) => const UmrahView()),
-            GoRoute(path: '/wallet', builder: (context, state) => const WalletView()),
-            GoRoute(path: '/bookings', builder: (context, state) => const BookingsView()),
-            GoRoute(path: '/travelers', builder: (context, state) => const TravelersView()),
-            GoRoute(path: '/passports', builder: (context, state) => const PassportsView()),
-            GoRoute(path: '/notifications', builder: (context, state) => const NotificationsView()),
-            GoRoute(path: '/ai', builder: (context, state) => const AiAssistantView()),
-            GoRoute(path: '/profile', builder: (context, state) => const ProfileView()),
-            GoRoute(path: '/settings', builder: (context, state) => const SettingsView()),
+            GoRoute(path: '/wallet', builder: (context, state) => const WalletWorkspaceView()),
+            GoRoute(path: '/bookings', builder: (context, state) => const BookingsWorkspaceView()),
+            GoRoute(path: '/travelers', builder: (context, state) => const TravelersWorkspaceView()),
+            GoRoute(path: '/passports', builder: (context, state) => const PassportsWorkspaceView()),
+            GoRoute(path: '/notifications', builder: (context, state) => const NotificationsWorkspaceView()),
+            GoRoute(path: '/ai', builder: (context, state) => const AiWorkspaceView()),
+            GoRoute(path: '/profile', builder: (context, state) => const ProfileWorkspaceView()),
+            GoRoute(path: '/settings', builder: (context, state) => const SettingsWorkspaceView()),
             GoRoute(path: '/admin', builder: (context, state) => const AdminOperationsView()),
             GoRoute(path: '/admin/settings', builder: (context, state) => const AdminSettingsView()),
           ],
