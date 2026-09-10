@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../core/utils/responsive_layout.dart';
 import 'masari_bottom_nav.dart';
 import 'masari_sidebar.dart';
 import 'masari_top_bar.dart';
 
-/// Primary Master Shell Component for Multi-Platform Responsive Layout
+/// Primary Master Shell Component for Multi-Platform Responsive Layout.
+///
+/// Builds only the layout branch that is currently needed. This is important
+/// because the routed [child] is a live widget subtree and must never be
+/// pre-mounted in multiple responsive branches at the same time.
 class MasariAppShell extends StatelessWidget {
   final Widget child;
   final String currentPath;
@@ -17,36 +20,46 @@ class MasariAppShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveLayout(
-      // Mobile Layout: Bottom Navigation + Main Content Area
-      mobile: Scaffold(
-        body: SafeArea(child: child),
-        bottomNavigationBar: MasariBottomNav(currentPath: currentPath),
-      ),
-      // Tablet Layout: Compact Sidebar Navigation + Main Content
-      tablet: Scaffold(
-        body: Row(
-          children: [
-            MasariSidebar(currentPath: currentPath, isCollapsed: true),
-            Expanded(child: child),
-          ],
-        ),
-      ),
-      // Desktop / Web Layout: Top Bar + Full Expanded Sidebar + Main View Area
-      desktop: Scaffold(
-        appBar: const MasariTopBar(),
-        body: Row(
-          children: [
-            MasariSidebar(currentPath: currentPath, isCollapsed: false),
-            Expanded(
-              child: Container(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                child: child,
-              ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth;
+
+        // Mobile: bottom navigation + main content.
+        if (width < 600) {
+          return Scaffold(
+            body: SafeArea(child: child),
+            bottomNavigationBar: MasariBottomNav(currentPath: currentPath),
+          );
+        }
+
+        // Tablet: compact sidebar + main content.
+        if (width <= 1100) {
+          return Scaffold(
+            body: Row(
+              children: [
+                MasariSidebar(currentPath: currentPath, isCollapsed: true),
+                Expanded(child: child),
+              ],
             ),
-          ],
-        ),
-      ),
+          );
+        }
+
+        // Desktop/Web: top bar + full sidebar + main content.
+        return Scaffold(
+          appBar: const MasariTopBar(),
+          body: Row(
+            children: [
+              MasariSidebar(currentPath: currentPath, isCollapsed: false),
+              Expanded(
+                child: Container(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  child: child,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
