@@ -27,7 +27,6 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
     final users = ref.watch(managedUsersProvider);
     final audits = ref.watch(auditLogProvider);
     final admin = ref.watch(userSessionProvider);
-
     return Scaffold(
       backgroundColor: MasariColors.darkGraphite,
       body: SafeArea(child: Column(children: [
@@ -56,7 +55,10 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
 
   Widget _tabButton(BuildContext context, int index, String label, IconData icon) {
     final selected = _tab == index;
-    return InkWell(onTap: () => setState(() => _tab = index), child: Container(padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14), decoration: BoxDecoration(border: Border(bottom: BorderSide(color: selected ? MasariColors.primaryCyan : Colors.transparent, width: 3))), child: Row(children: [Icon(icon, size: 18, color: selected ? MasariColors.primaryCyan : MasariColors.titaniumLight), const SizedBox(width: 7), Text(label, style: TextStyle(color: selected ? Colors.white : MasariColors.titaniumLight))])));
+    return InkWell(
+      onTap: () => setState(() => _tab = index),
+      child: Container(padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14), decoration: BoxDecoration(border: Border(bottom: BorderSide(color: selected ? MasariColors.primaryCyan : Colors.transparent, width: 3))), child: Row(children: [Icon(icon, size: 18, color: selected ? MasariColors.primaryCyan : MasariColors.titaniumLight), const SizedBox(width: 7), Text(label, style: TextStyle(color: selected ? Colors.white : MasariColors.titaniumLight))])),
+    );
   }
 
   Widget _dashboard(BuildContext context, int services, int users, int audits) {
@@ -90,7 +92,10 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
 
   Widget _security(BuildContext context, List<ManagedUser> users, List<dynamic> audits, dynamic admin) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Row(children: [Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(masariText(context, 'المستخدمون والتدقيق', 'Users & Audit'), style: MasariTypography.headlineSmall(color: Colors.white)), const SizedBox(height: 4), Text(masariText(context, 'إدارة الحسابات والحالات من نفس مركز الإدارة.', 'Manage accounts and statuses from the same admin center.'), style: MasariTypography.bodySmall(color: MasariColors.titaniumGray))])), ElevatedButton.icon(onPressed: () => _createUser(context, admin), icon: const Icon(Icons.person_add), label: Text(masariText(context, 'إضافة مستخدم', 'Add user')))]),
+      Row(children: [
+        Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text(masariText(context, 'المستخدمون والتدقيق', 'Users & Audit'), style: MasariTypography.headlineSmall(color: Colors.white)), const SizedBox(height: 4), Text(masariText(context, 'إدارة الحسابات والحالات من نفس مركز الإدارة.', 'Manage accounts and statuses from the same admin center.'), style: MasariTypography.bodySmall(color: MasariColors.titaniumGray))])),
+        ElevatedButton.icon(onPressed: () => _createUser(context, admin), icon: const Icon(Icons.person_add), label: Text(masariText(context, 'إضافة مستخدم', 'Add user'))),
+      ]),
       const SizedBox(height: 14),
       Expanded(child: ListView(children: [
         ...users.map((user) => Padding(padding: const EdgeInsets.only(bottom: 8), child: _userCard(context, user, admin))),
@@ -109,7 +114,16 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
       title: Text(user.name),
       subtitle: Text('${user.email}\n${isAdmin ? masariText(context, 'مدير نظام', 'Administrator') : masariText(context, 'عميل مسافر', 'Traveler')} • ${user.status}'),
       isThreeLine: true,
-      trailing: DropdownButton<String>(value: user.status, items: [DropdownMenuItem(value: 'نشط', child: Text(masariText(context, 'نشط', 'Active'))), DropdownMenuItem(value: 'موقوف', child: Text(masariText(context, 'موقوف', 'Suspended')))], onChanged: (value) { if (value != null) ref.read(managedUsersProvider.notifier).updateUserStatus(userId: user.id, newStatus: value, adminSession: admin); }),
+      trailing: DropdownButton<String>(
+        initialValue: user.status,
+        items: [
+          DropdownMenuItem(value: 'نشط', child: Text(masariText(context, 'نشط', 'Active'))),
+          DropdownMenuItem(value: 'موقوف', child: Text(masariText(context, 'موقوف', 'Suspended'))),
+        ],
+        onChanged: (value) {
+          if (value != null) ref.read(managedUsersProvider.notifier).updateUserStatus(userId: user.id, newStatus: value, adminSession: admin);
+        },
+      ),
     ));
   }
 
@@ -117,18 +131,43 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
     final name = TextEditingController();
     final email = TextEditingController();
     UserRole role = UserRole.user;
-    await showDialog<void>(context: context, builder: (dialogContext) => StatefulBuilder(builder: (context, setDialogState) => AlertDialog(
-      title: Text(masariText(context, 'إنشاء حساب', 'Create account')),
-      content: SizedBox(width: 480, child: Column(mainAxisSize: MainAxisSize.min, children: [
-        TextField(controller: name, decoration: InputDecoration(labelText: masariText(context, 'الاسم', 'Name'))),
-        TextField(controller: email, decoration: InputDecoration(labelText: masariText(context, 'البريد الإلكتروني', 'Email'))),
-        DropdownButtonFormField<UserRole>(initialValue: role, decoration: InputDecoration(labelText: masariText(context, 'نوع الحساب', 'Account type')), items: [DropdownMenuItem(value: UserRole.user, child: Text(masariText(context, 'عميل مسافر', 'Traveler'))), DropdownMenuItem(value: UserRole.admin, child: Text(masariText(context, 'مدير نظام', 'Administrator')))], onChanged: (v) => setDialogState(() => role = v ?? role)),
-      ])),
-      actions: [
-        TextButton(onPressed: () => Navigator.pop(dialogContext), child: Text(masariText(context, 'إلغاء', 'Cancel'))),
-        ElevatedButton(onPressed: () { if (name.text.trim().isEmpty || email.text.trim().isEmpty) return; ref.read(managedUsersProvider.notifier).createUser(name: name.text.trim(), email: email.text.trim(), role: role, adminSession: admin); Navigator.pop(dialogContext); }, child: Text(masariText(context, 'إنشاء', 'Create'))),
-      ],
-    )));
+    await showDialog<void>(
+      context: context,
+      builder: (dialogContext) => StatefulBuilder(
+        builder: (context, setDialogState) {
+          return AlertDialog(
+            title: Text(masariText(context, 'إنشاء حساب', 'Create account')),
+            content: SizedBox(
+              width: 480,
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                TextField(controller: name, decoration: InputDecoration(labelText: masariText(context, 'الاسم', 'Name'))),
+                TextField(controller: email, decoration: InputDecoration(labelText: masariText(context, 'البريد الإلكتروني', 'Email'))),
+                DropdownButtonFormField<UserRole>(
+                  initialValue: role,
+                  decoration: InputDecoration(labelText: masariText(context, 'نوع الحساب', 'Account type')),
+                  items: [
+                    DropdownMenuItem(value: UserRole.user, child: Text(masariText(context, 'عميل مسافر', 'Traveler'))),
+                    DropdownMenuItem(value: UserRole.admin, child: Text(masariText(context, 'مدير نظام', 'Administrator'))),
+                  ],
+                  onChanged: (value) => setDialogState(() => role = value ?? role),
+                ),
+              ]),
+            ),
+            actions: [
+              TextButton(onPressed: () => Navigator.pop(dialogContext), child: Text(masariText(context, 'إلغاء', 'Cancel'))),
+              ElevatedButton(
+                onPressed: () {
+                  if (name.text.trim().isEmpty || email.text.trim().isEmpty) return;
+                  ref.read(managedUsersProvider.notifier).createUser(name: name.text.trim(), email: email.text.trim(), role: role, adminSession: admin);
+                  Navigator.pop(dialogContext);
+                },
+                child: Text(masariText(context, 'إنشاء', 'Create')),
+              ),
+            ],
+          );
+        },
+      ),
+    );
     name.dispose();
     email.dispose();
   }
