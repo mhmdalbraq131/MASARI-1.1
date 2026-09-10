@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'masari_bottom_nav.dart';
+import 'masari_floating_ai_button.dart';
 import 'masari_sidebar.dart';
 import 'masari_top_bar.dart';
 
@@ -20,6 +21,8 @@ class MasariAppShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const aiButton = MasariFloatingAiButton();
+
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
@@ -29,6 +32,8 @@ class MasariAppShell extends StatelessWidget {
           return Scaffold(
             body: SafeArea(child: child),
             bottomNavigationBar: MasariBottomNav(currentPath: currentPath),
+            floatingActionButton: aiButton,
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           );
         }
 
@@ -41,6 +46,8 @@ class MasariAppShell extends StatelessWidget {
                 Expanded(child: child),
               ],
             ),
+            floatingActionButton: aiButton,
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           );
         }
 
@@ -58,6 +65,8 @@ class MasariAppShell extends StatelessWidget {
               ),
             ],
           ),
+          floatingActionButton: aiButton,
+          floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         );
       },
     );
