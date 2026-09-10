@@ -19,7 +19,7 @@ class AdminCatalogManagementView extends ConsumerStatefulWidget {
 
 class _AdminCatalogManagementViewState extends ConsumerState<AdminCatalogManagementView> {
   String _category = 'الكل';
-  final _categories = const ['الكل', 'طيران', 'فنادق', 'غرف', 'حافلات', 'سيارات', 'سياحة', 'فيزا', 'حج', 'عمرة'];
+  final _categories = const ['الكل', 'طيران', 'فنادق', 'غرف', 'حافلات', 'سيارات', 'نقل خاص', 'سياحة', 'فيزا', 'حج', 'عمرة'];
 
   @override
   Widget build(BuildContext context) {
@@ -144,12 +144,12 @@ class _AdminCatalogManagementViewState extends ConsumerState<AdminCatalogManagem
             width: 650,
             child: SingleChildScrollView(
               child: Column(mainAxisSize: MainAxisSize.min, children: [
-                DropdownButtonFormField<String>(value: category, decoration: const InputDecoration(labelText: 'القسم'), items: _categories.where((x) => x != 'الكل' && x != 'غرف').map((x) => DropdownMenuItem(value: x, child: Text(x))).toList(), onChanged: (v) => setDialogState(() => category = v ?? category)),
+                DropdownButtonFormField<String>(initialValue: category, decoration: const InputDecoration(labelText: 'القسم'), items: _categories.where((x) => x != 'الكل' && x != 'غرف').map((x) => DropdownMenuItem(value: x, child: Text(x))).toList(), onChanged: (v) => setDialogState(() => category = v ?? category)),
                 TextField(controller: name, decoration: const InputDecoration(labelText: 'اسم الخدمة / الفندق')),
                 TextField(controller: description, maxLines: 3, decoration: const InputDecoration(labelText: 'الوصف')),
                 Row(children: [Expanded(child: TextField(controller: price, keyboardType: TextInputType.number, decoration: const InputDecoration(labelText: 'السعر'))), const SizedBox(width: 10), Expanded(child: TextField(controller: currency, decoration: const InputDecoration(labelText: 'العملة')))]),
                 TextField(controller: image, decoration: const InputDecoration(labelText: 'رابط الصورة')),
-                DropdownButtonFormField<String>(value: status, decoration: const InputDecoration(labelText: 'الحالة'), items: const [DropdownMenuItem(value: 'نشط', child: Text('نشط')), DropdownMenuItem(value: 'معطل', child: Text('معطل'))], onChanged: (v) => setDialogState(() => status = v ?? status)),
+                DropdownButtonFormField<String>(initialValue: status, decoration: const InputDecoration(labelText: 'الحالة'), items: const [DropdownMenuItem(value: 'نشط', child: Text('نشط')), DropdownMenuItem(value: 'معطل', child: Text('معطل'))], onChanged: (v) => setDialogState(() => status = v ?? status)),
                 const SizedBox(height: 12),
                 Row(children: [Text('بيانات إضافية', style: MasariTypography.titleSmall(color: MasariColors.primaryCyan)), const Spacer(), IconButton(onPressed: () => setDialogState(() => metadata['معلومة_${metadata.length + 1}'] = TextEditingController()), icon: const Icon(Icons.add))]),
                 ...metadata.entries.map((entry) => Row(children: [Expanded(child: TextField(controller: TextEditingController(text: entry.key), decoration: const InputDecoration(labelText: 'الحقل'), onChanged: (v) { final value = metadata.remove(entry.key); if (value != null) metadata[v] = value; })), const SizedBox(width: 8), Expanded(child: TextField(controller: entry.value, decoration: const InputDecoration(labelText: 'القيمة'))), IconButton(onPressed: () => setDialogState(() => metadata.remove(entry.key)), icon: const Icon(Icons.remove_circle_outline))])),
@@ -178,7 +178,9 @@ class _AdminCatalogManagementViewState extends ConsumerState<AdminCatalogManagem
         ),
       ),
     );
-    for (final controller in [name, description, price, image, currency, ...metadata.values]) controller.dispose();
+    for (final controller in [name, description, price, image, currency, ...metadata.values]) {
+      controller.dispose();
+    }
   }
 
   Future<void> _openRooms(BuildContext context, dynamic admin, PlatformService hotel) async {
