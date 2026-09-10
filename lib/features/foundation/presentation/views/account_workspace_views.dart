@@ -1,36 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../../../core/theme/masari_colors.dart';
 import '../../../../core/theme/masari_typography.dart';
 import '../../../../shared/components/masari_cards.dart';
 import '../../../bookings/presentation/booking_provider.dart';
 import '../providers/app_providers.dart';
 
-class BookingsWorkspaceView extends ConsumerWidget {
-  const BookingsWorkspaceView({super.key});
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bookings = ref.watch(bookingProvider);
-    return _page('حجوزاتي وتذاكري', Icons.confirmation_number_outlined, Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('طلبات الحجز الخاصة بك', style: MasariTypography.headlineSmall()),
-      const SizedBox(height: 12),
-      if (bookings.isEmpty) const MasariCard(child: Padding(padding: EdgeInsets.all(24), child: Center(child: Text('لا توجد حجوزات بعد. اختر أي خدمة واضغط «احجز الآن» لبدء طلب جديد.'))))
-      else ...bookings.map((booking) => Padding(padding: const EdgeInsets.only(bottom: 10), child: MasariCard(child: ListTile(leading: const Icon(Icons.receipt_long, color: MasariColors.primaryCyan), title: Text(booking.serviceName), subtitle: Text('${booking.category} • ${booking.customerName} • ${booking.createdAt.toString().substring(0, 16)}'), trailing: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text('${booking.price.toStringAsFixed(0)} ${booking.currency}'), Text(booking.status, style: const TextStyle(color: MasariColors.primaryOrange))]))))),
-    ]));
-  }
-}
+class BookingsWorkspaceView extends ConsumerWidget { const BookingsWorkspaceView({super.key}); @override Widget build(BuildContext context, WidgetRef ref) { final bookings = ref.watch(bookingProvider); return _page('حجوزاتي وتذاكري', Icons.confirmation_number_outlined, Column(crossAxisAlignment: CrossAxisAlignment.start, children: [Text('طلبات الحجز الخاصة بك', style: MasariTypography.headlineSmall()), const SizedBox(height: 12), if (bookings.isEmpty) const MasariCard(child: Padding(padding: EdgeInsets.all(24), child: Center(child: Text('لا توجد حجوزات بعد. اختر أي خدمة واضغط «احجز الآن» لبدء طلب جديد.')))) else ...bookings.map((booking) => Padding(padding: const EdgeInsets.only(bottom: 10), child: MasariCard(child: ListTile(leading: const Icon(Icons.receipt_long, color: MasariColors.primaryCyan), title: Text(booking.serviceName), subtitle: Text('${booking.category} • ${booking.customerName} • ${booking.createdAt.toString().substring(0, 16)}'), trailing: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Text('${booking.price.toStringAsFixed(0)} ${booking.currency}'), Text(booking.status, style: const TextStyle(color: MasariColors.primaryOrange))]))))), ])); } }
 
 class TravelersWorkspaceView extends StatefulWidget { const TravelersWorkspaceView({super.key}); @override State<TravelersWorkspaceView> createState() => _TravelersWorkspaceViewState(); }
-class _TravelersWorkspaceViewState extends State<TravelersWorkspaceView> {
-  final List<String> _travelers = ['المسافر الرئيسي'];
-  final _name = TextEditingController();
-  @override void dispose() { _name.dispose(); super.dispose(); }
-  @override Widget build(BuildContext context) => _page('إدارة المسافرين', Icons.people_outline, Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    MasariCard(child: Row(children: [Expanded(child: TextField(controller: _name, decoration: const InputDecoration(labelText: 'اسم مسافر جديد', hintText: 'مثال: أحمد محمد'))), const SizedBox(width: 10), ElevatedButton(onPressed: () { if (_name.text.trim().isEmpty) return; setState(() { _travelers.add(_name.text.trim()); _name.clear(); }); }, child: const Text('إضافة'))])),
-    const SizedBox(height: 12), ..._travelers.map((name) => Padding(padding: const EdgeInsets.only(bottom: 8), child: MasariCard(child: ListTile(leading: const Icon(Icons.person, color: MasariColors.primaryCyan), title: Text(name), trailing: IconButton(onPressed: () { if (_travelers.length > 1) setState(() => _travelers.remove(name)); }, icon: const Icon(Icons.delete_outline))))),
-  ]));
-}
+class _TravelersWorkspaceViewState extends State<TravelersWorkspaceView> { final List<String> _travelers = ['المسافر الرئيسي']; final _name = TextEditingController(); @override void dispose() { _name.dispose(); super.dispose(); } @override Widget build(BuildContext context) => _page('إدارة المسافرين', Icons.people_outline, Column(crossAxisAlignment: CrossAxisAlignment.start, children: [MasariCard(child: Row(children: [Expanded(child: TextField(controller: _name, decoration: const InputDecoration(labelText: 'اسم مسافر جديد', hintText: 'مثال: أحمد محمد'))), const SizedBox(width: 10), ElevatedButton(onPressed: () { if (_name.text.trim().isEmpty) return; setState(() { _travelers.add(_name.text.trim()); _name.clear(); }); }, child: const Text('إضافة'))])), const SizedBox(height: 12), ..._travelers.map((name) => Padding(padding: const EdgeInsets.only(bottom: 8), child: MasariCard(child: ListTile(leading: const Icon(Icons.person, color: MasariColors.primaryCyan), title: Text(name), trailing: IconButton(onPressed: () { if (_travelers.length > 1) setState(() => _travelers.remove(name)); }, icon: const Icon(Icons.delete_outline))))), ])); }
 
 class WalletWorkspaceView extends StatefulWidget { const WalletWorkspaceView({super.key}); @override State<WalletWorkspaceView> createState() => _WalletWorkspaceViewState(); }
 class _WalletWorkspaceViewState extends State<WalletWorkspaceView> { double _balance = 0; @override Widget build(BuildContext context) => _page('محفظة مساري', Icons.account_balance_wallet_outlined, Column(children: [MasariCard(child: Column(children: [Text('الرصيد الحالي', style: MasariTypography.bodyMedium()), const SizedBox(height: 8), Text('${_balance.toStringAsFixed(2)} SAR', style: MasariTypography.headlineSmall(color: MasariColors.primaryCyan)), const SizedBox(height: 16), ElevatedButton.icon(onPressed: () => setState(() => _balance += 500), icon: const Icon(Icons.add), label: const Text('إضافة 500 SAR للتجربة'))])), const SizedBox(height: 12), const MasariCard(child: ListTile(leading: Icon(Icons.info_outline, color: MasariColors.primaryOrange), title: Text('المحفظة جاهزة لربط بوابة الدفع'), subtitle: Text('حركات الرصيد الحقيقية تحتاج مزود دفع وخدمة مالية خلفية.')))])); }
