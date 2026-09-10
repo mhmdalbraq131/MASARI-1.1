@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/constants/app_constants.dart';
 import '../../core/security/protected_route_guard.dart';
 import '../../core/theme/masari_colors.dart';
 import '../../core/theme/masari_typography.dart';
@@ -51,7 +50,6 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
               onPressed: onMenuPressed,
             ),
 
-          // Unified MASARI brand lockup.
           MasariBrand(
             compact: isMobile,
             onTap: () => context.go('/home'),
@@ -59,7 +57,6 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
 
           const SizedBox(width: 24),
 
-          // Fast Search Field (Desktop)
           if (!isMobile)
             Expanded(
               child: Container(
@@ -94,7 +91,6 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
           if (isMobile) const Spacer(),
           const SizedBox(width: 16),
 
-          // Admin Portal Quick Action Button
           if (currentRole == UserRole.admin && !isMobile)
             Container(
               margin: const EdgeInsets.only(left: 8, right: 8),
@@ -113,7 +109,6 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
               ),
             ),
 
-          // Theme Switcher
           IconButton(
             icon: Icon(
               themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
@@ -124,14 +119,12 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
             onPressed: () => ref.read(themeModeProvider.notifier).toggleTheme(),
           ),
 
-          // Language Switcher
           IconButton(
             icon: const Icon(Icons.language, color: MasariColors.brandTurquoise, size: 20),
             tooltip: isArabic ? 'Change Language' : 'تغيير اللغة',
             onPressed: () => ref.read(localeProvider.notifier).toggleLocale(),
           ),
 
-          // Notifications
           IconButton(
             icon: Stack(
               children: [
@@ -155,7 +148,6 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
 
           const SizedBox(width: 8),
 
-          // User Profile / Auth Status Menu
           if (userSession.isAuthenticated)
             PopupMenuButton<String>(
               offset: const Offset(0, 48),
