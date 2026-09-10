@@ -11,6 +11,7 @@ import '../features/foundation/presentation/views/onboarding_view.dart';
 import '../features/foundation/presentation/views/spiritual_services_views.dart';
 import '../features/foundation/presentation/views/splash_view.dart';
 import '../features/foundation/presentation/views/travel_services_views.dart';
+import '../features/payments/presentation/realistic_payment_view.dart';
 import '../shared/widgets/masari_app_shell.dart';
 
 class AppRouter {
@@ -50,7 +51,7 @@ class AppRouter {
             GoRoute(path: '/visa', builder: (context, state) => const VisaView()),
             GoRoute(path: '/hajj', builder: (context, state) => const HajjView()),
             GoRoute(path: '/umrah', builder: (context, state) => const UmrahView()),
-            GoRoute(path: '/wallet', builder: (context, state) => const WalletWorkspaceView()),
+            GoRoute(path: '/wallet', builder: (context, state) => const RealisticPaymentView()),
             GoRoute(path: '/bookings', builder: (context, state) => const BookingsWorkspaceView()),
             GoRoute(path: '/travelers', builder: (context, state) => const TravelersWorkspaceView()),
             GoRoute(path: '/passports', builder: (context, state) => const PassportsWorkspaceView()),
