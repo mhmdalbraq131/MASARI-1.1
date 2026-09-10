@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import '../../core/constants/app_constants.dart';
 import '../../core/security/protected_route_guard.dart';
 import '../../core/theme/masari_colors.dart';
 import '../../core/theme/masari_typography.dart';
 import '../../features/foundation/presentation/providers/app_providers.dart';
+import 'masari_brand.dart';
 
 /// Top Bar for MASARI Desktop / Web / Mobile Platforms
 class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
@@ -36,7 +38,7 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
         color: MasariColors.primaryBlueDark,
         border: Border(
           bottom: BorderSide(
-            color: MasariColors.primaryCyan,
+            color: MasariColors.brandTurquoise,
             width: 1.5,
           ),
         ),
@@ -45,50 +47,14 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
         children: [
           if (isMobile)
             IconButton(
-              icon: const Icon(Icons.menu, color: MasariColors.primaryCyan),
+              icon: const Icon(Icons.menu, color: MasariColors.brandTurquoise),
               onPressed: onMenuPressed,
             ),
 
-          // Brand Logo and Name
-          InkWell(
+          // Unified MASARI brand lockup.
+          MasariBrand(
+            compact: isMobile,
             onTap: () => context.go('/home'),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: MasariColors.primaryCyan,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const Icon(
-                    Icons.flight_takeoff,
-                    color: MasariColors.primaryBlueDark,
-                    size: 20,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppConstants.appNameArabic,
-                      style: MasariTypography.titleMedium(
-                        color: MasariColors.primaryCyan,
-                        isArabic: true,
-                      ),
-                    ),
-                    Text(
-                      AppConstants.appNameEnglish,
-                      style: MasariTypography.caption(
-                        color: MasariColors.pureWhite,
-                        isArabic: false,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
           ),
 
           const SizedBox(width: 24),
@@ -104,21 +70,21 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                   decoration: InputDecoration(
                     hintText: isArabic ? 'البحث عن رحلات، فنادق، برامج عمرة...' : 'Search flights, hotels, Umrah packages...',
                     hintStyle: const TextStyle(color: MasariColors.titaniumLight, fontSize: 12),
-                    prefixIcon: const Icon(Icons.search, color: MasariColors.primaryCyan, size: 18),
+                    prefixIcon: const Icon(Icons.search, color: MasariColors.brandTurquoise, size: 18),
                     filled: true,
                     fillColor: MasariColors.primaryBlueContainer,
                     contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 0.5),
+                      borderSide: const BorderSide(color: MasariColors.brandTurquoise, width: 0.5),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: MasariColors.primaryCyan.withValues(alpha: 0.3), width: 0.5),
+                      borderSide: BorderSide(color: MasariColors.brandTurquoise.withValues(alpha: 0.3), width: 0.5),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 1.5),
+                      borderSide: const BorderSide(color: MasariColors.brandTurquoise, width: 1.5),
                     ),
                   ),
                 ),
@@ -126,7 +92,6 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
             ),
 
           if (isMobile) const Spacer(),
-
           const SizedBox(width: 16),
 
           // Admin Portal Quick Action Button
@@ -135,15 +100,15 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
               margin: const EdgeInsets.only(left: 8, right: 8),
               child: OutlinedButton.icon(
                 onPressed: () => context.go('/admin'),
-                icon: const Icon(Icons.admin_panel_settings, color: MasariColors.primaryCyan, size: 16),
+                icon: const Icon(Icons.admin_panel_settings_outlined, color: MasariColors.brandOrange, size: 16),
                 label: Text(
                   isArabic ? 'بوابة الإدارة' : 'Admin Portal',
-                  style: const TextStyle(color: MasariColors.primaryCyan, fontSize: 12, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: MasariColors.brandOrange, fontSize: 12, fontWeight: FontWeight.bold),
                 ),
                 style: OutlinedButton.styleFrom(
-                  side: const BorderSide(color: MasariColors.primaryCyan),
+                  side: const BorderSide(color: MasariColors.brandOrange),
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  backgroundColor: MasariColors.primaryCyan.withValues(alpha: 0.1),
+                  backgroundColor: MasariColors.brandOrange.withValues(alpha: 0.1),
                 ),
               ),
             ),
@@ -152,7 +117,7 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
           IconButton(
             icon: Icon(
               themeMode == ThemeMode.dark ? Icons.light_mode : Icons.dark_mode,
-              color: MasariColors.primaryCyan,
+              color: MasariColors.brandTurquoise,
               size: 20,
             ),
             tooltip: isArabic ? 'تغيير المظهر' : 'Toggle Theme',
@@ -161,7 +126,7 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
 
           // Language Switcher
           IconButton(
-            icon: const Icon(Icons.language, color: MasariColors.primaryCyan, size: 20),
+            icon: const Icon(Icons.language, color: MasariColors.brandTurquoise, size: 20),
             tooltip: isArabic ? 'Change Language' : 'تغيير اللغة',
             onPressed: () => ref.read(localeProvider.notifier).toggleLocale(),
           ),
@@ -177,7 +142,7 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                   child: Container(
                     padding: const EdgeInsets.all(2),
                     decoration: const BoxDecoration(
-                      color: MasariColors.primaryOrange,
+                      color: MasariColors.brandOrange,
                       shape: BoxShape.circle,
                     ),
                     constraints: const BoxConstraints(minWidth: 8, minHeight: 8),
@@ -196,14 +161,14 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
               offset: const Offset(0, 48),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
-                side: const BorderSide(color: MasariColors.primaryCyan),
+                side: const BorderSide(color: MasariColors.brandTurquoise),
               ),
               color: MasariColors.primaryBlueDark,
               child: Row(
                 children: [
                   CircleAvatar(
                     radius: 16,
-                    backgroundColor: MasariColors.primaryCyan,
+                    backgroundColor: MasariColors.brandTurquoise,
                     child: Text(
                       userSession.name.isNotEmpty ? userSession.name[0] : 'U',
                       style: const TextStyle(
@@ -225,11 +190,11 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                         ),
                         Text(
                           userSession.role == UserRole.admin ? 'مدير نظام' : 'مسافر معتمد',
-                          style: const TextStyle(color: MasariColors.primaryCyan, fontSize: 10),
+                          style: const TextStyle(color: MasariColors.brandTurquoise, fontSize: 10),
                         ),
                       ],
                     ),
-                    const Icon(Icons.keyboard_arrow_down, color: MasariColors.primaryCyan, size: 16),
+                    const Icon(Icons.keyboard_arrow_down, color: MasariColors.brandTurquoise, size: 16),
                   ],
                 ],
               ),
@@ -252,7 +217,7 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                   value: 'profile',
                   child: Row(
                     children: [
-                      const Icon(Icons.person_outline, color: MasariColors.primaryCyan, size: 18),
+                      const Icon(Icons.person_outline, color: MasariColors.brandTurquoise, size: 18),
                       const SizedBox(width: 8),
                       Text(isArabic ? 'الملف الشخصي' : 'Profile', style: const TextStyle(color: MasariColors.pureWhite)),
                     ],
@@ -263,9 +228,9 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                     value: 'admin',
                     child: Row(
                       children: [
-                        const Icon(Icons.admin_panel_settings, color: MasariColors.primaryOrange, size: 18),
+                        const Icon(Icons.admin_panel_settings_outlined, color: MasariColors.brandOrange, size: 18),
                         const SizedBox(width: 8),
-                        Text(isArabic ? 'بوابة الإدارة' : 'Admin Portal', style: const TextStyle(color: MasariColors.primaryOrange)),
+                        Text(isArabic ? 'بوابة الإدارة' : 'Admin Portal', style: const TextStyle(color: MasariColors.brandOrange)),
                       ],
                     ),
                   ),
@@ -274,9 +239,9 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
                   value: 'logout',
                   child: Row(
                     children: [
-                      const Icon(Icons.logout, color: MasariColors.primaryOrange, size: 18),
+                      const Icon(Icons.logout, color: MasariColors.brandOrange, size: 18),
                       const SizedBox(width: 8),
-                      Text(isArabic ? 'تسجيل الخروج' : 'Logout', style: const TextStyle(color: MasariColors.primaryOrange)),
+                      Text(isArabic ? 'تسجيل الخروج' : 'Logout', style: const TextStyle(color: MasariColors.brandOrange)),
                     ],
                   ),
                 ),
@@ -286,8 +251,8 @@ class MasariTopBar extends ConsumerWidget implements PreferredSizeWidget {
             OutlinedButton(
               onPressed: () => context.go('/login'),
               style: OutlinedButton.styleFrom(
-                foregroundColor: MasariColors.primaryCyan,
-                side: const BorderSide(color: MasariColors.primaryCyan),
+                foregroundColor: MasariColors.brandTurquoise,
+                side: const BorderSide(color: MasariColors.brandTurquoise),
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               ),
               child: Text(isArabic ? 'تسجيل الدخول' : 'Login'),
