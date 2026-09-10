@@ -8,9 +8,54 @@ import '../../domain/entities/platform_service.dart';
 import '../../domain/entities/user_session.dart';
 import 'app_providers.dart';
 
+List<PlatformService> _completeOperationalDefaults(List<PlatformService> base) {
+  return [
+    ...base,
+    const PlatformService(
+      id: 'srv_transfer_01',
+      category: 'نقل خاص',
+      name: 'استقبال وتوصيل VIP من المطار',
+      description: 'سيارة فاخرة مع سائق خاص للاستقبال والتوصيل بين المطار والفندق.',
+      price: 300,
+      currency: 'SAR',
+      status: 'نشط',
+      imageUrl: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500',
+      metadata: {'الخدمة': 'استقبال وتوصيل', 'السيارة': 'VIP'},
+    ),
+    const PlatformService(
+      id: 'srv_tourism_01',
+      category: 'سياحة',
+      name: 'باقة جدة الفاخرة',
+      description: 'برنامج سياحي خاص لاكتشاف جدة التاريخية والواجهة البحرية مع مرشد.',
+      price: 950,
+      currency: 'SAR',
+      status: 'نشط',
+      imageUrl: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73f6e?w=500',
+      metadata: {'المدة': '3 أيام', 'النوع': 'خاص'},
+    ),
+    const PlatformService(
+      id: 'srv_visa_01',
+      category: 'فيزا',
+      name: 'خدمة إصدار التأشيرة السياحية',
+      description: 'مساعدة متكاملة في تجهيز طلب التأشيرة السياحية ومتابعة الطلب.',
+      price: 450,
+      currency: 'SAR',
+      status: 'نشط',
+      imageUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500',
+      metadata: {'المعالجة': 'متابعة الطلب', 'النوع': 'سياحية'},
+    ),
+  ];
+}
+
 class OperationalCatalogNotifier extends StateNotifier<List<PlatformService>> {
   final Ref ref;
-  OperationalCatalogNotifier(this.ref) : super(PlatformServicePersistence.loadCatalog(List<PlatformService>.from(ref.read(platformServicesProvider))));
+
+  OperationalCatalogNotifier(this.ref)
+      : super(
+          PlatformServicePersistence.loadCatalog(
+            _completeOperationalDefaults(List<PlatformService>.from(ref.read(platformServicesProvider))),
+          ),
+        );
 
   Future<void> _persist() async => PlatformServicePersistence.saveCatalog(state);
 
