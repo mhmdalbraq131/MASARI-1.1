@@ -128,7 +128,7 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
       subtitle: Text('${user.email}\n${isAdmin ? masariText(context, 'مدير نظام', 'Administrator') : masariText(context, 'عميل مسافر', 'Traveler')} • ${user.status}'),
       isThreeLine: true,
       trailing: DropdownButton<String>(
-        value: user.status,
+        initialValue: user.status,
         items: [
           DropdownMenuItem(value: 'نشط', child: Text(masariText(context, 'نشط', 'Active'))),
           DropdownMenuItem(value: 'موقوف', child: Text(masariText(context, 'موقوف', 'Suspended'))),
@@ -149,7 +149,7 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
       content: SizedBox(width: 480, child: Column(mainAxisSize: MainAxisSize.min, children: [
         TextField(controller: name, decoration: InputDecoration(labelText: masariText(context, 'الاسم', 'Name'))),
         TextField(controller: email, decoration: InputDecoration(labelText: masariText(context, 'البريد الإلكتروني', 'Email'))),
-        DropdownButtonFormField<UserRole>(value: role, decoration: InputDecoration(labelText: masariText(context, 'نوع الحساب', 'Account type')), items: [
+        DropdownButtonFormField<UserRole>(initialValue: role, decoration: InputDecoration(labelText: masariText(context, 'نوع الحساب', 'Account type')), items: [
           DropdownMenuItem(value: UserRole.user, child: Text(masariText(context, 'عميل مسافر', 'Traveler'))),
           DropdownMenuItem(value: UserRole.admin, child: Text(masariText(context, 'مدير نظام', 'Administrator'))),
         ], onChanged: (value) => setDialogState(() => role = value ?? role)),
