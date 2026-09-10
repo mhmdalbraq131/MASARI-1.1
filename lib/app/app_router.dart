@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../core/security/protected_route_guard.dart';
 import '../features/admin/presentation/views/admin_operations_view.dart';
 import '../features/admin/presentation/views/admin_settings_view.dart';
+import '../features/ai/presentation/realistic_ai_workspace_view.dart';
 import '../features/foundation/presentation/views/account_workspace_views.dart';
 import '../features/foundation/presentation/views/auth_foundation_views.dart';
 import '../features/foundation/presentation/views/home_view.dart';
@@ -56,7 +57,7 @@ class AppRouter {
             GoRoute(path: '/travelers', builder: (context, state) => const TravelersWorkspaceView()),
             GoRoute(path: '/passports', builder: (context, state) => const PassportsWorkspaceView()),
             GoRoute(path: '/notifications', builder: (context, state) => const NotificationsWorkspaceView()),
-            GoRoute(path: '/ai', builder: (context, state) => const AiWorkspaceView()),
+            GoRoute(path: '/ai', builder: (context, state) => const RealisticAiWorkspaceView()),
             GoRoute(path: '/profile', builder: (context, state) => const ProfileWorkspaceView()),
             GoRoute(path: '/settings', builder: (context, state) => const SettingsWorkspaceView()),
             GoRoute(path: '/admin', builder: (context, state) => const AdminOperationsView()),
