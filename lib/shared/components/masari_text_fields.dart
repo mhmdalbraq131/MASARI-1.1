@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/localization/masari_localization.dart';
 import '../../core/theme/masari_colors.dart';
 import '../../core/theme/masari_spacing.dart';
 import '../../core/theme/masari_typography.dart';
@@ -30,10 +31,7 @@ class MasariTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: MasariTypography.titleSmall(color: labelColor),
-        ),
+        Text(label, style: MasariTypography.titleSmall(color: labelColor)),
         const SizedBox(height: MasariSpacing.xs),
         TextField(
           controller: controller,
@@ -51,12 +49,12 @@ class MasariTextField extends StatelessWidget {
 
 /// Password Input Field with Toggle Visibility
 class MasariPasswordField extends StatefulWidget {
-  final String label;
+  final String? label;
   final TextEditingController? controller;
 
   const MasariPasswordField({
     super.key,
-    this.label = 'كلمة المرور',
+    this.label,
     this.controller,
   });
 
@@ -70,16 +68,13 @@ class _MasariPasswordFieldState extends State<MasariPasswordField> {
   @override
   Widget build(BuildContext context) {
     return MasariTextField(
-      label: widget.label,
+      label: widget.label ?? masariText(context, 'كلمة المرور', 'Password'),
       controller: widget.controller,
       prefixIcon: Icons.lock_outline,
       suffixIcon: IconButton(
+        tooltip: masariText(context, 'إظهار كلمة المرور', 'Show password'),
         icon: Icon(_obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined, color: MasariColors.titaniumGray),
-        onPressed: () {
-          setState(() {
-            _obscureText = !_obscureText;
-          });
-        },
+        onPressed: () => setState(() => _obscureText = !_obscureText),
       ),
     );
   }
@@ -87,12 +82,12 @@ class _MasariPasswordFieldState extends State<MasariPasswordField> {
 
 /// Travel Search Field
 class MasariSearchField extends StatelessWidget {
-  final String hint;
+  final String? hint;
   final ValueChanged<String>? onChanged;
 
   const MasariSearchField({
     super.key,
-    this.hint = 'ابحث عن الوجهات، الرحلات، أو الفنادق...',
+    this.hint,
     this.onChanged,
   });
 
@@ -105,23 +100,14 @@ class MasariSearchField extends StatelessWidget {
     return TextField(
       onChanged: onChanged,
       decoration: InputDecoration(
-        hintText: hint,
+        hintText: hint ?? masariText(context, 'ابحث عن الوجهات، الرحلات، أو الفنادق...', 'Search destinations, flights, or hotels...'),
         hintStyle: MasariTypography.bodyMedium(color: MasariColors.titaniumGray),
         prefixIcon: const Icon(Icons.search, color: MasariColors.primaryCyan),
         fillColor: fillBg,
         filled: true,
-        border: OutlineInputBorder(
-          borderRadius: MasariSpacing.borderLg,
-          borderSide: BorderSide(color: borderColor),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: MasariSpacing.borderLg,
-          borderSide: BorderSide(color: borderColor),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: MasariSpacing.borderLg,
-          borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 1.5),
-        ),
+        border: OutlineInputBorder(borderRadius: MasariSpacing.borderLg, borderSide: BorderSide(color: borderColor)),
+        enabledBorder: OutlineInputBorder(borderRadius: MasariSpacing.borderLg, borderSide: BorderSide(color: borderColor)),
+        focusedBorder: OutlineInputBorder(borderRadius: MasariSpacing.borderLg, borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 1.5)),
       ),
     );
   }
