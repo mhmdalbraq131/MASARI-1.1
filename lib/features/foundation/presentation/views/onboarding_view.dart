@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/localization/masari_localization.dart';
 import '../../../../core/theme/masari_colors.dart';
 import '../../../../core/theme/masari_typography.dart';
 import '../../../../shared/components/masari_buttons.dart';
@@ -132,7 +131,7 @@ class _WelcomeCard extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       child: Text(
                         text('بوابة السفر والعبادة', 'Travel & Worship Gateway'),
-                        style: MasariTypography.labelMedium(color: MasariColors.darkGraphite),
+                        style: MasariTypography.bodySmall(color: MasariColors.darkGraphite),
                       ),
                     ),
                   ),
