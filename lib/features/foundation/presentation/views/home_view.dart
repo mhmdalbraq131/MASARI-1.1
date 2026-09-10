@@ -9,7 +9,6 @@ import '../../../../shared/components/masari_cards.dart';
 import '../../../../shared/components/masari_chips_badges.dart';
 import '../../../../shared/components/masari_section_header.dart';
 import '../../../../shared/components/masari_text_fields.dart';
-import '../providers/app_providers.dart';
 
 /// MASARI Primary Platform Home Dashboard Foundation
 class HomeView extends ConsumerWidget {
