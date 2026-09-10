@@ -16,12 +16,19 @@ class AppRouter {
   static final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
   static final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
 
-  static GoRouter createRouter({UserRole userRole = UserRole.guest}) {
-    final guard = ProtectedRouteGuard(currentRole: userRole);
+  static GoRouter createRouter({
+    ValueListenable<UserRole>? roleListenable,
+    UserRole userRole = UserRole.guest,
+  }) {
     return GoRouter(
       navigatorKey: rootNavigatorKey,
       initialLocation: '/splash',
-      redirect: (context, state) => guard.canAccessRoute(state.matchedLocation) ? null : '/home',
+      refreshListenable: roleListenable,
+      redirect: (context, state) {
+        final role = roleListenable?.value ?? userRole;
+        final guard = ProtectedRouteGuard(currentRole: role);
+        return guard.canAccessRoute(state.matchedLocation) ? null : '/home';
+      },
       routes: [
         GoRoute(path: '/splash', builder: (context, state) => const SplashView()),
         GoRoute(path: '/onboarding', builder: (context, state) => const OnboardingView()),
