@@ -58,7 +58,7 @@ class HotelsView extends ConsumerWidget {
         final rooms = catalog.where((r) => r.category == 'غرف' && r.status == 'نشط' && r.metadata['hotelId'] == hotel.id).toList();
         return Padding(padding: const EdgeInsets.only(bottom: 18), child: MasariCard(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           _ServiceCard(service: hotel, accentColor: MasariColors.primaryCyan), const SizedBox(height: 16),
-          MasariSectionHeader(title: masariText(context, 'الغرف المتاحة', 'Available rooms') + ' (${rooms.length})', subtitle: masariText(context, 'الغرف التي يديرها مدير الفندق تظهر هنا تلقائيًا.', 'Rooms managed by the hotel manager appear here automatically.')), const SizedBox(height: 10),
+          MasariSectionHeader(title: '${masariText(context, 'الغرف المتاحة', 'Available rooms')} (${rooms.length})', subtitle: masariText(context, 'الغرف التي يديرها مدير الفندق تظهر هنا تلقائيًا.', 'Rooms managed by the hotel manager appear here automatically.')), const SizedBox(height: 10),
           if (rooms.isEmpty) Text(masariText(context, 'لا توجد غرف منشورة لهذا الفندق بعد.', 'No rooms have been published for this hotel yet.')) else ...rooms.map((room) => Padding(padding: const EdgeInsets.only(bottom: 8), child: _ServiceCard(service: room, accentColor: MasariColors.primaryOrange))),
         ])));
       }),
