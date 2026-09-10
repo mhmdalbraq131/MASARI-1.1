@@ -26,55 +26,56 @@ class _LoginViewState extends ConsumerState<LoginView> {
   Widget build(BuildContext context) {
     final session = ref.watch(userSessionProvider);
     final isAdmin = session.role == UserRole.admin;
-    return Scaffold(
-      body: Center(child: SingleChildScrollView(padding: const EdgeInsets.all(24), child: Container(
-        constraints: const BoxConstraints(maxWidth: 480),
-        child: MasariCard(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Row(children: [
-            Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: MasariColors.primaryCyan.withValues(alpha: 0.15), shape: BoxShape.circle), child: const Icon(Icons.lock_outline, color: MasariColors.primaryCyan, size: 28)),
-            const SizedBox(width: 16),
-            Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(masariText(context, 'تسجيل الدخول إلى منصة مساري', 'Sign in to MASARI'), style: MasariTypography.headlineSmall()),
-              const SizedBox(height: 2),
-              Text(masariText(context, 'مصادقة آمنة للمسافرين ومدراء النظام', 'Secure authentication for travelers and administrators'), style: MasariTypography.bodySmall(color: MasariColors.titaniumGray)),
-            ])),
-          ]),
-          const SizedBox(height: 24),
-          if (session.isAuthenticated) Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(color: MasariColors.primaryBlueContainer, borderRadius: BorderRadius.circular(12), border: Border.all(color: MasariColors.primaryCyan)),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Row(children: [const Icon(Icons.check_circle, color: MasariColors.success, size: 20), const SizedBox(width: 8), Text(masariText(context, 'أنت مسجل الدخول حاليًا بحساب:', 'You are currently signed in as:'), style: MasariTypography.titleSmall(color: MasariColors.pureWhite))]),
+    return Scaffold(body: Center(child: SingleChildScrollView(padding: const EdgeInsets.all(24), child: Container(
+      constraints: const BoxConstraints(maxWidth: 480),
+      child: MasariCard(child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(children: [
+          Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: MasariColors.primaryCyan.withValues(alpha: 0.15), shape: BoxShape.circle), child: const Icon(Icons.lock_outline, color: MasariColors.primaryCyan, size: 28)),
+          const SizedBox(width: 16),
+          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(masariText(context, 'تسجيل الدخول إلى منصة مساري', 'Sign in to MASARI'), style: MasariTypography.headlineSmall()),
+            const SizedBox(height: 2),
+            Text(masariText(context, 'مصادقة آمنة للمسافرين ومدراء النظام', 'Secure authentication for travelers and administrators'), style: MasariTypography.bodySmall(color: MasariColors.titaniumGray)),
+          ])),
+        ]),
+        const SizedBox(height: 24),
+        if (session.isAuthenticated) Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(color: MasariColors.primaryBlueContainer, borderRadius: BorderRadius.circular(12), border: Border.all(color: MasariColors.primaryCyan)),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(children: [const Icon(Icons.check_circle, color: MasariColors.success, size: 20), const SizedBox(width: 8), Text(masariText(context, 'أنت مسجل الدخول حاليًا بحساب:', 'You are currently signed in as:'), style: MasariTypography.titleSmall(color: MasariColors.pureWhite))]),
+            const SizedBox(height: 8),
+            Text('${masariText(context, 'الاسم', 'Name')}: ${session.name}', style: MasariTypography.bodyMedium(color: MasariColors.primaryCyan)),
+            Text('${masariText(context, 'البريد', 'Email')}: ${session.email}', style: MasariTypography.bodySmall(color: MasariColors.titaniumLight)),
+            Text('${masariText(context, 'نوع الحساب', 'Account type')}: ${isAdmin ? masariText(context, 'مدير نظام', 'Administrator') : masariText(context, 'عميل مسافر', 'Traveler')}', style: MasariTypography.bodySmall(color: MasariColors.pureWhite)),
+            const SizedBox(height: 16),
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              MasariPrimaryButton(label: isAdmin ? masariText(context, 'الانتقال إلى بوابة الإدارة', 'Go to Admin Portal') : masariText(context, 'الانتقال إلى الرئيسية', 'Go to Home'), onPressed: () => context.go(isAdmin ? '/admin' : '/home')),
               const SizedBox(height: 8),
-              Text('${masariText(context, 'الاسم', 'Name')}: ${session.name}', style: MasariTypography.bodyMedium(color: MasariColors.primaryCyan)),
-              Text('${masariText(context, 'البريد', 'Email')}: ${session.email}', style: MasariTypography.bodySmall(color: MasariColors.titaniumLight)),
-              Text('${masariText(context, 'نوع الحساب', 'Account type')}: ${isAdmin ? masariText(context, 'مدير نظام', 'Administrator') : masariText(context, 'عميل مسافر', 'Traveler')}', style: MasariTypography.bodySmall(color: MasariColors.pureWhite)),
-              const SizedBox(height: 16),
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                MasariPrimaryButton(label: isAdmin ? masariText(context, 'الانتقال إلى بوابة الإدارة', 'Go to Admin Portal') : masariText(context, 'الانتقال إلى الرئيسية', 'Go to Home'), onPressed: () => context.go(isAdmin ? '/admin' : '/home')),
-                const SizedBox(height: 8),
-                OutlinedButton(onPressed: () => ref.read(userSessionProvider.notifier).logout(), style: OutlinedButton.styleFrom(foregroundColor: MasariColors.primaryOrange, side: const BorderSide(color: MasariColors.primaryOrange), padding: const EdgeInsets.symmetric(vertical: 12)), child: Text(masariText(context, 'تسجيل الخروج', 'Sign out'))),
-              ]),
+              OutlinedButton(onPressed: () => ref.read(userSessionProvider.notifier).logout(), style: OutlinedButton.styleFrom(foregroundColor: MasariColors.primaryOrange, side: const BorderSide(color: MasariColors.primaryOrange), padding: const EdgeInsets.symmetric(vertical: 12)), child: Text(masariText(context, 'تسجيل الخروج', 'Sign out'))),
             ]),
-          ) else Column(children: [
-            MasariTextField(label: masariText(context, 'البريد الإلكتروني أو رقم الهاتف', 'Email or phone number'), hintText: 'user@masari.travel', controller: _emailController),
-            const SizedBox(height: 16),
-            MasariPasswordField(controller: _passwordController),
-            const SizedBox(height: 24),
-            MasariPrimaryButton(label: masariText(context, 'تسجيل الدخول كعميل', 'Sign in as Traveler'), onPressed: () { ref.read(userSessionProvider.notifier).loginAsUser(name: 'أحمد العتيبي', email: _emailController.text); context.go('/home'); }),
-            const SizedBox(height: 12),
-            SizedBox(width: double.infinity, child: OutlinedButton.icon(
-              onPressed: () { ref.read(userSessionProvider.notifier).loginAsAdmin(name: 'محمد البراق', email: 'mhmd.albraq@masari.travel'); context.go('/admin'); },
-              icon: const Icon(Icons.admin_panel_settings, color: MasariColors.primaryCyan, size: 18),
-              label: Text(masariText(context, 'تسجيل الدخول كمدير نظام', 'Sign in as Administrator'), style: const TextStyle(color: MasariColors.primaryCyan, fontWeight: FontWeight.bold)),
-              style: OutlinedButton.styleFrom(side: const BorderSide(color: MasariColors.primaryCyan, width: 1.5), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            )),
-            const SizedBox(height: 16),
-            Center(child: TextButton(onPressed: () => context.go('/register'), child: Text(masariText(context, 'ليس لديك حساب؟ إنشاء حساب جديد', 'Do not have an account? Create one'), style: MasariTypography.titleSmall(color: MasariColors.primaryCyanDark)))),
           ]),
-        ])),
-      )),
-    );
+        ) else Column(children: [
+          MasariTextField(label: masariText(context, 'البريد الإلكتروني أو رقم الهاتف', 'Email or phone number'), hintText: 'user@masari.travel', controller: _emailController),
+          const SizedBox(height: 16),
+          MasariPasswordField(controller: _passwordController),
+          const SizedBox(height: 24),
+          MasariPrimaryButton(label: masariText(context, 'تسجيل الدخول كعميل', 'Sign in as Traveler'), onPressed: () { ref.read(userSessionProvider.notifier).loginAsUser(name: 'أحمد العتيبي', email: _emailController.text); context.go('/home'); }),
+          const SizedBox(height: 12),
+          SizedBox(width: double.infinity, child: OutlinedButton.icon(
+            onPressed: () { ref.read(userSessionProvider.notifier).loginAsAdmin(name: 'محمد البراق', email: 'mhmd.albraq@masari.travel'); context.go('/admin'); },
+            icon: const Icon(Icons.admin_panel_settings, color: MasariColors.primaryCyan, size: 18),
+            label: Text(masariText(context, 'تسجيل الدخول كمدير نظام', 'Sign in as Administrator'), style: const TextStyle(color: MasariColors.primaryCyan, fontWeight: FontWeight.bold)),
+            style: OutlinedButton.styleFrom(side: const BorderSide(color: MasariColors.primaryCyan, width: 1.5), padding: const EdgeInsets.symmetric(vertical: 14), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+          )),
+          const SizedBox(height: 16),
+          Center(child: TextButton(
+            onPressed: () => context.go('/register'),
+            child: Text(masariText(context, 'ليس لديك حساب؟ إنشاء حساب جديد', 'Do not have an account? Create one'), style: MasariTypography.titleSmall(color: MasariColors.primaryCyanDark)),
+          )),
+        ]),
+      ])),
+    ))));
   }
 }
 
@@ -122,11 +123,7 @@ class OtpView extends ConsumerWidget {
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             maxLength: 1,
-            decoration: InputDecoration(
-              counterText: '',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-              focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 2)),
-            ),
+            decoration: InputDecoration(counterText: '', border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)), focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: MasariColors.primaryCyan, width: 2))),
           ));
         })),
         const SizedBox(height: 24),
