@@ -8,6 +8,7 @@ import '../../../../shared/components/masari_cards.dart';
 import '../../../foundation/domain/entities/managed_user.dart';
 import '../../../foundation/presentation/providers/app_providers.dart';
 import '../../../foundation/presentation/providers/operational_catalog_provider.dart';
+import 'admin_ai_settings_view.dart';
 import 'admin_catalog_management_view.dart';
 import 'admin_settings_view.dart';
 
@@ -42,8 +43,9 @@ class _AdminOperationsViewState extends ConsumerState<AdminOperationsView> {
           _tabButton(context, 1, masariText(context, 'الخدمات والفنادق والغرف', 'Services, Hotels & Rooms'), Icons.inventory_2_outlined),
           _tabButton(context, 2, masariText(context, 'المستخدمون والتدقيق', 'Users & Audit'), Icons.security_outlined),
           _tabButton(context, 3, masariText(context, 'إعدادات النظام', 'System Settings'), Icons.settings_outlined),
+          _tabButton(context, 4, masariText(context, 'تخصيص الذكاء الاصطناعي', 'AI Customization'), Icons.auto_awesome_outlined),
         ])),
-        Expanded(child: Padding(padding: const EdgeInsets.all(20), child: IndexedStack(index: _tab, children: [_dashboard(context, catalog.length, users.length, audits.length), const AdminCatalogManagementView(), _security(context, users, audits, admin), const AdminSettingsView()]))),
+        Expanded(child: Padding(padding: const EdgeInsets.all(20), child: IndexedStack(index: _tab, children: [_dashboard(context, catalog.length, users.length, audits.length), const AdminCatalogManagementView(), _security(context, users, audits, admin), const AdminSettingsView(), const AdminAiSettingsView()]))),
       ])),
     );
   }
